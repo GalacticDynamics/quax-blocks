@@ -221,7 +221,10 @@ class LaxSubMixin(Generic[T, R]):
     """
 
     def __sub__(self, other: T) -> R:
-        return qlax.sub(self, other)
+        try:
+            return qlax.sub(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpySubMixin(Generic[T, R]):
@@ -242,7 +245,10 @@ class NumpySubMixin(Generic[T, R]):
     """
 
     def __sub__(self, other: T) -> R:
-        return qnp.subtract(self, other)
+        try:
+            return qnp.subtract(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -267,7 +273,10 @@ class LaxRSubMixin(Generic[T, R]):
     """
 
     def __rsub__(self, other: T) -> R:
-        return qlax.sub(other, self)
+        try:
+            return qlax.sub(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRSubMixin(Generic[T, R]):
@@ -288,7 +297,10 @@ class NumpyRSubMixin(Generic[T, R]):
     """
 
     def __rsub__(self, other: T) -> R:
-        return qnp.subtract(other, self)
+        try:
+            return qnp.subtract(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -326,7 +338,10 @@ class LaxMulMixin(Generic[T, R]):
     """
 
     def __mul__(self, other: T) -> R:
-        return qlax.mul(self, other)
+        try:
+            return qlax.mul(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyMulMixin(Generic[T, R]):
@@ -347,7 +362,10 @@ class NumpyMulMixin(Generic[T, R]):
     """
 
     def __mul__(self, other: T) -> R:
-        return qnp.multiply(self, other)
+        try:
+            return qnp.multiply(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -372,7 +390,10 @@ class LaxRMulMixin(Generic[T, R]):
     """
 
     def __rmul__(self, other: T) -> R:
-        return qlax.mul(other, self)
+        try:
+            return qlax.mul(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRMulMixin(Generic[T, R]):
@@ -393,7 +414,10 @@ class NumpyRMulMixin(Generic[T, R]):
     """
 
     def __rmul__(self, other: T) -> R:
-        return qnp.multiply(other, self)
+        try:
+            return qnp.multiply(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -433,7 +457,10 @@ class LaxMatMulMixin(Generic[T, R]):
     """
 
     def __matmul__(self, other: T) -> R:
-        return qlax.dot(self, other)  # TODO: is this the right operator?
+        try:
+            return qlax.dot(self, other)  # TODO: is this the right operator?
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyMatMulMixin(Generic[T, R]):
@@ -456,7 +483,10 @@ class NumpyMatMulMixin(Generic[T, R]):
     """
 
     def __matmul__(self, other: T) -> R:
-        return qnp.matmul(self, other)
+        try:
+            return qnp.matmul(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -482,7 +512,10 @@ class LaxRMatMulMixin(Generic[T, R]):
     """
 
     def __rmatmul__(self, other: T) -> R:
-        return qlax.dot(other, self)  # TODO: is this the right operator?
+        try:
+            return qlax.dot(other, self)  # TODO: is this the right operator?
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRMatMulMixin(Generic[T, R]):
@@ -505,7 +538,10 @@ class NumpyRMatMulMixin(Generic[T, R]):
     """
 
     def __rmatmul__(self, other: T) -> R:
-        return qnp.matmul(other, self)
+        try:
+            return qnp.matmul(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -544,7 +580,10 @@ class LaxTrueDivMixin(Generic[T, R]):
     """
 
     def __truediv__(self, other: T) -> R:
-        return qlax.div(self, other)
+        try:
+            return qlax.div(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyTrueDivMixin(Generic[T, R]):
@@ -565,7 +604,10 @@ class NumpyTrueDivMixin(Generic[T, R]):
     """
 
     def __truediv__(self, other: T) -> R:
-        return qnp.true_divide(self, other)
+        try:
+            return qnp.true_divide(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -590,7 +632,10 @@ class LaxRTrueDivMixin(Generic[T, R]):
     """
 
     def __rtruediv__(self, other: T) -> R:
-        return qlax.div(other, self)
+        try:
+            return qlax.div(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRTrueDivMixin(Generic[T, R]):
@@ -611,7 +656,10 @@ class NumpyRTrueDivMixin(Generic[T, R]):
     """
 
     def __rtruediv__(self, other: T) -> R:
-        return qnp.true_divide(other, self)
+        try:
+            return qnp.true_divide(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -653,7 +701,10 @@ class LaxFloorDivMixin(Generic[T, R]):
     """
 
     def __floordiv__(self, other: T) -> R:
-        return qlax.floor(qlax.div(self, other))
+        try:
+            return qlax.floor(qlax.div(self, other))
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyFloorDivMixin(Generic[T, R]):
@@ -674,7 +725,10 @@ class NumpyFloorDivMixin(Generic[T, R]):
     """
 
     def __floordiv__(self, other: T) -> R:
-        return qnp.floor_divide(self, other)
+        try:
+            return qnp.floor_divide(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -702,7 +756,10 @@ class LaxRFloorDivMixin(Generic[T, R]):
     """
 
     def __rfloordiv__(self, other: T) -> R:
-        return qlax.floor(qlax.div(other, self))
+        try:
+            return qlax.floor(qlax.div(other, self))
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRFloorDivMixin(Generic[T, R]):
@@ -723,7 +780,10 @@ class NumpyRFloorDivMixin(Generic[T, R]):
     """
 
     def __rfloordiv__(self, other: T) -> R:
-        return qnp.floor_divide(other, self)
+        try:
+            return qnp.floor_divide(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -762,7 +822,10 @@ class LaxModMixin(Generic[T, R]):
     """
 
     def __mod__(self, other: T) -> R:
-        return qlax.rem(self, other)
+        try:
+            return qlax.rem(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyModMixin(Generic[T, R]):
@@ -783,7 +846,10 @@ class NumpyModMixin(Generic[T, R]):
     """
 
     def __mod__(self, other: T) -> R:
-        return qnp.mod(self, other)
+        try:
+            return qnp.mod(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -808,7 +874,10 @@ class LaxRModMixin(Generic[T, R]):
     """
 
     def __rmod__(self, other: T) -> R:
-        return qlax.rem(other, self)
+        try:
+            return qlax.rem(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRModMixin(Generic[T, R]):
@@ -829,7 +898,10 @@ class NumpyRModMixin(Generic[T, R]):
     """
 
     def __rmod__(self, other: T) -> R:
-        return qnp.mod(other, self)
+        try:
+            return qnp.mod(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -871,7 +943,10 @@ class NumpyDivModMixin(Generic[T, R]):
     """
 
     def __divmod__(self, other: T) -> R:
-        return qnp.divmod(self, other)
+        try:
+            return qnp.divmod(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -899,7 +974,10 @@ class NumpyRDivModMixin(Generic[T, R]):
     """
 
     def __rdivmod__(self, other: T) -> R:
-        return qnp.divmod(other, self)
+        try:
+            return qnp.divmod(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -934,7 +1012,10 @@ class LaxPowMixin(Generic[T, R]):
     """
 
     def __pow__(self, other: T) -> R:
-        return qlax.pow(self, other)
+        try:
+            return qlax.pow(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyPowMixin(Generic[T, R]):
@@ -955,7 +1036,10 @@ class NumpyPowMixin(Generic[T, R]):
     """
 
     def __pow__(self, other: T) -> R:
-        return qnp.power(self, other)
+        try:
+            return qnp.power(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -980,7 +1064,10 @@ class LaxRPowMixin(Generic[T, R]):
     """
 
     def __rpow__(self, other: T) -> R:
-        return qlax.pow(other, self)
+        try:
+            return qlax.pow(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRPowMixin(Generic[T, R]):
@@ -1001,7 +1088,10 @@ class NumpyRPowMixin(Generic[T, R]):
     """
 
     def __rpow__(self, other: T) -> R:
-        return qnp.power(other, self)
+        try:
+            return qnp.power(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -1040,7 +1130,10 @@ class LaxLShiftMixin(Generic[T, R]):
     """
 
     def __lshift__(self, other: T) -> R:
-        return qlax.shift_left(self, other)
+        try:
+            return qlax.shift_left(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyLShiftMixin(Generic[T, R]):
@@ -1061,7 +1154,10 @@ class NumpyLShiftMixin(Generic[T, R]):
     """
 
     def __lshift__(self, other: T) -> R:
-        return qnp.left_shift(self, other)
+        try:
+            return qnp.left_shift(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -1086,7 +1182,10 @@ class LaxRLShiftMixin(Generic[T, R]):
     """
 
     def __rlshift__(self, other: T) -> R:
-        return qlax.shift_left(other, self)
+        try:
+            return qlax.shift_left(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRLShiftMixin(Generic[T, R]):
@@ -1107,7 +1206,10 @@ class NumpyRLShiftMixin(Generic[T, R]):
     """
 
     def __rlshift__(self, other: T) -> R:
-        return qnp.left_shift(other, self)
+        try:
+            return qnp.left_shift(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -1148,13 +1250,16 @@ class LaxRShiftMixin(Generic[T, R]):
     _RIGHT_SHIFT_LOGICAL: Literal[True, False] = True
 
     def __rshift__(self, other: T) -> R:
-        return qlax.cond(
-            self._RIGHT_SHIFT_LOGICAL,
-            qlax.shift_right_logical,
-            qlax.shift_right_arithmetic,
-            self,
-            other,
-        )
+        try:
+            return qlax.cond(
+                self._RIGHT_SHIFT_LOGICAL,
+                qlax.shift_right_logical,
+                qlax.shift_right_arithmetic,
+                self,
+                other,
+            )
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRShiftMixin(Generic[T, R]):
@@ -1175,7 +1280,10 @@ class NumpyRShiftMixin(Generic[T, R]):
     """
 
     def __rshift__(self, other: T) -> R:
-        return qnp.right_shift(self, other)
+        try:
+            return qnp.right_shift(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -1202,13 +1310,16 @@ class LaxRRShiftMixin(Generic[T, R]):
     _RIGHT_SHIFT_LOGICAL: Literal[True, False] = True
 
     def __rrshift__(self, other: T) -> R:
-        return qlax.cond(
-            self._RIGHT_SHIFT_LOGICAL,
-            qlax.shift_right_logical,
-            qlax.shift_right_arithmetic,
-            other,
-            self,
-        )
+        try:
+            return qlax.cond(
+                self._RIGHT_SHIFT_LOGICAL,
+                qlax.shift_right_logical,
+                qlax.shift_right_arithmetic,
+                other,
+                self,
+            )
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRRShiftMixin(Generic[T, R]):
@@ -1229,7 +1340,10 @@ class NumpyRRShiftMixin(Generic[T, R]):
     """
 
     def __rrshift__(self, other: T) -> R:
-        return qnp.right_shift(other, self)
+        try:
+            return qnp.right_shift(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -1268,7 +1382,10 @@ class LaxAndMixin(Generic[T, R]):
     """
 
     def __and__(self, other: T) -> R:
-        return qlax.bitwise_and(self, other)
+        try:
+            return qlax.bitwise_and(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyAndMixin(Generic[T, R]):
@@ -1289,7 +1406,10 @@ class NumpyAndMixin(Generic[T, R]):
     """
 
     def __and__(self, other: T) -> R:
-        return qnp.bitwise_and(self, other)
+        try:
+            return qnp.bitwise_and(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -1314,7 +1434,10 @@ class LaxRAndMixin(Generic[T, R]):
     """
 
     def __rand__(self, other: T) -> R:
-        return qlax.bitwise_and(other, self)
+        try:
+            return qlax.bitwise_and(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRAndMixin(Generic[T, R]):
@@ -1335,7 +1458,10 @@ class NumpyRAndMixin(Generic[T, R]):
     """
 
     def __rand__(self, other: T) -> R:
-        return qnp.bitwise_and(other, self)
+        try:
+            return qnp.bitwise_and(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -1375,7 +1501,10 @@ class LaxXorMixin(Generic[T, R]):
     """
 
     def __xor__(self, other: T) -> R:
-        return qlax.bitwise_xor(self, other)
+        try:
+            return qlax.bitwise_xor(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyXorMixin(Generic[T, R]):
@@ -1396,7 +1525,10 @@ class NumpyXorMixin(Generic[T, R]):
     """
 
     def __xor__(self, other: T) -> R:
-        return qnp.bitwise_xor(self, other)
+        try:
+            return qnp.bitwise_xor(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -1421,7 +1553,10 @@ class LaxRXorMixin(Generic[T, R]):
     """
 
     def __rxor__(self, other: T) -> R:
-        return qlax.bitwise_xor(other, self)
+        try:
+            return qlax.bitwise_xor(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyRXorMixin(Generic[T, R]):
@@ -1442,7 +1577,10 @@ class NumpyRXorMixin(Generic[T, R]):
     """
 
     def __rxor__(self, other: T) -> R:
-        return qnp.bitwise_xor(other, self)
+        try:
+            return qnp.bitwise_xor(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------
@@ -1481,7 +1619,10 @@ class LaxOrMixin(Generic[T, R]):
     """
 
     def __or__(self, other: T) -> R:
-        return qlax.bitwise_or(self, other)
+        try:
+            return qlax.bitwise_or(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyOrMixin(Generic[T, R]):
@@ -1502,7 +1643,10 @@ class NumpyOrMixin(Generic[T, R]):
     """
 
     def __or__(self, other: T) -> R:
-        return qnp.bitwise_or(self, other)
+        try:
+            return qnp.bitwise_or(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # ================================================
@@ -1530,7 +1674,10 @@ class LaxROrMixin(Generic[T, R]):
     """
 
     def __ror__(self, other: T) -> R:
-        return qlax.bitwise_or(other, self)
+        try:
+            return qlax.bitwise_or(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyROrMixin(Generic[T, R]):
@@ -1551,7 +1698,10 @@ class NumpyROrMixin(Generic[T, R]):
     """
 
     def __ror__(self, other: T) -> R:
-        return qnp.bitwise_or(other, self)
+        try:
+            return qnp.bitwise_or(other, self)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -------------------------------------

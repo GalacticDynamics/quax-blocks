@@ -55,7 +55,10 @@ class LaxEqMixin(Generic[T, Rbool]):
 
     @override
     def __eq__(self, other: T) -> Rbool:  # type: ignore[override]
-        return qlax.eq(self, other)
+        try:
+            return qlax.eq(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyEqMixin(Generic[T, Rbool]):
@@ -86,7 +89,10 @@ class NumpyEqMixin(Generic[T, Rbool]):
 
     @override
     def __eq__(self, other: T) -> Rbool:  # type: ignore[override]
-        return qnp.equal(self, other)
+        try:
+            return qnp.equal(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -----------------------------------------------
@@ -115,7 +121,10 @@ class LaxNeMixin(Generic[T, Rbool]):
 
     @override
     def __ne__(self, other: T) -> Rbool:  # type: ignore[override]
-        return qlax.ne(self, other)
+        try:
+            return qlax.ne(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyNeMixin(Generic[T, Rbool]):
@@ -140,7 +149,10 @@ class NumpyNeMixin(Generic[T, Rbool]):
 
     @override
     def __ne__(self, other: T) -> Rbool:  # type: ignore[override]
-        return qnp.not_equal(self, other)
+        try:
+            return qnp.not_equal(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -----------------------------------------------
@@ -165,7 +177,10 @@ class LaxLtMixin(Generic[T, Rbool]):
     """
 
     def __lt__(self, other: T) -> Rbool:
-        return qlax.lt(self, other)
+        try:
+            return qlax.lt(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyLtMixin(Generic[T, Rbool]):
@@ -186,7 +201,10 @@ class NumpyLtMixin(Generic[T, Rbool]):
     """
 
     def __lt__(self, other: T) -> Rbool:
-        return qnp.less(self, other)
+        try:
+            return qnp.less(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -----------------------------------------------
@@ -211,7 +229,10 @@ class LaxLeMixin(Generic[T, Rbool]):
     """
 
     def __le__(self, other: T) -> Rbool:
-        return qlax.le(self, other)
+        try:
+            return qlax.le(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyLeMixin(Generic[T, Rbool]):
@@ -257,7 +278,10 @@ class LaxGtMixin(Generic[T, Rbool]):
     """
 
     def __gt__(self, other: T) -> Rbool:
-        return qlax.gt(self, other)
+        try:
+            return qlax.gt(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyGtMixin(Generic[T, Rbool]):
@@ -278,7 +302,10 @@ class NumpyGtMixin(Generic[T, Rbool]):
     """
 
     def __gt__(self, other: T) -> Rbool:
-        return qnp.greater(self, other)
+        try:
+            return qnp.greater(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # -----------------------------------------------
@@ -303,7 +330,10 @@ class LaxGeMixin(Generic[T, Rbool]):
     """
 
     def __ge__(self, other: T) -> Rbool:
-        return qlax.ge(self, other)
+        try:
+            return qlax.ge(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 class NumpyGeMixin(Generic[T, Rbool]):
@@ -324,7 +354,10 @@ class NumpyGeMixin(Generic[T, Rbool]):
     """
 
     def __ge__(self, other: T) -> Rbool:
-        return qnp.greater_equal(self, other)
+        try:
+            return qnp.greater_equal(self, other)
+        except Exception:  # noqa: BLE001
+            return NotImplemented
 
 
 # ================================================
