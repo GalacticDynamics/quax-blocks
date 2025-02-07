@@ -31,7 +31,7 @@ class LaxPosMixin:
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxPosMixin
+    >>> from quax_blocks import AbstractVal, LaxPosMixin
 
     >>> class Val(AbstractVal, LaxPosMixin):
     ...     v: Array
@@ -52,7 +52,7 @@ class NumpyPosMixin:
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyPosMixin
+    >>> from quax_blocks import AbstractVal, NumpyPosMixin
 
     >>> class Val(AbstractVal, NumpyPosMixin):
     ...     v: Array
@@ -77,7 +77,7 @@ class LaxNegMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxNegMixin
+    >>> from quax_blocks import AbstractVal, LaxNegMixin
 
     >>> class Val(AbstractVal, LaxNegMixin[Array]):
     ...     v: Array
@@ -98,7 +98,7 @@ class NumpyNegMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyNegMixin
+    >>> from quax_blocks import AbstractVal, NumpyNegMixin
 
     >>> class Val(AbstractVal, NumpyNegMixin[Array]):
     ...     v: Array
@@ -126,7 +126,7 @@ class NumpyInvertMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyInvertMixin
+    >>> from quax_blocks import AbstractVal, NumpyInvertMixin
 
     >>> class Val(AbstractVal, NumpyInvertMixin[Array]):
     ...     v: Array
@@ -151,7 +151,7 @@ class LaxAbsMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxAbsMixin
+    >>> from quax_blocks import AbstractVal, LaxAbsMixin
 
     >>> class Val(AbstractVal, LaxAbsMixin[Array]):
     ...     v: Array
@@ -172,7 +172,7 @@ class NumpyAbsMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyAbsMixin
+    >>> from quax_blocks import AbstractVal, NumpyAbsMixin
 
     >>> class Val(AbstractVal, NumpyAbsMixin[Array]):
     ...     v: Array

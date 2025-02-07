@@ -30,7 +30,7 @@ class LaxLenMixin:
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxLenMixin
+    >>> from quax_blocks import AbstractVal, LaxLenMixin
 
     >>> class Val(AbstractVal, LaxLenMixin):
     ...     v: Array
@@ -55,7 +55,7 @@ class NumpyLenMixin:
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyLenMixin
+    >>> from quax_blocks import AbstractVal, NumpyLenMixin
 
     >>> class Val(AbstractVal, NumpyLenMixin):
     ...     v: Array
@@ -85,7 +85,7 @@ class LaxLengthHintMixin:
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxLengthHintMixin
+    >>> from quax_blocks import AbstractVal, LaxLengthHintMixin
 
     >>> class Val(AbstractVal, LaxLengthHintMixin):
     ...     v: Array
@@ -110,7 +110,7 @@ class NumpyLengthHintMixin:
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyLengthHintMixin
+    >>> from quax_blocks import AbstractVal, NumpyLengthHintMixin
 
     >>> class Val(AbstractVal, NumpyLengthHintMixin):
     ...     v: Array

@@ -73,6 +73,7 @@ from typing_extensions import TypeVar
 
 import quaxed.lax as qlax
 import quaxed.numpy as qnp
+from plum import NotFoundLookupError
 
 T = TypeVar("T")
 R = TypeVar("R", default=bool)
@@ -91,7 +92,7 @@ class LaxAddMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxAddMixin
+    >>> from quax_blocks import AbstractVal, LaxAddMixin
 
     >>> class Val(AbstractVal, LaxAddMixin[object, Array]):
     ...     v: Array
@@ -105,7 +106,7 @@ class LaxAddMixin(Generic[T, R]):
     def __add__(self, other: T) -> R:
         try:
             return qlax.add(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -115,7 +116,7 @@ class NumpyAddMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyAddMixin
+    >>> from quax_blocks import AbstractVal, NumpyAddMixin
 
     >>> class Val(AbstractVal, NumpyAddMixin[object, Array]):
     ...     v: Array
@@ -129,7 +130,7 @@ class NumpyAddMixin(Generic[T, R]):
     def __add__(self, other: T) -> R:
         try:
             return qnp.add(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -143,7 +144,7 @@ class LaxRAddMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRAddMixin
+    >>> from quax_blocks import AbstractVal, LaxRAddMixin
 
     >>> class Val(AbstractVal, LaxRAddMixin[object, Array]):
     ...     v: Array
@@ -157,7 +158,7 @@ class LaxRAddMixin(Generic[T, R]):
     def __radd__(self, other: T) -> R:
         try:
             return qlax.add(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -167,7 +168,7 @@ class NumpyRAddMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRAddMixin
+    >>> from quax_blocks import AbstractVal, NumpyRAddMixin
 
     >>> class Val(AbstractVal, NumpyRAddMixin[object, Array]):
     ...     v: Array
@@ -181,7 +182,7 @@ class NumpyRAddMixin(Generic[T, R]):
     def __radd__(self, other: T) -> R:
         try:
             return qnp.add(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -209,7 +210,7 @@ class LaxSubMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxSubMixin
+    >>> from quax_blocks import AbstractVal, LaxSubMixin
 
     >>> class Val(AbstractVal, LaxSubMixin[object, Array]):
     ...     v: Array
@@ -223,7 +224,7 @@ class LaxSubMixin(Generic[T, R]):
     def __sub__(self, other: T) -> R:
         try:
             return qlax.sub(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -233,7 +234,7 @@ class NumpySubMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpySubMixin
+    >>> from quax_blocks import AbstractVal, NumpySubMixin
 
     >>> class Val(AbstractVal, NumpySubMixin[object, Array]):
     ...     v: Array
@@ -247,7 +248,7 @@ class NumpySubMixin(Generic[T, R]):
     def __sub__(self, other: T) -> R:
         try:
             return qnp.subtract(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -261,7 +262,7 @@ class LaxRSubMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRSubMixin
+    >>> from quax_blocks import AbstractVal, LaxRSubMixin
 
     >>> class Val(AbstractVal, LaxRSubMixin[object, Array]):
     ...     v: Array
@@ -275,7 +276,7 @@ class LaxRSubMixin(Generic[T, R]):
     def __rsub__(self, other: T) -> R:
         try:
             return qlax.sub(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -285,7 +286,7 @@ class NumpyRSubMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRSubMixin
+    >>> from quax_blocks import AbstractVal, NumpyRSubMixin
 
     >>> class Val(AbstractVal, NumpyRSubMixin[object, Array]):
     ...     v: Array
@@ -299,7 +300,7 @@ class NumpyRSubMixin(Generic[T, R]):
     def __rsub__(self, other: T) -> R:
         try:
             return qnp.subtract(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -326,7 +327,7 @@ class LaxMulMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxMulMixin
+    >>> from quax_blocks import AbstractVal, LaxMulMixin
 
     >>> class Val(AbstractVal, LaxMulMixin[object, Array]):
     ...     v: Array
@@ -340,7 +341,7 @@ class LaxMulMixin(Generic[T, R]):
     def __mul__(self, other: T) -> R:
         try:
             return qlax.mul(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -350,7 +351,7 @@ class NumpyMulMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyMulMixin
+    >>> from quax_blocks import AbstractVal, NumpyMulMixin
 
     >>> class Val(AbstractVal, NumpyMulMixin[object, Array]):
     ...     v: Array
@@ -364,7 +365,7 @@ class NumpyMulMixin(Generic[T, R]):
     def __mul__(self, other: T) -> R:
         try:
             return qnp.multiply(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -378,7 +379,7 @@ class LaxRMulMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRMulMixin
+    >>> from quax_blocks import AbstractVal, LaxRMulMixin
 
     >>> class Val(AbstractVal, LaxRMulMixin[object, Array]):
     ...     v: Array
@@ -392,7 +393,7 @@ class LaxRMulMixin(Generic[T, R]):
     def __rmul__(self, other: T) -> R:
         try:
             return qlax.mul(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -402,7 +403,7 @@ class NumpyRMulMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRMulMixin
+    >>> from quax_blocks import AbstractVal, NumpyRMulMixin
 
     >>> class Val(AbstractVal, NumpyRMulMixin[object, Array]):
     ...     v: Array
@@ -416,7 +417,7 @@ class NumpyRMulMixin(Generic[T, R]):
     def __rmul__(self, other: T) -> R:
         try:
             return qnp.multiply(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -443,7 +444,7 @@ class LaxMatMulMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxMatMulMixin
+    >>> from quax_blocks import AbstractVal, LaxMatMulMixin
 
     >>> class Val(AbstractVal, LaxMatMulMixin[object, Array]):
     ...     v: Array
@@ -459,7 +460,7 @@ class LaxMatMulMixin(Generic[T, R]):
     def __matmul__(self, other: T) -> R:
         try:
             return qlax.dot(self, other)  # TODO: is this the right operator?
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -469,7 +470,7 @@ class NumpyMatMulMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyMatMulMixin
+    >>> from quax_blocks import AbstractVal, NumpyMatMulMixin
 
     >>> class Val(AbstractVal, NumpyMatMulMixin[object, Array]):
     ...     v: Array
@@ -485,7 +486,7 @@ class NumpyMatMulMixin(Generic[T, R]):
     def __matmul__(self, other: T) -> R:
         try:
             return qnp.matmul(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -498,7 +499,7 @@ class LaxRMatMulMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRMatMulMixin
+    >>> from quax_blocks import AbstractVal, LaxRMatMulMixin
 
     >>> class Val(AbstractVal, LaxRMatMulMixin[object, Array]):
     ...     v: Array
@@ -514,7 +515,7 @@ class LaxRMatMulMixin(Generic[T, R]):
     def __rmatmul__(self, other: T) -> R:
         try:
             return qlax.dot(other, self)  # TODO: is this the right operator?
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -524,7 +525,7 @@ class NumpyRMatMulMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRMatMulMixin
+    >>> from quax_blocks import AbstractVal, NumpyRMatMulMixin
 
     >>> class Val(AbstractVal, NumpyRMatMulMixin[object, Array]):
     ...     v: Array
@@ -540,7 +541,7 @@ class NumpyRMatMulMixin(Generic[T, R]):
     def __rmatmul__(self, other: T) -> R:
         try:
             return qnp.matmul(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -568,7 +569,7 @@ class LaxTrueDivMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxTrueDivMixin
+    >>> from quax_blocks import AbstractVal, LaxTrueDivMixin
 
     >>> class Val(AbstractVal, LaxTrueDivMixin[object, Array]):
     ...     v: Array
@@ -582,7 +583,7 @@ class LaxTrueDivMixin(Generic[T, R]):
     def __truediv__(self, other: T) -> R:
         try:
             return qlax.div(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -592,7 +593,7 @@ class NumpyTrueDivMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyTrueDivMixin
+    >>> from quax_blocks import AbstractVal, NumpyTrueDivMixin
 
     >>> class Val(AbstractVal, NumpyTrueDivMixin[object, Array]):
     ...     v: Array
@@ -606,7 +607,7 @@ class NumpyTrueDivMixin(Generic[T, R]):
     def __truediv__(self, other: T) -> R:
         try:
             return qnp.true_divide(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -620,7 +621,7 @@ class LaxRTrueDivMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRTrueDivMixin
+    >>> from quax_blocks import AbstractVal, LaxRTrueDivMixin
 
     >>> class Val(AbstractVal, LaxRTrueDivMixin[object, Array]):
     ...     v: Array
@@ -634,7 +635,7 @@ class LaxRTrueDivMixin(Generic[T, R]):
     def __rtruediv__(self, other: T) -> R:
         try:
             return qlax.div(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -644,7 +645,7 @@ class NumpyRTrueDivMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRTrueDivMixin
+    >>> from quax_blocks import AbstractVal, NumpyRTrueDivMixin
 
     >>> class Val(AbstractVal, NumpyRTrueDivMixin[object, Array]):
     ...     v: Array
@@ -658,7 +659,7 @@ class NumpyRTrueDivMixin(Generic[T, R]):
     def __rtruediv__(self, other: T) -> R:
         try:
             return qnp.true_divide(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -689,7 +690,7 @@ class LaxFloorDivMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxFloorDivMixin
+    >>> from quax_blocks import AbstractVal, LaxFloorDivMixin
 
     >>> class Val(AbstractVal, LaxFloorDivMixin[object, Array]):
     ...     v: Array
@@ -703,7 +704,7 @@ class LaxFloorDivMixin(Generic[T, R]):
     def __floordiv__(self, other: T) -> R:
         try:
             return qlax.floor(qlax.div(self, other))
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -713,7 +714,7 @@ class NumpyFloorDivMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyFloorDivMixin
+    >>> from quax_blocks import AbstractVal, NumpyFloorDivMixin
 
     >>> class Val(AbstractVal, NumpyFloorDivMixin[object, Array]):
     ...     v: Array
@@ -727,7 +728,7 @@ class NumpyFloorDivMixin(Generic[T, R]):
     def __floordiv__(self, other: T) -> R:
         try:
             return qnp.floor_divide(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -744,7 +745,7 @@ class LaxRFloorDivMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRFloorDivMixin
+    >>> from quax_blocks import AbstractVal, LaxRFloorDivMixin
 
     >>> class Val(AbstractVal, LaxRFloorDivMixin[object, Array]):
     ...     v: Array
@@ -758,7 +759,7 @@ class LaxRFloorDivMixin(Generic[T, R]):
     def __rfloordiv__(self, other: T) -> R:
         try:
             return qlax.floor(qlax.div(other, self))
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -768,7 +769,7 @@ class NumpyRFloorDivMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRFloorDivMixin
+    >>> from quax_blocks import AbstractVal, NumpyRFloorDivMixin
 
     >>> class Val(AbstractVal, NumpyRFloorDivMixin[object, Array]):
     ...     v: Array
@@ -782,7 +783,7 @@ class NumpyRFloorDivMixin(Generic[T, R]):
     def __rfloordiv__(self, other: T) -> R:
         try:
             return qnp.floor_divide(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -810,7 +811,7 @@ class LaxModMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxModMixin
+    >>> from quax_blocks import AbstractVal, LaxModMixin
 
     >>> class Val(AbstractVal, LaxModMixin[object, Array]):
     ...     v: Array
@@ -824,7 +825,7 @@ class LaxModMixin(Generic[T, R]):
     def __mod__(self, other: T) -> R:
         try:
             return qlax.rem(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -834,7 +835,7 @@ class NumpyModMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyModMixin
+    >>> from quax_blocks import AbstractVal, NumpyModMixin
 
     >>> class Val(AbstractVal, NumpyModMixin[object, Array]):
     ...     v: Array
@@ -848,7 +849,7 @@ class NumpyModMixin(Generic[T, R]):
     def __mod__(self, other: T) -> R:
         try:
             return qnp.mod(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -862,7 +863,7 @@ class LaxRModMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRModMixin
+    >>> from quax_blocks import AbstractVal, LaxRModMixin
 
     >>> class Val(AbstractVal, LaxRModMixin[object, Array]):
     ...     v: Array
@@ -876,7 +877,7 @@ class LaxRModMixin(Generic[T, R]):
     def __rmod__(self, other: T) -> R:
         try:
             return qlax.rem(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -886,7 +887,7 @@ class NumpyRModMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRModMixin
+    >>> from quax_blocks import AbstractVal, NumpyRModMixin
 
     >>> class Val(AbstractVal, NumpyRModMixin[object, Array]):
     ...     v: Array
@@ -900,7 +901,7 @@ class NumpyRModMixin(Generic[T, R]):
     def __rmod__(self, other: T) -> R:
         try:
             return qnp.mod(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -931,7 +932,7 @@ class NumpyDivModMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyDivModMixin
+    >>> from quax_blocks import AbstractVal, NumpyDivModMixin
 
     >>> class Val(AbstractVal, NumpyDivModMixin[object, Array]):
     ...     v: Array
@@ -945,7 +946,7 @@ class NumpyDivModMixin(Generic[T, R]):
     def __divmod__(self, other: T) -> R:
         try:
             return qnp.divmod(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -962,7 +963,7 @@ class NumpyRDivModMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRDivModMixin
+    >>> from quax_blocks import AbstractVal, NumpyRDivModMixin
 
     >>> class Val(AbstractVal, NumpyRDivModMixin[object, Array]):
     ...     v: Array
@@ -976,7 +977,7 @@ class NumpyRDivModMixin(Generic[T, R]):
     def __rdivmod__(self, other: T) -> R:
         try:
             return qnp.divmod(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1000,7 +1001,7 @@ class LaxPowMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxPowMixin
+    >>> from quax_blocks import AbstractVal, LaxPowMixin
 
     >>> class Val(AbstractVal, LaxPowMixin[object, Array]):
     ...     v: Array
@@ -1014,7 +1015,7 @@ class LaxPowMixin(Generic[T, R]):
     def __pow__(self, other: T) -> R:
         try:
             return qlax.pow(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1024,7 +1025,7 @@ class NumpyPowMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyPowMixin
+    >>> from quax_blocks import AbstractVal, NumpyPowMixin
 
     >>> class Val(AbstractVal, NumpyPowMixin[object, Array]):
     ...     v: Array
@@ -1038,7 +1039,7 @@ class NumpyPowMixin(Generic[T, R]):
     def __pow__(self, other: T) -> R:
         try:
             return qnp.power(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1052,7 +1053,7 @@ class LaxRPowMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRPowMixin
+    >>> from quax_blocks import AbstractVal, LaxRPowMixin
 
     >>> class Val(AbstractVal, LaxRPowMixin[object, Array]):
     ...     v: Array
@@ -1066,7 +1067,7 @@ class LaxRPowMixin(Generic[T, R]):
     def __rpow__(self, other: T) -> R:
         try:
             return qlax.pow(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1076,7 +1077,7 @@ class NumpyRPowMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRPowMixin
+    >>> from quax_blocks import AbstractVal, NumpyRPowMixin
 
     >>> class Val(AbstractVal, NumpyRPowMixin[object, Array]):
     ...     v: Array
@@ -1090,7 +1091,7 @@ class NumpyRPowMixin(Generic[T, R]):
     def __rpow__(self, other: T) -> R:
         try:
             return qnp.power(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1118,7 +1119,7 @@ class LaxLShiftMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxLShiftMixin
+    >>> from quax_blocks import AbstractVal, LaxLShiftMixin
 
     >>> class Val(AbstractVal, LaxLShiftMixin[object, Array]):
     ...     v: Array
@@ -1132,7 +1133,7 @@ class LaxLShiftMixin(Generic[T, R]):
     def __lshift__(self, other: T) -> R:
         try:
             return qlax.shift_left(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1142,7 +1143,7 @@ class NumpyLShiftMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyLShiftMixin
+    >>> from quax_blocks import AbstractVal, NumpyLShiftMixin
 
     >>> class Val(AbstractVal, NumpyLShiftMixin[object, Array]):
     ...     v: Array
@@ -1156,7 +1157,7 @@ class NumpyLShiftMixin(Generic[T, R]):
     def __lshift__(self, other: T) -> R:
         try:
             return qnp.left_shift(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1170,7 +1171,7 @@ class LaxRLShiftMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRLShiftMixin
+    >>> from quax_blocks import AbstractVal, LaxRLShiftMixin
 
     >>> class Val(AbstractVal, LaxRLShiftMixin[object, Array]):
     ...     v: Array
@@ -1184,7 +1185,7 @@ class LaxRLShiftMixin(Generic[T, R]):
     def __rlshift__(self, other: T) -> R:
         try:
             return qlax.shift_left(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1194,7 +1195,7 @@ class NumpyRLShiftMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRLShiftMixin
+    >>> from quax_blocks import AbstractVal, NumpyRLShiftMixin
 
     >>> class Val(AbstractVal, NumpyRLShiftMixin[object, Array]):
     ...     v: Array
@@ -1208,7 +1209,7 @@ class NumpyRLShiftMixin(Generic[T, R]):
     def __rlshift__(self, other: T) -> R:
         try:
             return qnp.left_shift(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1236,7 +1237,7 @@ class LaxRShiftMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRShiftMixin
+    >>> from quax_blocks import AbstractVal, LaxRShiftMixin
 
     >>> class Val(AbstractVal, LaxRShiftMixin[object, Array]):
     ...     v: Array
@@ -1258,7 +1259,7 @@ class LaxRShiftMixin(Generic[T, R]):
                 self,
                 other,
             )
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1268,7 +1269,7 @@ class NumpyRShiftMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRShiftMixin
+    >>> from quax_blocks import AbstractVal, NumpyRShiftMixin
 
     >>> class Val(AbstractVal, NumpyRShiftMixin[object, Array]):
     ...     v: Array
@@ -1282,7 +1283,7 @@ class NumpyRShiftMixin(Generic[T, R]):
     def __rshift__(self, other: T) -> R:
         try:
             return qnp.right_shift(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1296,7 +1297,7 @@ class LaxRRShiftMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRRShiftMixin
+    >>> from quax_blocks import AbstractVal, LaxRRShiftMixin
 
     >>> class Val(AbstractVal, LaxRRShiftMixin[object, Array]):
     ...     v: Array
@@ -1318,7 +1319,7 @@ class LaxRRShiftMixin(Generic[T, R]):
                 other,
                 self,
             )
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1328,7 +1329,7 @@ class NumpyRRShiftMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRRShiftMixin
+    >>> from quax_blocks import AbstractVal, NumpyRRShiftMixin
 
     >>> class Val(AbstractVal, NumpyRRShiftMixin[object, Array]):
     ...     v: Array
@@ -1342,7 +1343,7 @@ class NumpyRRShiftMixin(Generic[T, R]):
     def __rrshift__(self, other: T) -> R:
         try:
             return qnp.right_shift(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1370,7 +1371,7 @@ class LaxAndMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxAndMixin
+    >>> from quax_blocks import AbstractVal, LaxAndMixin
 
     >>> class Val(AbstractVal, LaxAndMixin[object, Array]):
     ...     v: Array
@@ -1384,7 +1385,7 @@ class LaxAndMixin(Generic[T, R]):
     def __and__(self, other: T) -> R:
         try:
             return qlax.bitwise_and(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1394,7 +1395,7 @@ class NumpyAndMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyAndMixin
+    >>> from quax_blocks import AbstractVal, NumpyAndMixin
 
     >>> class Val(AbstractVal, NumpyAndMixin[object, Array]):
     ...     v: Array
@@ -1408,7 +1409,7 @@ class NumpyAndMixin(Generic[T, R]):
     def __and__(self, other: T) -> R:
         try:
             return qnp.bitwise_and(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1422,7 +1423,7 @@ class LaxRAndMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRAndMixin
+    >>> from quax_blocks import AbstractVal, LaxRAndMixin
 
     >>> class Val(AbstractVal, LaxRAndMixin[object, Array]):
     ...     v: Array
@@ -1436,7 +1437,7 @@ class LaxRAndMixin(Generic[T, R]):
     def __rand__(self, other: T) -> R:
         try:
             return qlax.bitwise_and(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1446,7 +1447,7 @@ class NumpyRAndMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRAndMixin
+    >>> from quax_blocks import AbstractVal, NumpyRAndMixin
 
     >>> class Val(AbstractVal, NumpyRAndMixin[object, Array]):
     ...     v: Array
@@ -1460,7 +1461,7 @@ class NumpyRAndMixin(Generic[T, R]):
     def __rand__(self, other: T) -> R:
         try:
             return qnp.bitwise_and(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1489,7 +1490,7 @@ class LaxXorMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxXorMixin
+    >>> from quax_blocks import AbstractVal, LaxXorMixin
 
     >>> class Val(AbstractVal, LaxXorMixin[object, Array]):
     ...     v: Array
@@ -1503,7 +1504,7 @@ class LaxXorMixin(Generic[T, R]):
     def __xor__(self, other: T) -> R:
         try:
             return qlax.bitwise_xor(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1513,7 +1514,7 @@ class NumpyXorMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyXorMixin
+    >>> from quax_blocks import AbstractVal, NumpyXorMixin
 
     >>> class Val(AbstractVal, NumpyXorMixin[object, Array]):
     ...     v: Array
@@ -1527,7 +1528,7 @@ class NumpyXorMixin(Generic[T, R]):
     def __xor__(self, other: T) -> R:
         try:
             return qnp.bitwise_xor(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1541,7 +1542,7 @@ class LaxRXorMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRXorMixin
+    >>> from quax_blocks import AbstractVal, LaxRXorMixin
 
     >>> class Val(AbstractVal, LaxRXorMixin[object, Array]):
     ...     v: Array
@@ -1555,7 +1556,7 @@ class LaxRXorMixin(Generic[T, R]):
     def __rxor__(self, other: T) -> R:
         try:
             return qlax.bitwise_xor(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1565,7 +1566,7 @@ class NumpyRXorMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRXorMixin
+    >>> from quax_blocks import AbstractVal, NumpyRXorMixin
 
     >>> class Val(AbstractVal, NumpyRXorMixin[object, Array]):
     ...     v: Array
@@ -1579,7 +1580,7 @@ class NumpyRXorMixin(Generic[T, R]):
     def __rxor__(self, other: T) -> R:
         try:
             return qnp.bitwise_xor(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1607,7 +1608,7 @@ class LaxOrMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxOrMixin
+    >>> from quax_blocks import AbstractVal, LaxOrMixin
 
     >>> class Val(AbstractVal, LaxOrMixin[object, Array]):
     ...     v: Array
@@ -1621,7 +1622,7 @@ class LaxOrMixin(Generic[T, R]):
     def __or__(self, other: T) -> R:
         try:
             return qlax.bitwise_or(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1631,7 +1632,7 @@ class NumpyOrMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyOrMixin
+    >>> from quax_blocks import AbstractVal, NumpyOrMixin
 
     >>> class Val(AbstractVal, NumpyOrMixin[object, Array]):
     ...     v: Array
@@ -1645,7 +1646,7 @@ class NumpyOrMixin(Generic[T, R]):
     def __or__(self, other: T) -> R:
         try:
             return qnp.bitwise_or(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1662,7 +1663,7 @@ class LaxROrMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxROrMixin
+    >>> from quax_blocks import AbstractVal, LaxROrMixin
 
     >>> class Val(AbstractVal, LaxROrMixin[object, Array]):
     ...     v: Array
@@ -1676,7 +1677,7 @@ class LaxROrMixin(Generic[T, R]):
     def __ror__(self, other: T) -> R:
         try:
             return qlax.bitwise_or(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -1686,7 +1687,7 @@ class NumpyROrMixin(Generic[T, R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyROrMixin
+    >>> from quax_blocks import AbstractVal, NumpyROrMixin
 
     >>> class Val(AbstractVal, NumpyROrMixin[object, Array]):
     ...     v: Array
@@ -1700,7 +1701,7 @@ class NumpyROrMixin(Generic[T, R]):
     def __ror__(self, other: T) -> R:
         try:
             return qnp.bitwise_or(other, self)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 

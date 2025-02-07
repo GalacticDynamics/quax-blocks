@@ -25,7 +25,7 @@ class NumpyCopyMixin(Generic[RCopy]):
     >>> import copy
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyCopyMixin
+    >>> from quax_blocks import AbstractVal, NumpyCopyMixin
 
     >>> class Val(AbstractVal, NumpyCopyMixin[Any]):
     ...     v: Array
@@ -50,7 +50,7 @@ class NumpyDeepCopyMixin(Generic[RDeepcopy]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyDeepCopyMixin
+    >>> from quax_blocks import AbstractVal, NumpyDeepCopyMixin
 
     >>> class Val(AbstractVal, NumpyDeepCopyMixin[Any]):
     ...     v: Array

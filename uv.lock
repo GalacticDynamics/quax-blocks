@@ -6,6 +6,12 @@ resolution-markers = [
     "python_full_version < '3.12'",
 ]
 
+[manifest]
+constraints = [
+    { name = "pyparsing", specifier = ">=3.0.0" },
+    { name = "scipy", specifier = ">=1.13" },
+]
+
 [[package]]
 name = "argcomplete"
 version = "3.5.3"
@@ -690,7 +696,7 @@ requires-dist = [
     { name = "optype", specifier = ">=0.8.0" },
     { name = "plum-dispatch", specifier = ">=2.5.2" },
     { name = "quax", specifier = ">=0.0.5" },
-    { name = "quaxed", specifier = ">0.8.2" },
+    { name = "quaxed", specifier = ">=0.9.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -702,7 +708,6 @@ dev = [
     { name = "pytest-github-actions-annotate-failures" },
     { name = "sybil", specifier = ">=7.1.0" },
 ]
-docs = []
 test = [
     { name = "pytest", specifier = ">=8.3" },
     { name = "pytest-cov", specifier = ">=3" },
@@ -712,7 +717,7 @@ test = [
 
 [[package]]
 name = "quaxed"
-version = "0.8.3"
+version = "0.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jax" },
@@ -722,9 +727,9 @@ dependencies = [
     { name = "plum-dispatch" },
     { name = "quax" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5c/dd/8e7a7efc78c6fc317132ffa98f9d8f75f2867cc697059fea0babd2c73227/quaxed-0.8.3.tar.gz", hash = "sha256:a838ce9a57df87615e6968e305f86cae669ed9c1811ed14bede043b0ca44dc72", size = 131906 }
+sdist = { url = "https://files.pythonhosted.org/packages/e3/9a/a2753026ebdb1b1a926a839b54873139ab686121fed8989b4d874b940a80/quaxed-0.9.0.tar.gz", hash = "sha256:df5931d1aee77b00f78bac412f304dc332c0162a990818b447e78dcca10a7b10", size = 123860 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f4/75/dde255f8644ac2a167b588c986582f66226637e0225e262a2d05f487ba07/quaxed-0.8.3-py3-none-any.whl", hash = "sha256:cbcd1067f51c09a4ee0652f10e0ab8b4b167f7250b1c418c085512b29b18f1b1", size = 48633 },
+    { url = "https://files.pythonhosted.org/packages/91/cb/736e2443d3eca15ee58763eb0fdf37d39a970d9d23aff66165bd32a46fee/quaxed-0.9.0-py3-none-any.whl", hash = "sha256:bf32deb8403f5b60b4edd16c418872c3b875ea4ad20580289a7592b0d9e06f96", size = 37172 },
 ]
 
 [[package]]

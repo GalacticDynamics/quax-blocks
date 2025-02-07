@@ -19,6 +19,7 @@ from typing_extensions import TypeVar, override
 
 import quaxed.lax as qlax
 import quaxed.numpy as qnp
+from plum import NotFoundLookupError
 
 T = TypeVar("T")
 Rbool = TypeVar("Rbool", default=bool)
@@ -38,7 +39,7 @@ class LaxEqMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array, Bool
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxEqMixin
+    >>> from quax_blocks import AbstractVal, LaxEqMixin
 
     >>> class Val(AbstractVal, LaxEqMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -57,7 +58,7 @@ class LaxEqMixin(Generic[T, Rbool]):
     def __eq__(self, other: T) -> Rbool:  # type: ignore[override]
         try:
             return qlax.eq(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -72,7 +73,7 @@ class NumpyEqMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyEqMixin
+    >>> from quax_blocks import AbstractVal, NumpyEqMixin
 
     >>> class Val(AbstractVal, NumpyEqMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -91,7 +92,7 @@ class NumpyEqMixin(Generic[T, Rbool]):
     def __eq__(self, other: T) -> Rbool:  # type: ignore[override]
         try:
             return qnp.equal(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -105,7 +106,7 @@ class LaxNeMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxNeMixin
+    >>> from quax_blocks import AbstractVal, LaxNeMixin
 
     >>> class Val(AbstractVal, LaxNeMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -123,7 +124,7 @@ class LaxNeMixin(Generic[T, Rbool]):
     def __ne__(self, other: T) -> Rbool:  # type: ignore[override]
         try:
             return qlax.ne(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -133,7 +134,7 @@ class NumpyNeMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyNeMixin
+    >>> from quax_blocks import AbstractVal, NumpyNeMixin
 
     >>> class Val(AbstractVal, NumpyNeMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -151,7 +152,7 @@ class NumpyNeMixin(Generic[T, Rbool]):
     def __ne__(self, other: T) -> Rbool:  # type: ignore[override]
         try:
             return qnp.not_equal(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -165,7 +166,7 @@ class LaxLtMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxLtMixin
+    >>> from quax_blocks import AbstractVal, LaxLtMixin
 
     >>> class Val(AbstractVal, LaxLtMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -179,7 +180,7 @@ class LaxLtMixin(Generic[T, Rbool]):
     def __lt__(self, other: T) -> Rbool:
         try:
             return qlax.lt(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -189,7 +190,7 @@ class NumpyLtMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyLtMixin
+    >>> from quax_blocks import AbstractVal, NumpyLtMixin
 
     >>> class Val(AbstractVal, NumpyLtMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -203,7 +204,7 @@ class NumpyLtMixin(Generic[T, Rbool]):
     def __lt__(self, other: T) -> Rbool:
         try:
             return qnp.less(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -217,7 +218,7 @@ class LaxLeMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxLeMixin
+    >>> from quax_blocks import AbstractVal, LaxLeMixin
 
     >>> class Val(AbstractVal, LaxLeMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -231,7 +232,7 @@ class LaxLeMixin(Generic[T, Rbool]):
     def __le__(self, other: T) -> Rbool:
         try:
             return qlax.le(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -241,7 +242,7 @@ class NumpyLeMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyLeMixin
+    >>> from quax_blocks import AbstractVal, NumpyLeMixin
 
     >>> class Val(AbstractVal, NumpyLeMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -266,7 +267,7 @@ class LaxGtMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxGtMixin
+    >>> from quax_blocks import AbstractVal, LaxGtMixin
 
     >>> class Val(AbstractVal, LaxGtMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -280,7 +281,7 @@ class LaxGtMixin(Generic[T, Rbool]):
     def __gt__(self, other: T) -> Rbool:
         try:
             return qlax.gt(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -290,7 +291,7 @@ class NumpyGtMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyGtMixin
+    >>> from quax_blocks import AbstractVal, NumpyGtMixin
 
     >>> class Val(AbstractVal, NumpyGtMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -304,7 +305,7 @@ class NumpyGtMixin(Generic[T, Rbool]):
     def __gt__(self, other: T) -> Rbool:
         try:
             return qnp.greater(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -318,7 +319,7 @@ class LaxGeMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxGeMixin
+    >>> from quax_blocks import AbstractVal, LaxGeMixin
 
     >>> class Val(AbstractVal, LaxGeMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -332,7 +333,7 @@ class LaxGeMixin(Generic[T, Rbool]):
     def __ge__(self, other: T) -> Rbool:
         try:
             return qlax.ge(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
@@ -342,7 +343,7 @@ class NumpyGeMixin(Generic[T, Rbool]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyGeMixin
+    >>> from quax_blocks import AbstractVal, NumpyGeMixin
 
     >>> class Val(AbstractVal, NumpyGeMixin[object, Bool[Array, "..."]]):
     ...     v: Array
@@ -356,7 +357,7 @@ class NumpyGeMixin(Generic[T, Rbool]):
     def __ge__(self, other: T) -> Rbool:
         try:
             return qnp.greater_equal(self, other)
-        except Exception:  # noqa: BLE001
+        except (TypeError, NotFoundLookupError):
             return NotImplemented
 
 
