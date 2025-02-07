@@ -33,7 +33,7 @@ class LaxRoundMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxRoundMixin
+    >>> from quax_blocks import AbstractVal, LaxRoundMixin
 
     >>> class Val(AbstractVal, LaxRoundMixin[Array]):
     ...     v: Array
@@ -56,7 +56,7 @@ class NumpyRoundMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyRoundMixin
+    >>> from quax_blocks import AbstractVal, NumpyRoundMixin
 
     >>> class Val(AbstractVal, NumpyRoundMixin[Array]):
     ...     v: Array
@@ -88,7 +88,7 @@ class LaxTruncMixin(
     >>> import math
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxTruncMixin
+    >>> from quax_blocks import AbstractVal, LaxTruncMixin
 
     >>> class Val(AbstractVal, LaxTruncMixin[Array]):
     ...     v: Array
@@ -114,7 +114,7 @@ class NumpyTruncMixin(Generic[R]):
     >>> import math
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyTruncMixin
+    >>> from quax_blocks import AbstractVal, NumpyTruncMixin
 
     >>> class Val(AbstractVal, NumpyTruncMixin[Array]):
     ...     v: Array
@@ -139,7 +139,7 @@ class LaxFloorMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxFloorMixin
+    >>> from quax_blocks import AbstractVal, LaxFloorMixin
 
     >>> class Val(AbstractVal, LaxFloorMixin[Array]):
     ...     v: Array
@@ -160,7 +160,7 @@ class NumpyFloorMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyFloorMixin
+    >>> from quax_blocks import AbstractVal, NumpyFloorMixin
 
     >>> class Val(AbstractVal, NumpyFloorMixin[Array]):
     ...     v: Array
@@ -185,7 +185,7 @@ class LaxCeilMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, LaxCeilMixin
+    >>> from quax_blocks import AbstractVal, LaxCeilMixin
 
     >>> class Val(AbstractVal, LaxCeilMixin[Array]):
     ...     v: Array
@@ -206,7 +206,7 @@ class NumpyCeilMixin(Generic[R]):
     Examples:
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
-    >>> from quaxed.experimental.arrayish import AbstractVal, NumpyCeilMixin
+    >>> from quax_blocks import AbstractVal, NumpyCeilMixin
 
     >>> class Val(AbstractVal, NumpyCeilMixin[Array]):
     ...     v: Array
