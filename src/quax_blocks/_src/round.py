@@ -9,7 +9,7 @@ __all__ = [
 ]
 # fmt: on
 
-from functools import partial
+import functools as ft
 from typing import Generic, Literal
 from typing_extensions import TypeVar
 
@@ -67,7 +67,7 @@ class NumpyRoundMixin(Generic[R]):
 
     """
 
-    @partial(jax.jit, static_argnums=1)
+    @ft.partial(jax.jit, static_argnums=1)
     def __round__(self, ndigits: int = 0) -> R:
         return qnp.round(self, decimals=ndigits)
 
