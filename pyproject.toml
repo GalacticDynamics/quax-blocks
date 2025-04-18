@@ -23,12 +23,12 @@
     "Typing :: Typed",
   ]
   dependencies = [
-    "jax>=0.4.3,<0.4.36",
-    "jaxlib>=0.4.3",
+    "jax>=0.5.3",
+    "jaxlib>=0.5.3",
     "jaxtyping>=0.2.34",
-    "optype>=0.8.0",
-    "plum-dispatch>=2.5.2",
-    "quax>=0.0.5",
+    "optype>=0.9.0",
+    "plum-dispatch>=2.5.7",
+    "quax>=0.2.0",
     "quaxed>=0.9.0",
 ]
 
@@ -127,7 +127,7 @@
     "ignore:jax\\.experimental\\.array_api import is no longer required as of JAX v0\\.4\\.32"
   ]
   log_cli_level = "INFO"
-  testpaths = ["tests"]
+  testpaths = ["tests", "src"]
 
 
 [tool.repo-review]
