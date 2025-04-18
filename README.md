@@ -16,7 +16,7 @@
 
 ---
 
-[`quax`](https://docs.kidger.site/quax/) brings enables JAX to work with custom
+[`quax`](https://docs.kidger.site/quax/) enables JAX to work with custom
 array-ish objects. This library provides the building blocks, like comparison
 operators, for building `quax`-compatible classes.
 
@@ -128,7 +128,7 @@ We welcome contributions!
 
 If you found this library to be useful and want to support the development and
 maintenance of lower-level utility libraries for the scientific community,
-please consider citing this work.
+consider citing this work.
 
 <!-- prettier-ignore-start -->
 [actions-badge]:            https://github.com/GalacticDynamics/quax-blocks/workflows/CI/badge.svg
