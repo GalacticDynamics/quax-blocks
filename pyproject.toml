@@ -30,7 +30,7 @@
     "plum-dispatch>=2.5.7",
     "quax>=0.2.0",
     "quaxed>=0.9.0",
-]
+  ]
 
   [project.urls]
     Homepage = "https://github.com/GalacticDynamics/quax-blocks"
@@ -45,17 +45,20 @@
 
 
 [dependency-groups]
-  dev = [
-    "cz-conventional-gitmoji>=0.6.1",
-    {include-group = "test"},
-    "pre-commit>=4.1.0",
-  ]
-  test = [
-    "pytest >= 8.3",
-    "pytest-cov >= 3",
-    "pytest-github-actions-annotate-failures",  # only applies to GH Actions
-    "sybil >= 7.1.0",
-  ]
+dev = [
+  "cz-conventional-gitmoji>=0.6.1",
+  {include-group = "test"},
+  {include-group = "lint"},
+]
+lint = [
+  "pre-commit>=4.1.0",
+]
+test = [
+  "pytest>=8.4.2",
+  "pytest-cov>=6.2.1",
+  "pytest-github-actions-annotate-failures>=0.3.0",
+  "sybil[pytest]>=9.2.0",
+]
 
 
 [tool.hatch]
@@ -135,6 +138,8 @@ ignore = ["PY004", "RTD100"]
 
 
 [tool.ruff]
+  fix = true
+
   [tool.ruff.lint]
     extend-select = ["ALL"]
     ignore = [
