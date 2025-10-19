@@ -8,6 +8,7 @@ resolution-markers = [
 
 [manifest]
 constraints = [
+    { name = "opt-einsum", specifier = ">=3.3.0" },
     { name = "pyparsing", specifier = ">=3.0.0" },
     { name = "scipy", specifier = ">=1.13" },
 ]
@@ -520,14 +521,14 @@ wheels = [
 
 [[package]]
 name = "optype"
-version = "0.9.1"
+version = "0.14.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/42/b5/bc62c3de61b8ae97cf861c7402cecd9874937a8295089271714c16bcd245/optype-0.9.1.tar.gz", hash = "sha256:f3096963195b9f83e72e1be2f7e7140bbeb30ee5565a28fd207f3e552dd18411", size = 93575 }
+sdist = { url = "https://files.pythonhosted.org/packages/94/ca/d3a2abcf12cc8c18ccac1178ef87ab50a235bf386d2401341776fdad18aa/optype-0.14.0.tar.gz", hash = "sha256:925cf060b7d1337647f880401f6094321e7d8e837533b8e159b9a92afa3157c6", size = 100880 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6d/2f/d66a2a485916f2c918409a0d4fdb80a84d22ee81d8073f1d7e8e402dc475/optype-0.9.1-py3-none-any.whl", hash = "sha256:4b843085a39a07a3d2ebe9b531eecfabcb523d22a334376488aa583601897caf", size = 81811 },
+    { url = "https://files.pythonhosted.org/packages/84/a6/11b0eb65eeafa87260d36858b69ec4e0072d09e37ea6714280960030bc93/optype-0.14.0-py3-none-any.whl", hash = "sha256:50d02edafd04edf2e5e27d6249760a51b2198adb9f6ffd778030b3d2806b026b", size = 89465 },
 ]
 
 [[package]]
@@ -736,8 +737,8 @@ test = [
 requires-dist = [
     { name = "jax", specifier = ">=0.5.3" },
     { name = "jaxlib", specifier = ">=0.5.3" },
-    { name = "jaxtyping", specifier = ">=0.2.34" },
-    { name = "optype", specifier = ">=0.9.0" },
+    { name = "jaxtyping", specifier = ">=0.3.3" },
+    { name = "optype", specifier = ">=0.12.0" },
     { name = "plum-dispatch", specifier = ">=2.5.7" },
     { name = "quax", specifier = ">=0.2.1" },
     { name = "quaxed", specifier = ">=0.10.2" },
