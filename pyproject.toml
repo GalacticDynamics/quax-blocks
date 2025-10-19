@@ -180,4 +180,5 @@ ignore = ["PY004", "RTD100"]
 constraint-dependencies = [
   "pyparsing>=3.0.0",
   "scipy>=1.13",
+  "opt-einsum>=3.3.0",
 ]
