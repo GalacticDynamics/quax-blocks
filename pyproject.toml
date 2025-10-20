@@ -25,12 +25,13 @@
   dependencies = [
     "jax>=0.5.3",
     "jaxlib>=0.5.3",
-    "jaxtyping>=0.2.34",
-    "optype>=0.9.0",
+    "jaxtyping>=0.3.3",
+    "optype>=0.13,<0.14; python_version<'3.12'",
+    "optype>=0.14.0; python_version>='3.12'",
     "plum-dispatch>=2.5.7",
-    "quax>=0.2.0",
-    "quaxed>=0.9.0",
-]
+    "quax>=0.2.1",
+    "quaxed>=0.10.2",
+  ]
 
   [project.urls]
     Homepage = "https://github.com/GalacticDynamics/quax-blocks"
@@ -45,17 +46,20 @@
 
 
 [dependency-groups]
-  dev = [
-    "cz-conventional-gitmoji>=0.6.1",
-    {include-group = "test"},
-    "pre-commit>=4.1.0",
-  ]
-  test = [
-    "pytest >= 8.3",
-    "pytest-cov >= 3",
-    "pytest-github-actions-annotate-failures",  # only applies to GH Actions
-    "sybil >= 7.1.0",
-  ]
+dev = [
+  "cz-conventional-gitmoji>=0.6.1",
+  {include-group = "test"},
+  {include-group = "lint"},
+]
+lint = [
+  "pre-commit>=4.1.0",
+]
+test = [
+  "pytest>=8.4.2",
+  "pytest-cov>=7.0.0",
+  "pytest-github-actions-annotate-failures>=0.3.0",
+  "sybil[pytest]>=9.2.0",
+]
 
 
 [tool.hatch]
@@ -135,6 +139,8 @@ ignore = ["PY004", "RTD100"]
 
 
 [tool.ruff]
+  fix = true
+
   [tool.ruff.lint]
     extend-select = ["ALL"]
     ignore = [
@@ -175,4 +181,8 @@ ignore = ["PY004", "RTD100"]
 constraint-dependencies = [
   "pyparsing>=3.0.0",
   "scipy>=1.13",
+  "opt-einsum>=3.3.0",
+  "typing-extensions>=4.12.2; python_version<'3.12'",
+  "optype<0.14; python_version<'3.12'",
+  "optype>=0.14.0; python_version>='3.12'",
 ]

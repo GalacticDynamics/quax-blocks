@@ -24,36 +24,25 @@ jobs:
         python-version: ["3.11", "3.12", "3.13"]
         runs-on: [ubuntu-latest, macos-latest, windows-latest]
 
-        # include:
-        #   - python-version: pypy-3.10
-        #     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@2ddd2b9cb38ad8efd50337e8ab201519a34c9f24 # v7.1.1
         with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-
-      - name: Set up Python ${{ matrix.python-version }}
-        run: uv python install ${{ matrix.python-version }}
-
-      - name: Install the project
-        run: uv sync --group test
+          python-version: ${{ matrix.python-version }}
 
       - name: Test package
         run: >-
-          uv run python -m pytest tests/ src/ -ra --cov --cov-report=xml
-          --cov-report=term --durations=20
+          uv run --group test pytest --cov --cov-report=xml --cov-report=term
+          --durations=20
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v5.4.3
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  check_oldest:
+  test_oldest:
     name: Check Oldest Dependencies
     runs-on: ${{ matrix.runs-on }}
     strategy:
@@ -63,26 +52,19 @@ jobs:
         runs-on: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@2ddd2b9cb38ad8efd50337e8ab201519a34c9f24 # v7.1.1
         with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-
-      - name: Set up Python ${{ matrix.python-version }}
-        run: uv python install ${{ matrix.python-version }}
-
-      - name: Install the project
-        run: uv sync --group test --resolution lowest
+          python-version: ${{ matrix.python-version }}
 
       - name: Test package
         run: >-
-          uv run python -m pytest tests/ src/ -ra --cov --cov-report=xml
+          uv run --group test --resolution lowest pytest --cov --cov-report=xml
           --cov-report=term --durations=20
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v5.4.3
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
