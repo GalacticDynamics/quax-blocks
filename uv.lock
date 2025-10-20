@@ -738,7 +738,7 @@ requires-dist = [
     { name = "jax", specifier = ">=0.5.3" },
     { name = "jaxlib", specifier = ">=0.5.3" },
     { name = "jaxtyping", specifier = ">=0.3.3" },
-    { name = "optype", specifier = ">=0.13.0" },
+    { name = "optype", specifier = ">=0.14.0" },
     { name = "plum-dispatch", specifier = ">=2.5.7" },
     { name = "quax", specifier = ">=0.2.1" },
     { name = "quaxed", specifier = ">=0.10.2" },
@@ -749,14 +749,14 @@ dev = [
     { name = "cz-conventional-gitmoji", specifier = ">=0.6.1" },
     { name = "pre-commit", specifier = ">=4.1.0" },
     { name = "pytest", specifier = ">=8.4.2" },
-    { name = "pytest-cov", specifier = ">=6.2.1" },
+    { name = "pytest-cov", specifier = ">=7.0.0" },
     { name = "pytest-github-actions-annotate-failures", specifier = ">=0.3.0" },
     { name = "sybil", extras = ["pytest"], specifier = ">=9.2.0" },
 ]
 lint = [{ name = "pre-commit", specifier = ">=4.1.0" }]
 test = [
     { name = "pytest", specifier = ">=8.4.2" },
-    { name = "pytest-cov", specifier = ">=6.2.1" },
+    { name = "pytest-cov", specifier = ">=7.0.0" },
     { name = "pytest-github-actions-annotate-failures", specifier = ">=0.3.0" },
     { name = "sybil", extras = ["pytest"], specifier = ">=9.2.0" },
 ]
