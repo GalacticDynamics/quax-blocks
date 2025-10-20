@@ -26,7 +26,8 @@
     "jax>=0.5.3",
     "jaxlib>=0.5.3",
     "jaxtyping>=0.3.3",
-    "optype>=0.14.0",
+    "optype>=0.13,<0.14; python_version<'3.12'",
+    "optype>=0.14.0; python_version>='3.12'",
     "plum-dispatch>=2.5.7",
     "quax>=0.2.1",
     "quaxed>=0.10.2",
@@ -181,4 +182,7 @@ constraint-dependencies = [
   "pyparsing>=3.0.0",
   "scipy>=1.13",
   "opt-einsum>=3.3.0",
+  "typing-extensions>=4.12.2; python_version<'3.12'",
+  "optype<0.14; python_version<'3.12'",
+  "optype>=0.14.0; python_version>='3.12'",
 ]
