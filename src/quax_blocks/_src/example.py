@@ -9,7 +9,7 @@ from jaxtyping import Array
 from quax import ArrayValue
 
 
-class AbstractVal(ArrayValue):  # type: ignore[misc]
+class AbstractVal(ArrayValue):
     """ABC for example arrayish object."""
 
     #: The array.
