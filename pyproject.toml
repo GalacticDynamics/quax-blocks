@@ -200,8 +200,10 @@ ignore = ["PC140", "PY004", "RTD100"]
 
 [tool.uv]
 constraint-dependencies = [
+  "future>=1.0.0",
   "opt_einsum>=3.3.0",
   "pyparsing>=3.0.0",
+  "pyproject-hooks>=1.0.0",
   "scipy>=1.13",
   "toml>=0.10.2",
   "wcwidth>=0.2.0",

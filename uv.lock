@@ -7,8 +7,10 @@ resolution-markers = [
 
 [manifest]
 constraints = [
+    { name = "future", specifier = ">=1.0.0" },
     { name = "opt-einsum", specifier = ">=3.3.0" },
     { name = "pyparsing", specifier = ">=3.0.0" },
+    { name = "pyproject-hooks", specifier = ">=1.0.0" },
     { name = "scipy", specifier = ">=1.13" },
     { name = "toml", specifier = ">=0.10.2" },
     { name = "wcwidth", specifier = ">=0.2.0" },
