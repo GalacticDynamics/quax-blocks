@@ -1,4 +1,5 @@
 """Binary operations for Array-ish objects."""
+# pylint: disable=too-many-lines
 
 # fmt: off
 __all__ = [

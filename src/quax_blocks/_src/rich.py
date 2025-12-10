@@ -14,8 +14,8 @@ __all__ = [
 # fmt: on
 
 
-from typing import Generic
-from typing_extensions import TypeVar, override
+from typing import Generic, override
+from typing_extensions import TypeVar
 
 import quaxed.lax as qlax
 import quaxed.numpy as qnp
@@ -28,7 +28,7 @@ Rbool = TypeVar("Rbool", default=bool)
 # `__eq__`
 
 
-class LaxEqMixin(Generic[T, Rbool]):
+class LaxEqMixin(Generic[T, Rbool]):  # noqa: PLW1641
     """Mixin for ``__eq__`` method using quaxified `jax.lax.eq`.
 
     !!! warning
@@ -62,7 +62,7 @@ class LaxEqMixin(Generic[T, Rbool]):
             return NotImplemented
 
 
-class NumpyEqMixin(Generic[T, Rbool]):
+class NumpyEqMixin(Generic[T, Rbool]):  # noqa: PLW1641
     """Mixin for ``__eq__`` method using quaxified `jax.numpy.eq`.
 
     !!! warning

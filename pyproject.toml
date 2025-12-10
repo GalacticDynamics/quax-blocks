@@ -3,7 +3,7 @@
   dynamic = ["version"]
   description = "Building blocks for Quax classes"
   readme = "README.md"
-  requires-python = ">=3.11"
+  requires-python = ">=3.12"
   authors = [
     { name = "Nathaniel Starkman", email = "nstarman@users.noreply.github.com" },
   ]
@@ -16,9 +16,9 @@
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Scientific/Engineering",
     "Typing :: Typed",
   ]
@@ -26,8 +26,7 @@
     "jax>=0.5.3",
     "jaxlib>=0.5.3",
     "jaxtyping>=0.3.3",
-    "optype>=0.13,<0.14; python_version<'3.12'",
-    "optype>=0.14.0; python_version>='3.12'",
+    "optype>=0.15.0",
     "plum-dispatch>=2.5.7",
     "quax>=0.2.1",
     "quaxed>=0.10.2",
@@ -48,23 +47,44 @@
 [dependency-groups]
 dev = [
   "cz-conventional-gitmoji>=0.6.1",
-  {include-group = "test"},
+  {include-group = "build"},
   {include-group = "lint"},
+  {include-group = "nox"},
+  {include-group = "test"},
+]
+build = [
+  "build>=1.3.0",
 ]
 lint = [
+  "mypy>=1.19.0",
   "pre-commit>=4.1.0",
+  "pylint>=4.0.3",
+  "ruff>=0.14.6",
+]
+nox = [
+  "nox>=2025.11.12",
+  "nox-uv>=0.6.3",
 ]
 test = [
-  "pytest>=8.4.2",
+  "pytest>=9.0.1",
   "pytest-cov>=7.0.0",
-  "pytest-github-actions-annotate-failures>=0.3.0",
+  "pytest-github-actions-annotate-failures>=0.3.0", # only applies to GH Actions
   "sybil[pytest]>=9.2.0",
 ]
 
 
 [tool.hatch]
-  version.source = "vcs"
-  build.hooks.vcs.version-file = "src/quax_blocks/_version.py"
+version.source = "vcs"
+build.hooks.vcs.version-file = "src/quax_blocks/_version.py"
+build.hooks.vcs.version-file-template = """\
+version: str = {version!r}
+version_tuple: tuple[int, int, int] | tuple[int, int, int, str, str]
+version_tuple = {version_tuple!r}
+"""
+
+
+[tool.codespell]
+skip = ["uv.lock"]
 
 
 [tool.commitizen]
@@ -72,17 +92,17 @@ test = [
 
 
 [tool.coverage]
-  run.source = ["quax-blocks"]
-  port.exclude_lines = [
-    'pragma: no cover',
-    '\.\.\.',
-    'if typing.TYPE_CHECKING:'
-  ]
+run.source = ["quax-blocks"]
+port.exclude_lines = [
+  'pragma: no cover',
+  '\.\.\.',
+  'if typing.TYPE_CHECKING:'
+]
 
 
 [tool.mypy]
   files = ["src"]
-  python_version = "3.11"
+  python_version = "3.12"
   warn_unused_configs = true
   strict = true
   enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
@@ -102,17 +122,20 @@ test = [
 
 
 [tool.pylint]
-  py-version = "3.11"
+  py-version = "3.12"
   ignore-paths = [".*/_version.py"]
   reports.output-format = "colorized"
   similarities.ignore-imports = "yes"
   messages_control.disable = [
     "design",
+    "duplicate-code",  # This repo needs duplicate __all__
     "fixme",
     "line-too-long",
+    "missing-class-docstring", # TODO: reinstate
     "missing-function-docstring", # TODO: reinstate.
     "missing-module-docstring",
     "redefined-builtin",
+    "unnecessary-ellipsis",  # I like Protocols with docstrings
     "useless-import-alias",  # handled by ruff
     "wrong-import-position",
   ]
@@ -130,17 +153,15 @@ test = [
     "ignore:jax\\.core\\.pp_eqn_rules is deprecated:DeprecationWarning",
     "ignore:jax\\.experimental\\.array_api import is no longer required as of JAX v0\\.4\\.32"
   ]
-  log_cli_level = "INFO"
+  log_level = "INFO"
   testpaths = ["tests", "src"]
 
 
 [tool.repo-review]
-ignore = ["PY004", "RTD100"]
+ignore = ["PC140", "PY004", "RTD100"]
 
 
 [tool.ruff]
-  fix = true
-
   [tool.ruff.lint]
     extend-select = ["ALL"]
     ignore = [
@@ -179,10 +200,11 @@ ignore = ["PY004", "RTD100"]
 
 [tool.uv]
 constraint-dependencies = [
+  "future>=1.0.0",
+  "opt_einsum>=3.3.0",
   "pyparsing>=3.0.0",
+  "pyproject-hooks>=1.0.0",
   "scipy>=1.13",
-  "opt-einsum>=3.3.0",
-  "typing-extensions>=4.12.2; python_version<'3.12'",
-  "optype<0.14; python_version<'3.12'",
-  "optype>=0.14.0; python_version>='3.12'",
+  "toml>=0.10.2",
+  "wcwidth>=0.2.0",
 ]
