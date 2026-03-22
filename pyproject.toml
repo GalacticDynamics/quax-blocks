@@ -23,14 +23,13 @@
     "Typing :: Typed",
   ]
   dependencies = [
-    "jax>=0.5.3",
-    "jaxlib>=0.5.3",
-    "jaxtyping>=0.3.3",
-    "optype>=0.13,<0.14; python_version<'3.12'",
-    "optype>=0.14.0; python_version>='3.12'",
-    "plum-dispatch>=2.5.7",
+    "jax>=0.7.2",
+    "jaxlib>=0.7.2",
+    "jaxtyping>=0.3.9",
+    "optype>=0.17.0",
+    "plum>=2.8.0",
     "quax>=0.2.1",
-    "quaxed>=0.10.2",
+    "quaxed>=0.10.4",
   ]
 
   [project.urls]
