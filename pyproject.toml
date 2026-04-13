@@ -1,59 +1,57 @@
 [project]
-  name = "quax_blocks"
-  dynamic = ["version"]
-  description = "Building blocks for Quax classes"
-  readme = "README.md"
-  requires-python = ">=3.11"
-  authors = [
-    { name = "Nathaniel Starkman", email = "nstarman@users.noreply.github.com" },
-  ]
-  classifiers = [
-    "Development Status :: 1 - Planning",
-    "Intended Audience :: Science/Research",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: BSD License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Topic :: Scientific/Engineering",
-    "Typing :: Typed",
-  ]
-  dependencies = [
-    "jax>=0.5.3",
-    "jaxlib>=0.5.3",
-    "jaxtyping>=0.3.3",
-    "optype>=0.13,<0.14; python_version<'3.12'",
-    "optype>=0.14.0; python_version>='3.12'",
-    "plum-dispatch>=2.5.7",
-    "quax>=0.2.1",
-    "quaxed>=0.10.2",
-  ]
+authors = [
+  { name = "Nathaniel Starkman", email = "nstarman@users.noreply.github.com" },
+]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: BSD License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
+]
+dependencies = [
+  "jax>=0.5.3",
+  "jaxlib>=0.5.3",
+  "jaxtyping>=0.3.3",
+  "optype>=0.13,<0.14; python_version<'3.12'",
+  "optype>=0.14.0; python_version>='3.12'",
+  "plum-dispatch>=2.5.7",
+  "quax>=0.2.1",
+  "quaxed>=0.10.2",
+]
+description = "Building blocks for Quax classes"
+dynamic = ["version"]
+name = "quax_blocks"
+readme = "README.md"
+requires-python = ">=3.11"
 
-  [project.urls]
-    Homepage = "https://github.com/GalacticDynamics/quax-blocks"
-    "Bug Tracker" = "https://github.com/GalacticDynamics/quax-blocks/issues"
-    Discussions = "https://github.com/GalacticDynamics/quax-blocks/discussions"
-    Changelog = "https://github.com/GalacticDynamics/quax-blocks/releases"
+[project.urls]
+"Bug Tracker" = "https://github.com/GalacticDynamics/quax-blocks/issues"
+Changelog     = "https://github.com/GalacticDynamics/quax-blocks/releases"
+Discussions   = "https://github.com/GalacticDynamics/quax-blocks/discussions"
+Homepage      = "https://github.com/GalacticDynamics/quax-blocks"
 
 
 [build-system]
-  requires = ["hatchling", "hatch-vcs"]
-  build-backend = "hatchling.build"
+build-backend = "hatchling.build"
+requires      = ["hatchling", "hatch-vcs"]
 
 
 [dependency-groups]
 dev = [
   "cz-conventional-gitmoji>=0.6.1",
-  {include-group = "test"},
-  {include-group = "lint"},
+  { include-group = "test" },
+  { include-group = "lint" },
 ]
-lint = [
-  "pre-commit>=4.1.0",
-]
+lint = ["pre-commit>=4.1.0"]
 test = [
   "pytest>=8.4.2",
   "pytest-cov>=7.0.0",
@@ -63,75 +61,71 @@ test = [
 
 
 [tool.hatch]
-  version.source = "vcs"
-  build.hooks.vcs.version-file = "src/quax_blocks/_version.py"
+build.hooks.vcs.version-file = "src/quax_blocks/_version.py"
+version.source               = "vcs"
 
 
 [tool.commitizen]
-  name = "cz_gitmoji"
+name = "cz_gitmoji"
 
 
 [tool.coverage]
-  run.source = ["quax-blocks"]
-  port.exclude_lines = [
-    'pragma: no cover',
-    '\.\.\.',
-    'if typing.TYPE_CHECKING:'
-  ]
+port.exclude_lines = ['pragma: no cover', '\.\.\.', 'if typing.TYPE_CHECKING:']
+run.source         = ["quax-blocks"]
 
 
 [tool.mypy]
-  files = ["src"]
-  python_version = "3.11"
-  warn_unused_configs = true
-  strict = true
-  enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
-  warn_unreachable = true
-  disallow_untyped_defs = false
-  disallow_incomplete_defs = false
-  warn_return_any = false
+disallow_incomplete_defs = false
+disallow_untyped_defs    = false
+enable_error_code        = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+files                    = ["src"]
+python_version           = "3.11"
+strict                   = true
+warn_return_any          = false
+warn_unreachable         = true
+warn_unused_configs      = true
 
-  [[tool.mypy.overrides]]
-    module = "quax-blocks.*"
-    disallow_untyped_defs = true
-    disallow_incomplete_defs = true
+[[tool.mypy.overrides]]
+disallow_incomplete_defs = true
+disallow_untyped_defs    = true
+module                   = "quax-blocks.*"
 
-  [[tool.mypy.overrides]]
-    module = ["jax.*", "jaxtyping.*", "plum.*", "quax.*"]
-    ignore_missing_imports = true
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
+module                 = ["jax.*", "jaxtyping.*", "plum.*", "quax.*"]
 
 
 [tool.pylint]
-  py-version = "3.11"
-  ignore-paths = [".*/_version.py"]
-  reports.output-format = "colorized"
-  similarities.ignore-imports = "yes"
-  messages_control.disable = [
-    "design",
-    "fixme",
-    "line-too-long",
-    "missing-function-docstring", # TODO: reinstate.
-    "missing-module-docstring",
-    "redefined-builtin",
-    "useless-import-alias",  # handled by ruff
-    "wrong-import-position",
-  ]
+ignore-paths = [".*/_version.py"]
+messages_control.disable = [
+  "design",
+  "fixme",
+  "line-too-long",
+  "missing-function-docstring", # TODO: reinstate.
+  "missing-module-docstring",
+  "redefined-builtin",
+  "useless-import-alias",       # handled by ruff
+  "wrong-import-position",
+]
+py-version = "3.11"
+reports.output-format = "colorized"
+similarities.ignore-imports = "yes"
 
 
 [tool.pytest.ini_options]
-  minversion = "8.3"
-  addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
-  xfail_strict = true
-  filterwarnings = [
-    "error",
-    # jaxtyping
-    "ignore:ast\\.Str is deprecated and will be removed in Python 3.14:DeprecationWarning",
-    # jax
-    "ignore:jax\\.core\\.pp_eqn_rules is deprecated:DeprecationWarning",
-    "ignore:jax\\.experimental\\.array_api import is no longer required as of JAX v0\\.4\\.32"
-  ]
-  log_cli_level = "INFO"
-  testpaths = ["tests", "src"]
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+filterwarnings = [
+  "error",
+  # jaxtyping
+  "ignore:ast\\.Str is deprecated and will be removed in Python 3.14:DeprecationWarning",
+  # jax
+  "ignore:jax\\.core\\.pp_eqn_rules is deprecated:DeprecationWarning",
+  "ignore:jax\\.experimental\\.array_api import is no longer required as of JAX v0\\.4\\.32",
+]
+log_cli_level = "INFO"
+minversion = "8.3"
+testpaths = ["tests", "src"]
+xfail_strict = true
 
 
 [tool.repo-review]
@@ -139,42 +133,42 @@ ignore = ["PY004", "RTD100"]
 
 
 [tool.ruff]
-  fix = true
+fix = true
 
-  [tool.ruff.lint]
-    extend-select = ["ALL"]
-    ignore = [
-        "A001",   # Variable is shadowing a Python builtin
-        "A002",   # Argument is shadowing a Python builtin
-        "ANN401", # Dynamically typed expressions (typing.Any) are disallowed
-        "ARG001", # Unused function argument
-        "COM812", # Missing trailing comma
-        "D203",   # one-blank-line-before-class
-        "D213",   # Multi-line docstring summary should start at the second line
-        "ISC001", # handled by formatter
-        "ERA001", # Found commented-out code
-        "F811",   # Redefinition of unused variable  <- plum
-        "FIX002", # Line contains TODO, consider resolving the issue
-        "PD011",  # Pandas
-        "PYI041", # Use `float` instead of `int | float`
-        "RUF022", # `__all__` is not sorted
-        "TD002",  # Missing author in TODO; try: `# TODO(<author_name>): .
-        "TD003",  # Missing issue link on the line following this TODO
-    ]
+[tool.ruff.lint]
+extend-select = ["ALL"]
+ignore = [
+  "A001",   # Variable is shadowing a Python builtin
+  "A002",   # Argument is shadowing a Python builtin
+  "ANN401", # Dynamically typed expressions (typing.Any) are disallowed
+  "ARG001", # Unused function argument
+  "COM812", # Missing trailing comma
+  "D203",   # one-blank-line-before-class
+  "D213",   # Multi-line docstring summary should start at the second line
+  "ISC001", # handled by formatter
+  "ERA001", # Found commented-out code
+  "F811",   # Redefinition of unused variable  <- plum
+  "FIX002", # Line contains TODO, consider resolving the issue
+  "PD011",  # Pandas
+  "PYI041", # Use `float` instead of `int | float`
+  "RUF022", # `__all__` is not sorted
+  "TD002",  # Missing author in TODO; try: `# TODO(<author_name>): .
+  "TD003",  # Missing issue link on the line following this TODO
+]
 
-  [tool.ruff.lint.isort]
-    combine-as-imports = true
-    extra-standard-library = ["typing_extensions"]
+[tool.ruff.lint.isort]
+combine-as-imports     = true
+extra-standard-library = ["typing_extensions"]
 
-  [tool.ruff.lint.per-file-ignores]
-    "src/quax-blocks/**" = ["A004"]
-    "tests/**" = ["ANN", "INP001", "PLR0913", "PLR2004", "S101", "T20", "TID252"]
-    "__init__.py" = ["F403"]
-    "noxfile.py" = ["T20"]
-    "scratch/**" = ["ANN", "D", "FBT", "INP"]
+[tool.ruff.lint.per-file-ignores]
+"__init__.py"        = ["F403"]
+"noxfile.py"         = ["T20"]
+"scratch/**"         = ["ANN", "D", "FBT", "INP"]
+"src/quax-blocks/**" = ["A004"]
+"tests/**"           = ["ANN", "INP001", "PLR0913", "PLR2004", "S101", "T20", "TID252"]
 
-  [tool.ruff.lint.pydocstyle]
-    convention = "google"
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 
 [tool.uv]
@@ -182,6 +176,7 @@ constraint-dependencies = [
   "pyparsing>=3.0.0",
   "scipy>=1.13",
   "opt-einsum>=3.3.0",
+  "nodeenv>=1.9.1",
   "typing-extensions>=4.12.2; python_version<'3.12'",
   "optype<0.14; python_version<'3.12'",
   "optype>=0.14.0; python_version>='3.12'",
