@@ -50,11 +50,12 @@ requires      = ["hatchling", "hatch-vcs"]
 [dependency-groups]
 dev = [
   "cz-conventional-gitmoji>=0.6.1",
-  { include-group = "test" },
+  { include-group = "tests" },
   { include-group = "lint" },
 ]
-lint = ["pre-commit>=4.1.0"]
-test = [
+lint = ["prek>=0.3.11"]
+nox = ["nox>=2026.4.10", "nox-uv>=0.7.1"]
+tests = [
   "pytest>=8.4.2",
   "pytest-cov>=7.0.0",
   "pytest-github-actions-annotate-failures>=0.3.0",
@@ -179,6 +180,7 @@ constraint-dependencies = [
   "scipy>=1.13",
   "opt-einsum>=3.3.0",
   "nodeenv>=1.9.1",
+  'scipy>=1.16.1; python_version >= "3.14"',          # 1.15.x has no cp314 wheels
   "typing-extensions>=4.12.2; python_version<'3.12'",
   "optype<0.14; python_version<'3.12'",
   "optype>=0.14.0; python_version>='3.12'",
