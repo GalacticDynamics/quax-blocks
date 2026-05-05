@@ -53,6 +53,12 @@ dev = [
   { include-group = "tests" },
   { include-group = "lint" },
 ]
+docs = [
+  "hippogriffe==0.2.2",
+  "mkdocstrings[python]==1.0.3",
+  "pymdown-extensions>=10.0",
+  "zensical>=0.0.40",
+]
 lint = ["prek>=0.3.11"]
 nox = ["nox>=2026.4.10", "nox-uv>=0.7.1"]
 tests = [
