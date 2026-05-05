@@ -27,7 +27,8 @@ class HasShape(Protocol):
 class LaxLenMixin:
     """Mixin for ``__len__`` method using quaxified `jax.lax.len`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxLenMixin
@@ -52,7 +53,8 @@ class LaxLenMixin:
 class NumpyLenMixin:
     """Mixin for ``__len__`` method using quaxified `jax.numpy.len`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyLenMixin
@@ -82,7 +84,8 @@ class NumpyLenMixin:
 class LaxLengthHintMixin:
     """Mixin for ``__length_hint__`` method using quaxified `jax.lax.length_hint`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxLengthHintMixin
@@ -107,7 +110,8 @@ class LaxLengthHintMixin:
 class NumpyLengthHintMixin:
     """Mixin for ``__length_hint__`` method using quaxified `jax.numpy.length_hint`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyLengthHintMixin

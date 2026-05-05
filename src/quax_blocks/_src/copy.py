@@ -21,7 +21,8 @@ RDeepcopy = TypeVar("RDeepcopy", default=opt.copy.CanDeepcopySelf)
 class NumpyCopyMixin(Generic[RCopy]):
     """Mixin for ``__copy__`` method using quaxified `jax.numpy.copy`.
 
-    Examples:
+    Examples
+    --------
     >>> import copy
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
@@ -47,7 +48,8 @@ class NumpyCopyMixin(Generic[RCopy]):
 class NumpyDeepCopyMixin(Generic[RDeepcopy]):
     """Mixin for ``__deepcopy__`` method using quaxified `jax.numpy.copy`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyDeepCopyMixin

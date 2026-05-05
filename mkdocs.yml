@@ -1,0 +1,89 @@
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - toc.integrate
+    - header.autohide
+  palette:
+    - scheme: default
+      primary: white
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+  logo: "_static/favicon.png"
+  favicon: "_static/favicon.png"
+
+site_name: quax-blocks
+site_description: The documentation for the quax-blocks software library.
+site_author: GalacticDynamics
+site_url: https://GalacticDynamics.github.io/quax-blocks
+
+repo_url: https://github.com/GalacticDynamics/quax-blocks
+repo_name: GalacticDynamics/quax-blocks
+edit_uri: ""
+
+extra_javascript:
+  - _static/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - _static/custom_css.css
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path: docs
+  - admonition
+  - toc:
+      permalink: "¤"
+      toc_depth: 4
+
+plugins:
+  - search:
+      # See https://github.com/squidfunk/mkdocs-material/discussions/8116#discussioncomment-12632752
+      # and https://github.com/patrick-kidger/equinox/issues/984
+      # In particular this allows for searching e.g. 'filter_grad' and to match 'equinox.filter_grad'.
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - hippogriffe:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy
+            filters:
+              - "^__all__$"
+              - "!^__"
+            force_inspection: true
+            heading_level: 4
+            inherited_members: true
+            members_order: source
+            show_bases: false
+            show_if_no_docstring: true
+            show_overloads: false
+            show_root_heading: true
+            show_signature_annotations: true
+            show_source: false
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+
+nav:
+  - "index.md"
+  - Guides:
+      - "guides/getting_started.md"
+      - "guides/mixins.md"
+  - API:
+      - "api/quax_blocks.md"

@@ -36,7 +36,8 @@ class LaxEqMixin(Generic[T, Rbool]):
         subclassing in this way. To ensure correct behavior, you need to
         explicitly assign the `__eq__` method in your subclass.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, LaxEqMixin
@@ -70,7 +71,8 @@ class NumpyEqMixin(Generic[T, Rbool]):
         subclassing in this way. To ensure correct behavior, you need to
         explicitly assign the `__eq__` method in your subclass.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyEqMixin
@@ -103,7 +105,8 @@ class NumpyEqMixin(Generic[T, Rbool]):
 class LaxNeMixin(Generic[T, Rbool]):
     """Mixin for ``__ne__`` method using quaxified `jax.lax.ne`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxNeMixin
@@ -131,7 +134,8 @@ class LaxNeMixin(Generic[T, Rbool]):
 class NumpyNeMixin(Generic[T, Rbool]):
     """Mixin for ``__ne__`` method using quaxified `jax.numpy.ne`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyNeMixin
@@ -163,7 +167,8 @@ class NumpyNeMixin(Generic[T, Rbool]):
 class LaxLtMixin(Generic[T, Rbool]):
     """Mixin for ``__lt__`` method using quaxified `jax.lax.lt`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxLtMixin
@@ -187,7 +192,8 @@ class LaxLtMixin(Generic[T, Rbool]):
 class NumpyLtMixin(Generic[T, Rbool]):
     """Mixin for ``__lt__`` method using quaxified `jax.numpy.lt`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyLtMixin
@@ -215,7 +221,8 @@ class NumpyLtMixin(Generic[T, Rbool]):
 class LaxLeMixin(Generic[T, Rbool]):
     """Mixin for ``__le__`` method using quaxified `jax.lax.le`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxLeMixin
@@ -239,7 +246,8 @@ class LaxLeMixin(Generic[T, Rbool]):
 class NumpyLeMixin(Generic[T, Rbool]):
     """Mixin for ``__le__`` method using quaxified `jax.numpy.le`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyLeMixin
@@ -264,7 +272,8 @@ class NumpyLeMixin(Generic[T, Rbool]):
 class LaxGtMixin(Generic[T, Rbool]):
     """Mixin for ``__gt__`` method using quaxified `jax.lax.gt`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxGtMixin
@@ -288,7 +297,8 @@ class LaxGtMixin(Generic[T, Rbool]):
 class NumpyGtMixin(Generic[T, Rbool]):
     """Mixin for ``__gt__`` method using quaxified `jax.numpy.gt`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyGtMixin
@@ -316,7 +326,8 @@ class NumpyGtMixin(Generic[T, Rbool]):
 class LaxGeMixin(Generic[T, Rbool]):
     """Mixin for ``__ge__`` method using quaxified `jax.lax.ge`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxGeMixin
@@ -340,7 +351,8 @@ class LaxGeMixin(Generic[T, Rbool]):
 class NumpyGeMixin(Generic[T, Rbool]):
     """Mixin for ``__ge__`` method using quaxified `jax.numpy.ge`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyGeMixin
