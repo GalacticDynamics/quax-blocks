@@ -30,7 +30,8 @@ R = TypeVar("R", default=bool)
 class LaxRoundMixin(Generic[R]):
     """Mixin for ``__round__`` method using quaxified `jax.lax.round`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRoundMixin
@@ -53,7 +54,8 @@ class LaxRoundMixin(Generic[R]):
 class NumpyRoundMixin(Generic[R]):
     """Mixin for ``__round__`` method using quaxified `jax.numpy.round`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRoundMixin
@@ -84,7 +86,8 @@ class LaxTruncMixin(
     Uses quaxified `jax.lax.select` to apply `qlax.floor` for positive values
     and `qlax.ceil` for negative values.
 
-    Examples:
+    Examples
+    --------
     >>> import math
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
@@ -110,7 +113,8 @@ class LaxTruncMixin(
 class NumpyTruncMixin(Generic[R]):
     """Mixin for ``__trunc__`` method using quaxified `jax.numpy.trunc`.
 
-    Examples:
+    Examples
+    --------
     >>> import math
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
@@ -136,7 +140,8 @@ class NumpyTruncMixin(Generic[R]):
 class LaxFloorMixin(Generic[R]):
     """Mixin for ``__floor__`` method using quaxified `jax.lax.floor`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxFloorMixin
@@ -157,7 +162,8 @@ class LaxFloorMixin(Generic[R]):
 class NumpyFloorMixin(Generic[R]):
     """Mixin for ``__floor__`` method using quaxified `jax.numpy.floor`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyFloorMixin
@@ -182,7 +188,8 @@ class NumpyFloorMixin(Generic[R]):
 class LaxCeilMixin(Generic[R]):
     """Mixin for ``__ceil__`` method using quaxified `jax.lax.ceil`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxCeilMixin
@@ -203,7 +210,8 @@ class LaxCeilMixin(Generic[R]):
 class NumpyCeilMixin(Generic[R]):
     """Mixin for ``__ceil__`` method using quaxified `jax.numpy.ceil`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyCeilMixin

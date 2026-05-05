@@ -89,7 +89,8 @@ R = TypeVar("R", default=bool)
 class LaxAddMixin(Generic[T, R]):
     """Mixin for ``__add__`` method using quaxified `jax.lax.add`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxAddMixin
@@ -113,7 +114,8 @@ class LaxAddMixin(Generic[T, R]):
 class NumpyAddMixin(Generic[T, R]):
     """Mixin for ``__add__`` method using quaxified `jax.numpy.add`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyAddMixin
@@ -141,7 +143,8 @@ class NumpyAddMixin(Generic[T, R]):
 class LaxRAddMixin(Generic[T, R]):
     """Mixin for ``__radd__`` method using quaxified `jax.lax.add`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRAddMixin
@@ -165,7 +168,8 @@ class LaxRAddMixin(Generic[T, R]):
 class NumpyRAddMixin(Generic[T, R]):
     """Mixin for ``__radd__`` method using quaxified `jax.numpy.add`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRAddMixin
@@ -207,7 +211,8 @@ class NumpyBothAddMixin(NumpyAddMixin[T, R], NumpyRAddMixin[T, R]):
 class LaxSubMixin(Generic[T, R]):
     """Mixin for ``__sub__`` method using quaxified `jax.lax.sub`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxSubMixin
@@ -231,7 +236,8 @@ class LaxSubMixin(Generic[T, R]):
 class NumpySubMixin(Generic[T, R]):
     """Mixin for ``__sub__`` method using quaxified `jax.numpy.sub`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpySubMixin
@@ -259,7 +265,8 @@ class NumpySubMixin(Generic[T, R]):
 class LaxRSubMixin(Generic[T, R]):
     """Mixin for ``__rsub__`` method using quaxified `jax.lax.sub`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRSubMixin
@@ -283,7 +290,8 @@ class LaxRSubMixin(Generic[T, R]):
 class NumpyRSubMixin(Generic[T, R]):
     """Mixin for ``__rsub__`` method using quaxified `jax.numpy.sub`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRSubMixin
@@ -324,7 +332,8 @@ class NumpyBothSubMixin(NumpySubMixin[T, R], NumpyRSubMixin[T, R]):
 class LaxMulMixin(Generic[T, R]):
     """Mixin for ``__mul__`` method using quaxified `jax.lax.mul`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxMulMixin
@@ -348,7 +357,8 @@ class LaxMulMixin(Generic[T, R]):
 class NumpyMulMixin(Generic[T, R]):
     """Mixin for ``__mul__`` method using quaxified `jax.numpy.mul`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyMulMixin
@@ -376,7 +386,8 @@ class NumpyMulMixin(Generic[T, R]):
 class LaxRMulMixin(Generic[T, R]):
     """Mixin for ``__rmul__`` method using quaxified `jax.lax.mul`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRMulMixin
@@ -400,7 +411,8 @@ class LaxRMulMixin(Generic[T, R]):
 class NumpyRMulMixin(Generic[T, R]):
     """Mixin for ``__rmul__`` method using quaxified `jax.numpy.mul`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRMulMixin
@@ -441,7 +453,8 @@ class NumpyBothMulMixin(NumpyMulMixin[T, R], NumpyRMulMixin[T, R]):
 class LaxMatMulMixin(Generic[T, R]):
     """Mixin for ``__matmul__`` method using quaxified `jax.lax.matmul`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxMatMulMixin
@@ -467,7 +480,8 @@ class LaxMatMulMixin(Generic[T, R]):
 class NumpyMatMulMixin(Generic[T, R]):
     """Mixin for ``__matmul__`` method using quaxified `jax.numpy.matmul`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyMatMulMixin
@@ -496,7 +510,8 @@ class NumpyMatMulMixin(Generic[T, R]):
 class LaxRMatMulMixin(Generic[T, R]):
     """Mixin for ``__rmatmul__`` method using quaxified `jax.lax.matmul`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRMatMulMixin
@@ -522,7 +537,8 @@ class LaxRMatMulMixin(Generic[T, R]):
 class NumpyRMatMulMixin(Generic[T, R]):
     """Mixin for ``__rmatmul__`` method using quaxified `jax.numpy.matmul`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRMatMulMixin
@@ -566,7 +582,8 @@ class NumpyBothMatMulMixin(NumpyMatMulMixin[T, R], NumpyRMatMulMixin[T, R]):
 class LaxTrueDivMixin(Generic[T, R]):
     """Mixin for ``__truediv__`` method using quaxified `jax.lax.truediv`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxTrueDivMixin
@@ -590,7 +607,8 @@ class LaxTrueDivMixin(Generic[T, R]):
 class NumpyTrueDivMixin(Generic[T, R]):
     """Mixin for ``__truediv__`` method using quaxified `jax.numpy.true_divide`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyTrueDivMixin
@@ -618,7 +636,8 @@ class NumpyTrueDivMixin(Generic[T, R]):
 class LaxRTrueDivMixin(Generic[T, R]):
     """Mixin for ``__rtruediv__`` method using quaxified `jax.lax.truediv`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRTrueDivMixin
@@ -642,7 +661,8 @@ class LaxRTrueDivMixin(Generic[T, R]):
 class NumpyRTrueDivMixin(Generic[T, R]):
     """Mixin for ``__rtruediv__`` method using quaxified `jax.numpy.true_divide`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRTrueDivMixin
@@ -687,7 +707,8 @@ class LaxFloorDivMixin(Generic[T, R]):
     Note that lax does not have a floor division function, so this is
     ``lax.floor(lax.div(x, y))``.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxFloorDivMixin
@@ -711,7 +732,8 @@ class LaxFloorDivMixin(Generic[T, R]):
 class NumpyFloorDivMixin(Generic[T, R]):
     """Mixin for ``__floordiv__`` method using quaxified `jax.numpy.floor_divide`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyFloorDivMixin
@@ -742,7 +764,8 @@ class LaxRFloorDivMixin(Generic[T, R]):
     Note that lax does not have a floor division function, so this is
     ``lax.floor(lax.div(x, y))``.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRFloorDivMixin
@@ -766,7 +789,8 @@ class LaxRFloorDivMixin(Generic[T, R]):
 class NumpyRFloorDivMixin(Generic[T, R]):
     """Mixin for ``__rfloordiv__`` method using quaxified `jax.numpy.floor_divide`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRFloorDivMixin
@@ -808,7 +832,8 @@ class NumpyBothFloorDivMixin(NumpyFloorDivMixin[T, R], NumpyRFloorDivMixin[T, R]
 class LaxModMixin(Generic[T, R]):
     """Mixin for ``__mod__`` method using quaxified `jax.lax.rem`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxModMixin
@@ -832,7 +857,8 @@ class LaxModMixin(Generic[T, R]):
 class NumpyModMixin(Generic[T, R]):
     """Mixin for ``__mod__`` method using quaxified `jax.numpy.mod`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyModMixin
@@ -860,7 +886,8 @@ class NumpyModMixin(Generic[T, R]):
 class LaxRModMixin(Generic[T, R]):
     """Mixin for ``__rmod__`` method using quaxified `jax.lax.rem`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRModMixin
@@ -884,7 +911,8 @@ class LaxRModMixin(Generic[T, R]):
 class NumpyRModMixin(Generic[T, R]):
     """Mixin for ``__rmod__`` method using quaxified `jax.numpy.mod`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRModMixin
@@ -929,7 +957,8 @@ class NumpyBothModMixin(NumpyModMixin[T, R], NumpyRModMixin[T, R]):
 class NumpyDivModMixin(Generic[T, R]):
     """Mixin for ``__divmod__`` method using quaxified `jax.numpy.divmod`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyDivModMixin
@@ -960,7 +989,8 @@ class NumpyDivModMixin(Generic[T, R]):
 class NumpyRDivModMixin(Generic[T, R]):
     """Mixin for ``__rdivmod__`` method using quaxified `jax.numpy.divmod`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRDivModMixin
@@ -998,7 +1028,8 @@ class NumpyBothDivModMixin(NumpyDivModMixin[T, R], NumpyRDivModMixin[T, R]):
 class LaxPowMixin(Generic[T, R]):
     """Mixin for ``__pow__`` method using quaxified `jax.lax.pow`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxPowMixin
@@ -1022,7 +1053,8 @@ class LaxPowMixin(Generic[T, R]):
 class NumpyPowMixin(Generic[T, R]):
     """Mixin for ``__pow__`` method using quaxified `jax.numpy.pow`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyPowMixin
@@ -1050,7 +1082,8 @@ class NumpyPowMixin(Generic[T, R]):
 class LaxRPowMixin(Generic[T, R]):
     """Mixin for ``__rpow__`` method using quaxified `jax.lax.pow`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRPowMixin
@@ -1074,7 +1107,8 @@ class LaxRPowMixin(Generic[T, R]):
 class NumpyRPowMixin(Generic[T, R]):
     """Mixin for ``__rpow__`` method using quaxified `jax.numpy.pow`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRPowMixin
@@ -1116,7 +1150,8 @@ class NumpyBothPowMixin(NumpyPowMixin[T, R], NumpyRPowMixin[T, R]):
 class LaxLShiftMixin(Generic[T, R]):
     """Mixin for ``__lshift__`` method using quaxified `jax.lax.lshift`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxLShiftMixin
@@ -1140,7 +1175,8 @@ class LaxLShiftMixin(Generic[T, R]):
 class NumpyLShiftMixin(Generic[T, R]):
     """Mixin for ``__lshift__`` method using quaxified `jax.numpy.lshift`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyLShiftMixin
@@ -1168,7 +1204,8 @@ class NumpyLShiftMixin(Generic[T, R]):
 class LaxRLShiftMixin(Generic[T, R]):
     """Mixin for ``__rlshift__`` method using quaxified `jax.lax.lshift`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRLShiftMixin
@@ -1192,7 +1229,8 @@ class LaxRLShiftMixin(Generic[T, R]):
 class NumpyRLShiftMixin(Generic[T, R]):
     """Mixin for ``__rlshift__`` method using quaxified `jax.numpy.lshift`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRLShiftMixin
@@ -1234,7 +1272,8 @@ class NumpyBothLShiftMixin(NumpyLShiftMixin[T, R], NumpyRLShiftMixin[T, R]):
 class LaxRShiftMixin(Generic[T, R]):
     """Mixin for ``__rshift__`` method using quaxified `jax.lax.shift_right`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRShiftMixin
@@ -1266,7 +1305,8 @@ class LaxRShiftMixin(Generic[T, R]):
 class NumpyRShiftMixin(Generic[T, R]):
     """Mixin for ``__rshift__`` method using quaxified `jax.numpy.rshift`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRShiftMixin
@@ -1294,7 +1334,8 @@ class NumpyRShiftMixin(Generic[T, R]):
 class LaxRRShiftMixin(Generic[T, R]):
     """Mixin for ``__rrshift__`` method using quaxified `jax.lax.rshift`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRRShiftMixin
@@ -1326,7 +1367,8 @@ class LaxRRShiftMixin(Generic[T, R]):
 class NumpyRRShiftMixin(Generic[T, R]):
     """Mixin for ``__rrshift__`` method using quaxified `jax.numpy.rshift`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRRShiftMixin
@@ -1368,7 +1410,8 @@ class NumpyBothRShiftMixin(NumpyRShiftMixin[T, R], NumpyRRShiftMixin[T, R]):
 class LaxAndMixin(Generic[T, R]):
     """Mixin for ``__and__`` method using quaxified `jax.lax.and_`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxAndMixin
@@ -1392,7 +1435,8 @@ class LaxAndMixin(Generic[T, R]):
 class NumpyAndMixin(Generic[T, R]):
     """Mixin for ``__and__`` method using quaxified `jax.numpy.and_`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyAndMixin
@@ -1420,7 +1464,8 @@ class NumpyAndMixin(Generic[T, R]):
 class LaxRAndMixin(Generic[T, R]):
     """Mixin for ``__rand__`` method using quaxified `jax.lax.and_`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRAndMixin
@@ -1444,7 +1489,8 @@ class LaxRAndMixin(Generic[T, R]):
 class NumpyRAndMixin(Generic[T, R]):
     """Mixin for ``__rand__`` method using quaxified `jax.numpy.and_`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRAndMixin
@@ -1487,7 +1533,8 @@ class NumpyBothAndMixin(NumpyAndMixin[T, R], NumpyRAndMixin[T, R]):
 class LaxXorMixin(Generic[T, R]):
     """Mixin for ``__xor__`` method using quaxified `jax.lax.xor`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxXorMixin
@@ -1511,7 +1558,8 @@ class LaxXorMixin(Generic[T, R]):
 class NumpyXorMixin(Generic[T, R]):
     """Mixin for ``__xor__`` method using quaxified `jax.numpy.xor`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyXorMixin
@@ -1539,7 +1587,8 @@ class NumpyXorMixin(Generic[T, R]):
 class LaxRXorMixin(Generic[T, R]):
     """Mixin for ``__rxor__`` method using quaxified `jax.lax.xor`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRXorMixin
@@ -1563,7 +1612,8 @@ class LaxRXorMixin(Generic[T, R]):
 class NumpyRXorMixin(Generic[T, R]):
     """Mixin for ``__rxor__`` method using quaxified `jax.numpy.xor`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRXorMixin
@@ -1605,7 +1655,8 @@ class NumpyBothXorMixin(NumpyXorMixin[T, R], NumpyRXorMixin[T, R]):
 class LaxOrMixin(Generic[T, R]):
     """Mixin for ``__or__`` method using quaxified `jax.lax.or_`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxOrMixin
@@ -1629,7 +1680,8 @@ class LaxOrMixin(Generic[T, R]):
 class NumpyOrMixin(Generic[T, R]):
     """Mixin for ``__or__`` method using quaxified `jax.numpy.or_`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyOrMixin
@@ -1660,7 +1712,8 @@ class NumpyOrMixin(Generic[T, R]):
 class LaxROrMixin(Generic[T, R]):
     """Mixin for ``__ror__`` method using quaxified `jax.lax.or_`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxROrMixin
@@ -1684,7 +1737,8 @@ class LaxROrMixin(Generic[T, R]):
 class NumpyROrMixin(Generic[T, R]):
     """Mixin for ``__ror__`` method using quaxified `jax.numpy.or_`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyROrMixin

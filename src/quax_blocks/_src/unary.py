@@ -28,7 +28,8 @@ R = TypeVar("R", default=bool)
 class LaxPosMixin:
     """Mixin for ``__pos__`` method using quaxified `jax.lax.pos`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxPosMixin
@@ -49,7 +50,8 @@ class LaxPosMixin:
 class NumpyPosMixin:
     """Mixin for ``__pos__`` method using quaxified `jax.numpy.pos`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyPosMixin
@@ -74,7 +76,8 @@ class NumpyPosMixin:
 class LaxNegMixin(Generic[R]):
     """Mixin for ``__neg__`` method using quaxified `jax.lax.neg`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxNegMixin
@@ -95,7 +98,8 @@ class LaxNegMixin(Generic[R]):
 class NumpyNegMixin(Generic[R]):
     """Mixin for ``__neg__`` method using quaxified `jax.numpy.neg`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyNegMixin
@@ -123,7 +127,8 @@ class NumpyNegMixin(Generic[R]):
 class NumpyInvertMixin(Generic[R]):
     """Mixin for ``__invert__`` method using quaxified `jax.numpy.invert`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyInvertMixin
@@ -148,7 +153,8 @@ class NumpyInvertMixin(Generic[R]):
 class LaxAbsMixin(Generic[R]):
     """Mixin for ``__abs__`` method using quaxified `jax.lax.abs`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxAbsMixin
@@ -169,7 +175,8 @@ class LaxAbsMixin(Generic[R]):
 class NumpyAbsMixin(Generic[R]):
     """Mixin for ``__abs__`` method using quaxified `jax.numpy.abs`.
 
-    Examples:
+    Examples
+    --------
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyAbsMixin
