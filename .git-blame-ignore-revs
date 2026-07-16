@@ -1,0 +1,8 @@
+# Revisions to ignore in `git blame` (bulk reformatting, etc.).
+#
+# Enable locally with:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+# GitHub uses this file automatically.
+#
+# Add the full 40-character commit hash of any pure-formatting / mass-rename
+# commit below (one per line), so it does not obscure real authorship.
