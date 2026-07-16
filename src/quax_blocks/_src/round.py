@@ -43,12 +43,22 @@ class LaxRoundMixin(Generic[R]):
     >>> round(x)
     Array([1., 3., 4.], dtype=float32)
 
+    ``ndigits`` rounds to that many decimal places:
+
+    >>> round(Val(jnp.array([1.234, 5.678])), 2)
+    Array([1.23, 5.68], dtype=float32)
+
     """
 
     _ROUNDING_METHOD: Literal[qlax.RoundingMethod] = qlax.RoundingMethod.AWAY_FROM_ZERO  # type: ignore[valid-type]
 
-    def __round__(self) -> R:
-        return qlax.round(self, self._ROUNDING_METHOD)
+    def __round__(self, ndigits: int = 0) -> R:
+        if not ndigits:
+            return qlax.round(self, self._ROUNDING_METHOD)
+        # Scale, round, unscale -- `jax.lax.round` has no `decimals` argument.
+        scale = 10.0**ndigits
+        rounded = qlax.round(qlax.mul(self, scale), self._ROUNDING_METHOD)
+        return qlax.div(rounded, scale)
 
 
 class NumpyRoundMixin(Generic[R]):
