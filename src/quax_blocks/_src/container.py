@@ -17,7 +17,6 @@ class HasShape(Protocol):
     @property
     def shape(self) -> tuple[int, ...]:
         """Return the shape of the object."""
-        ...
 
 
 # -----------------------------------------------
