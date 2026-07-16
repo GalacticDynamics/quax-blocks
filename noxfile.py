@@ -1,6 +1,6 @@
-#!/usr/bin/env -S uv run --script  # noqa: EXE003
+#!/usr/bin/env -S uv run --script
 # /// script
-#    dependencies = ["nox", "nox_uv"]
+#    dependencies = ["nox", "nox-uv"]
 # ///
 """Nox setup."""
 
@@ -10,7 +10,7 @@ from pathlib import Path
 import nox
 from nox_uv import session
 
-nox.needs_version = ">=2024.3.2"
+nox.needs_version = ">=2026.4.10"
 nox.options.default_venv_backend = "uv"
 
 DIR = Path(__file__).parent.resolve()
@@ -19,7 +19,7 @@ DIR = Path(__file__).parent.resolve()
 # Comprehensive sessions
 
 
-@session(uv_groups=["lint", "test", "docs"], reuse_venv=True, default=True)
+@session(uv_groups=["lint", "tests", "docs"], reuse_venv=True, default=True)
 def all(s: nox.Session, /) -> None:
     """Run all default sessions."""
     lint(s)
@@ -31,33 +31,45 @@ def all(s: nox.Session, /) -> None:
 # Linting
 
 
-@session(uv_groups=["lint", "build"], reuse_venv=True)
+@session(uv_groups=["lint"], reuse_venv=True)
 def lint(s: nox.Session, /) -> None:
     """Run the linter."""
-    precommit(s)  # reuse pre-commit session
+    precommit(s)  # reuse pre-commit session (runs ruff, mypy, ...)
     pylint(s)  # reuse pylint session
 
 
-@session(uv_groups=["lint", "build"], reuse_venv=True)
+@session(uv_groups=["lint"], reuse_venv=True)
 def precommit(s: nox.Session, /) -> None:
-    """Run pre-commit."""
+    """Run pre-commit (via prek)."""
     s.run("prek", "run", "--all-files", *s.posargs)
 
 
-@session(uv_groups=["lint", "build"], reuse_venv=True)
+@session(uv_groups=["lint"], reuse_venv=True)
 def pylint(s: nox.Session, /) -> None:
     """Run PyLint."""
-    s.run("pylint", "quax-blocks", *s.posargs)
+    s.run("pylint", "quax_blocks", *s.posargs)
+
+
+@session(uv_groups=["lint"], reuse_venv=True)
+def mypy(s: nox.Session, /) -> None:
+    """Run mypy."""
+    s.run("mypy", "src/quax_blocks", *s.posargs)
 
 
 # =============================================================================
 # Testing
 
 
-@session(uv_groups=["test"], reuse_venv=True)
+@session(uv_groups=["tests"], reuse_venv=True)
 def test(s: nox.Session, /) -> None:
     """Run the unit and regular tests."""
     s.notify("pytest", posargs=s.posargs)
+
+
+@session(uv_groups=["tests"], reuse_venv=True)
+def pytest(s: nox.Session, /) -> None:
+    """Run the unit and regular tests."""
+    s.run("pytest", *s.posargs)
 
 
 # =============================================================================
