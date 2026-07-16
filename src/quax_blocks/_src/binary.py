@@ -69,7 +69,7 @@ __all__ = [
 ]
 # fmt: on
 
-from typing import Generic, Literal
+from typing import Any, Generic, Literal
 from typing_extensions import TypeVar
 
 import quaxed.lax as qlax
@@ -450,9 +450,39 @@ class NumpyBothMulMixin(NumpyMulMixin[T, R], NumpyRMulMixin[T, R]):
 # -------------------------------------
 # `__matmul__`
 
+#: Rank at which `jax.lax.dot` no longer applies and batching is required.
+_BATCH_NDIM = 3
+
+
+def _ndim(x: Any, /) -> int:
+    """Return the rank of an array-ish operand (``0`` for scalars)."""
+    shape = getattr(x, "shape", None)
+    return len(shape) if shape is not None else 0
+
+
+def _lax_matmul(lhs: Any, rhs: Any, /) -> Any:
+    """Matrix-multiply two operands using `jax.lax` primitives.
+
+    `jax.lax.dot` handles 1-D and 2-D operands; `jax.lax.batch_matmul` handles
+    equal-rank batched (>= 3-D) operands. Neither primitive supports NumPy's
+    mixed-rank broadcasting (e.g. ``(2, 2, 2) @ (2, 2)``) -- use
+    `NumpyMatMulMixin` for full NumPy `matmul` semantics.
+    """
+    if max(_ndim(lhs), _ndim(rhs)) >= _BATCH_NDIM:
+        return qlax.batch_matmul(lhs, rhs)
+    return qlax.dot(lhs, rhs)
+
 
 class LaxMatMulMixin(Generic[T, R]):
-    """Mixin for ``__matmul__`` method using quaxified `jax.lax.matmul`.
+    """Mixin for ``__matmul__`` method using quaxified `jax.lax` primitives.
+
+    Dispatches on rank: `jax.lax.dot` for 1-D/2-D operands and
+    `jax.lax.batch_matmul` for equal-rank batched (>= 3-D) operands.
+
+    !!! note
+        NumPy's mixed-rank broadcasting (e.g. ``(2, 2, 2) @ (2, 2)``) is not
+        expressible with these `jax.lax` primitives. Use `NumpyMatMulMixin`
+        for full NumPy `matmul` semantics.
 
     Examples
     --------
@@ -469,11 +499,17 @@ class LaxMatMulMixin(Generic[T, R]):
     Array([[19, 22],
            [43, 50]], dtype=int32)
 
+    Batched (3-D) operands are supported:
+
+    >>> b = Val(jnp.arange(8).reshape(2, 2, 2))
+    >>> (b @ jnp.arange(8).reshape(2, 2, 2)).shape
+    (2, 2, 2)
+
     """
 
     def __matmul__(self, other: T) -> R:
         try:
-            return qlax.dot(self, other)  # TODO: is this the right operator?
+            return _lax_matmul(self, other)
         except (TypeError, NotFoundLookupError):
             return NotImplemented
 
@@ -509,7 +545,11 @@ class NumpyMatMulMixin(Generic[T, R]):
 
 
 class LaxRMatMulMixin(Generic[T, R]):
-    """Mixin for ``__rmatmul__`` method using quaxified `jax.lax.matmul`.
+    """Mixin for ``__rmatmul__`` method using quaxified `jax.lax` primitives.
+
+    Dispatches on rank: `jax.lax.dot` for 1-D/2-D operands and
+    `jax.lax.batch_matmul` for equal-rank batched (>= 3-D) operands. See
+    `LaxMatMulMixin` for the broadcasting caveat.
 
     Examples
     --------
@@ -530,7 +570,7 @@ class LaxRMatMulMixin(Generic[T, R]):
 
     def __rmatmul__(self, other: T) -> R:
         try:
-            return qlax.dot(other, self)  # TODO: is this the right operator?
+            return _lax_matmul(other, self)
         except (TypeError, NotFoundLookupError):
             return NotImplemented
 
