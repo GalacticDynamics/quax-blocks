@@ -50,6 +50,7 @@ class NumpyDeepCopyMixin(Generic[RDeepcopy]):
 
     Examples
     --------
+    >>> import copy
     >>> import jax.numpy as jnp
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyDeepCopyMixin
