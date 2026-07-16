@@ -44,11 +44,9 @@ __all__ = [
     "LaxModMixin", "NumpyModMixin",  # __mod__
     "LaxRModMixin", "NumpyRModMixin",  # __rmod__
     # ----- divmod -----
-    "NumpyBothDivModMixin",
-    # "LaxDivModMixin",
-    "NumpyDivModMixin",
-    # "LaxRDivModMixin",
-    "NumpyRDivModMixin",
+    "LaxBothDivModMixin", "NumpyBothDivModMixin",
+    "LaxDivModMixin", "NumpyDivModMixin",  # __divmod__
+    "LaxRDivModMixin", "NumpyRDivModMixin",  # __rdivmod__
     # ----- pow -----
     "LaxBothPowMixin", "NumpyBothPowMixin",
     "LaxPowMixin", "NumpyPowMixin",  # __pow__
@@ -80,7 +78,7 @@ __all__ = [
     # ----------
     "LaxPosMixin", "NumpyPosMixin",  # __pos__
     "LaxNegMixin", "NumpyNegMixin",  # __neg__
-    "NumpyInvertMixin",              # __invert__
+    "LaxInvertMixin", "NumpyInvertMixin",  # __invert__
     "LaxAbsMixin", "NumpyAbsMixin",  # __abs__
     #################################################
     "LaxRoundMixin", "NumpyRoundMixin",  # __round__
@@ -90,6 +88,7 @@ __all__ = [
     ##################################################
     "LaxLenMixin", "NumpyLenMixin",  # __len__
     "LaxLengthHintMixin", "NumpyLengthHintMixin",  # __length_hint__
+    "NumpyGetItemMixin",  # __getitem__
     #################################################
     "NumpyCopyMixin",  # __copy__
     "NumpyDeepCopyMixin",  # __deepcopy__
@@ -103,6 +102,7 @@ from ._src.binary import (
     LaxBitwiseMixin,
     LaxBothAddMixin,
     LaxBothAndMixin,
+    LaxBothDivModMixin,
     LaxBothFloorDivMixin,
     LaxBothLShiftMixin,
     LaxBothMatMulMixin,
@@ -114,6 +114,7 @@ from ._src.binary import (
     LaxBothSubMixin,
     LaxBothTrueDivMixin,
     LaxBothXorMixin,
+    LaxDivModMixin,
     LaxFloorDivMixin,
     LaxLShiftMixin,
     LaxMathMixin,
@@ -124,6 +125,7 @@ from ._src.binary import (
     LaxPowMixin,
     LaxRAddMixin,
     LaxRAndMixin,
+    LaxRDivModMixin,
     LaxRFloorDivMixin,
     LaxRLShiftMixin,
     LaxRMatMulMixin,
@@ -188,6 +190,7 @@ from ._src.binary import (
 from ._src.container import (
     LaxLengthHintMixin,
     LaxLenMixin,
+    NumpyGetItemMixin,
     NumpyLengthHintMixin,
     NumpyLenMixin,
 )
@@ -224,6 +227,7 @@ from ._src.round import (
 )
 from ._src.unary import (
     LaxAbsMixin,
+    LaxInvertMixin,
     LaxNegMixin,
     LaxPosMixin,
     LaxUnaryMixin,

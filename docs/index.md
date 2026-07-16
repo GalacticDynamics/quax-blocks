@@ -68,7 +68,7 @@ print(jax.vmap(add)(x, y))  # Array([11., 22., 33.], dtype=float32)
 | [Binary](guides/mixins.md#binary-operators)         | `+`, `-`, `*`, `/`, `//`, `%`, `**`, `@`, bitwise ops    |
 | [Unary](guides/mixins.md#unary-operators)           | `+x`, `-x`, `~x`, `abs(x)`                               |
 | [Rounding](guides/mixins.md#rounding-operators)     | `round()`, `math.trunc()`, `math.floor()`, `math.ceil()` |
-| [Container](guides/mixins.md#container-operators)   | `len()`, `operator.length_hint()`                        |
+| [Container](guides/mixins.md#container-operators)   | `len()`, `operator.length_hint()`, `x[...]`              |
 | [Copy](guides/mixins.md#copy-operators)             | `copy.copy()`, `copy.deepcopy()`                         |
 
 Each group comes in two flavours — **Lax** (using `jax.lax` primitives directly)

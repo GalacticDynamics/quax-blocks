@@ -16,8 +16,8 @@ Each operator is available in two flavours:
 operations map 1-to-1 to XLA HLO instructions and have no Python overhead.
 
 **When to use NumPy:** When you want NumPy broadcasting rules, NumPy-compatible
-type promotion, or when a Lax equivalent does not exist (e.g. `divmod`,
-`__invert__`).
+type promotion, or when a Lax equivalent does not exist (e.g. `__getitem__`,
+`__copy__`).
 
 Both flavours work transparently with `jit`, `vmap`, and `grad`.
 
@@ -117,9 +117,9 @@ JAX version you must explicitly assign the method in your class body:
 | `__mod__`                        | `LaxModMixin`          | `NumpyModMixin`          |
 | `__rmod__`                       | `LaxRModMixin`         | `NumpyRModMixin`         |
 | `__mod__` + `__rmod__`           | `LaxBothModMixin`      | `NumpyBothModMixin`      |
-| `__divmod__`                     | _(not implemented)_    | `NumpyDivModMixin`       |
-| `__rdivmod__`                    | _(not implemented)_    | `NumpyRDivModMixin`      |
-| `__divmod__` + `__rdivmod__`     | _(not implemented)_    | `NumpyBothDivModMixin`   |
+| `__divmod__`                     | `LaxDivModMixin`       | `NumpyDivModMixin`       |
+| `__rdivmod__`                    | `LaxRDivModMixin`      | `NumpyRDivModMixin`      |
+| `__divmod__` + `__rdivmod__`     | `LaxBothDivModMixin`   | `NumpyBothDivModMixin`   |
 | `__pow__`                        | `LaxPowMixin`          | `NumpyPowMixin`          |
 | `__rpow__`                       | `LaxRPowMixin`         | `NumpyRPowMixin`         |
 | `__pow__` + `__rpow__`           | `LaxBothPowMixin`      | `NumpyBothPowMixin`      |
@@ -148,13 +148,13 @@ JAX version you must explicitly assign the method in your class body:
 
 ## Unary operators
 
-| Operator     | Lax mixin           | NumPy mixin        |
-| ------------ | ------------------- | ------------------ |
-| All unary    | `LaxUnaryMixin`     | `NumpyUnaryMixin`  |
-| `__pos__`    | `LaxPosMixin`       | `NumpyPosMixin`    |
-| `__neg__`    | `LaxNegMixin`       | `NumpyNegMixin`    |
-| `__abs__`    | `LaxAbsMixin`       | `NumpyAbsMixin`    |
-| `__invert__` | _(not implemented)_ | `NumpyInvertMixin` |
+| Operator     | Lax mixin        | NumPy mixin        |
+| ------------ | ---------------- | ------------------ |
+| All unary    | `LaxUnaryMixin`  | `NumpyUnaryMixin`  |
+| `__pos__`    | `LaxPosMixin`    | `NumpyPosMixin`    |
+| `__neg__`    | `LaxNegMixin`    | `NumpyNegMixin`    |
+| `__abs__`    | `LaxAbsMixin`    | `NumpyAbsMixin`    |
+| `__invert__` | `LaxInvertMixin` | `NumpyInvertMixin` |
 
 ---
 
@@ -184,6 +184,11 @@ e.g. `0.5 → 0`, `2.5 → 2`), which matches `numpy.round`. Override the
 | ----------------- | -------------------- | ---------------------- |
 | `__len__`         | `LaxLenMixin`        | `NumpyLenMixin`        |
 | `__length_hint__` | `LaxLengthHintMixin` | `NumpyLengthHintMixin` |
+| `__getitem__`     | _(not implemented)_  | `NumpyGetItemMixin`    |
+
+`NumpyGetItemMixin` indexes via `quax.quaxify`, so NumPy-style indexing
+(integers, slices, fancy indexing) works. There is no Lax counterpart: `jax.lax`
+has no general indexing primitive that accepts a Python index expression.
 
 `LaxLenMixin` reads the length from `self.shape[0]` (returns `0` for scalars).
 `NumpyLenMixin` uses `jax.numpy.shape` to obtain the shape first.
