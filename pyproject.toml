@@ -18,11 +18,11 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "jax>=0.5.3",
-  "jaxlib>=0.5.3",
-  "jaxtyping>=0.3.3",
-  "optype>=0.15.0",
-  'plum-dispatch>=2.5.7; python_version < "3.14"',
+  "jax>=0.7.2",
+  "jaxlib>=0.7.2",
+  "jaxtyping>=0.3.9",
+  "optype>=0.17.0",
+  'plum-dispatch>=2.8.0; python_version < "3.14"',
   'plum-dispatch>=2.9.0; python_version >= "3.14"',
   "quax>=0.3.2",
   "quaxed>=0.10.5",

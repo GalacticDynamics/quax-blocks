@@ -1345,11 +1345,11 @@ tests = [
 
 [package.metadata]
 requires-dist = [
-    { name = "jax", specifier = ">=0.5.3" },
-    { name = "jaxlib", specifier = ">=0.5.3" },
-    { name = "jaxtyping", specifier = ">=0.3.3" },
-    { name = "optype", specifier = ">=0.15.0" },
-    { name = "plum-dispatch", marker = "python_full_version < '3.14'", specifier = ">=2.5.7" },
+    { name = "jax", specifier = ">=0.7.2" },
+    { name = "jaxlib", specifier = ">=0.7.2" },
+    { name = "jaxtyping", specifier = ">=0.3.9" },
+    { name = "optype", specifier = ">=0.17.0" },
+    { name = "plum-dispatch", marker = "python_full_version < '3.14'", specifier = ">=2.8.0" },
     { name = "plum-dispatch", marker = "python_full_version >= '3.14'", specifier = ">=2.9.0" },
     { name = "quax", specifier = ">=0.3.2" },
     { name = "quaxed", specifier = ">=0.10.5" },
