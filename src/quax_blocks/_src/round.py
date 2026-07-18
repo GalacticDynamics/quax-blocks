@@ -56,7 +56,10 @@ class LaxRoundMixin(Generic[R]):
         if not ndigits:
             return qlax.round(self, self._ROUNDING_METHOD)
         # Scale, round, unscale -- `jax.lax.round` has no `decimals` argument.
-        scale = 10.0**ndigits
+        # Build the scale with `full_like` so it shares self's dtype: `jax.lax`
+        # requires identical dtypes and does not promote weak Python scalars, so
+        # a bare ``10.0 ** ndigits`` (float64) fails under ``jax_enable_x64``.
+        scale = qlax.full_like(self, 10.0**ndigits)
         rounded = qlax.round(qlax.mul(self, scale), self._ROUNDING_METHOD)
         return qlax.div(rounded, scale)
 
