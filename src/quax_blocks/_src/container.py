@@ -17,6 +17,9 @@ import quaxed.numpy as qnp
 
 R = TypeVar("R", default=Any)
 
+#: Quaxified indexing, built once and reused (see ``NumpyGetItemMixin``).
+_quax_getitem = quax.quaxify(operator.getitem)
+
 
 @runtime_checkable
 class HasShape(Protocol):
@@ -179,4 +182,4 @@ class NumpyGetItemMixin(Generic[R]):
     """
 
     def __getitem__(self, key: object) -> R:
-        return quax.quaxify(operator.getitem)(self, key)
+        return _quax_getitem(self, key)

@@ -979,7 +979,7 @@ class LaxDivModMixin(Generic[T, R]):
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxDivModMixin
 
-    >>> class Val(AbstractVal, LaxDivModMixin[object, Array]):
+    >>> class Val(AbstractVal, LaxDivModMixin[object, tuple[Array, Array]]):
     ...     v: Array
 
     >>> x = Val(jnp.array([5, 7, 9]))
@@ -1004,7 +1004,7 @@ class NumpyDivModMixin(Generic[T, R]):
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyDivModMixin
 
-    >>> class Val(AbstractVal, NumpyDivModMixin[object, Array]):
+    >>> class Val(AbstractVal, NumpyDivModMixin[object, tuple[Array, Array]]):
     ...     v: Array
 
     >>> x = Val(jnp.array([5, 7, 9]))
@@ -1037,7 +1037,7 @@ class LaxRDivModMixin(Generic[T, R]):
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, LaxRDivModMixin
 
-    >>> class Val(AbstractVal, LaxRDivModMixin[object, Array]):
+    >>> class Val(AbstractVal, LaxRDivModMixin[object, tuple[Array, Array]]):
     ...     v: Array
 
     >>> x = Val(jnp.array([5, 7, 9]))
@@ -1062,7 +1062,7 @@ class NumpyRDivModMixin(Generic[T, R]):
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRDivModMixin
 
-    >>> class Val(AbstractVal, NumpyRDivModMixin[object, Array]):
+    >>> class Val(AbstractVal, NumpyRDivModMixin[object, tuple[Array, Array]]):
     ...     v: Array
 
     >>> x = Val(jnp.array([5, 7, 9]))
