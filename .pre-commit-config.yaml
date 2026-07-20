@@ -89,4 +89,8 @@ repos:
     rev: v0.23
     hooks:
       - id: validate-pyproject
-        additional_dependencies: ["validate-pyproject-schema-store[all]"]
+        # Pinned: schema-store 2026.7.20 crashes with
+        # "UnboundLocalError: cannot access local variable 'data_keys'".
+        # 2026.7.17 validates the same file fine. Unpin once upstream is fixed.
+        additional_dependencies:
+          ["validate-pyproject-schema-store[all]==2026.7.17"]
