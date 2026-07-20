@@ -103,7 +103,7 @@ warn_unused_configs      = true
 [[tool.mypy.overrides]]
 disallow_incomplete_defs = true
 disallow_untyped_defs    = true
-module                   = "quax-blocks.*"
+module                   = "quax_blocks.*"
 
 [[tool.mypy.overrides]]
 ignore_missing_imports = true
