@@ -254,7 +254,10 @@ class NumpyLeMixin(Generic[T, Rbool]):
     """
 
     def __le__(self, other: T) -> Rbool:
-        return qnp.less_equal(self, other)
+        try:
+            return qnp.less_equal(self, other)
+        except (TypeError, NotFoundLookupError):
+            return NotImplemented
 
 
 # -----------------------------------------------
