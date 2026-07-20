@@ -27,7 +27,7 @@ def _referenced_names() -> list[tuple[str, str, str]]:
     found = {
         (path.name, alias, attr)
         for path in sorted(SRC.glob("*.py"))
-        for alias, attr in _CALL.findall(path.read_text())
+        for alias, attr in _CALL.findall(path.read_text(encoding="utf-8"))
     }
     return sorted(found)
 

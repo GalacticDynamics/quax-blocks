@@ -1392,7 +1392,7 @@ dev = [
     { name = "packaging", specifier = ">=23.0" },
     { name = "prek", specifier = ">=0.3.11" },
     { name = "pylint", specifier = ">=4.0.3" },
-    { name = "pyright", specifier = ">=1.1.410" },
+    { name = "pyright", specifier = ">=1.1.411" },
     { name = "pytest", specifier = ">=8.4.2" },
     { name = "pytest-cov", specifier = ">=7.0.0" },
     { name = "pytest-github-actions-annotate-failures", specifier = ">=0.3.0" },
@@ -1409,7 +1409,7 @@ lint = [
     { name = "mypy", specifier = ">=1.19.0" },
     { name = "prek", specifier = ">=0.3.11" },
     { name = "pylint", specifier = ">=4.0.3" },
-    { name = "pyright", specifier = ">=1.1.410" },
+    { name = "pyright", specifier = ">=1.1.411" },
     { name = "ruff", specifier = ">=0.14.6" },
 ]
 nox = [

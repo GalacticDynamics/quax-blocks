@@ -64,7 +64,7 @@ lint = [
   "mypy>=1.19.0",
   "prek>=0.3.11",
   "pylint>=4.0.3",
-  "pyright>=1.1.410",
+  "pyright>=1.1.411",
   "ruff>=0.14.6",
 ]
 nox = ["nox>=2026.4.10", "nox-uv>=0.7.1"]
@@ -91,8 +91,12 @@ name = "cz_gitmoji"
 
 
 [tool.coverage]
-port.exclude_lines = ['pragma: no cover', '\.\.\.', 'if typing.TYPE_CHECKING:']
-run.source         = ["quax_blocks"]
+report.exclude_lines = [
+  'pragma: no cover',
+  '\.\.\.',
+  'if (typing\.)?TYPE_CHECKING:',
+]
+run.source = ["quax_blocks"]
 
 
 [tool.mypy]
