@@ -92,21 +92,32 @@ def test_bitwise_matches_numpy(
 
 
 @pytest.mark.parametrize(
-    ("mixin", "op"),
+    ("mixin", "op", "forward", "reflected"),
     [
-        (qb.LaxRSubMixin, operator.sub),
-        (qb.NumpyRSubMixin, operator.sub),
-        (qb.LaxRAddMixin, operator.add),
-        (qb.NumpyRAddMixin, operator.add),
-        (qb.NumpyRTrueDivMixin, operator.truediv),
+        (qb.LaxRSubMixin, operator.sub, "__sub__", "__rsub__"),
+        (qb.NumpyRSubMixin, operator.sub, "__sub__", "__rsub__"),
+        (qb.LaxRAddMixin, operator.add, "__add__", "__radd__"),
+        (qb.NumpyRAddMixin, operator.add, "__add__", "__radd__"),
+        (qb.NumpyRTrueDivMixin, operator.truediv, "__truediv__", "__rtruediv__"),
     ],
 )
-def test_reflected_operand_order(mixin: type, op: Callable[[Any, Any], Any]) -> None:
+def test_reflected_operand_order(
+    mixin: type, op: Callable[[Any, Any], Any], forward: str, reflected: str
+) -> None:
     """``op(other, val)`` computes ``other OP self``, not the other way round."""
-    other = np.asarray(I1)
-    expected = op(other, np.asarray(I2))
-    got = op(I1, make(mixin, v=I2))  # reflected: Val is on the right
-    np.testing.assert_allclose(np.asarray(got), expected)
+    val = make(mixin, v=I2)
+    expected = op(np.asarray(I1), np.asarray(I2))
+
+    # Premise: the reflected method is reached only because the left operand
+    # declines. Assert it, so this test cannot silently stop exercising the
+    # `__r*__` path if jax ever starts handling ArrayValue operands directly.
+    assert getattr(type(I1), forward)(I1, val) is NotImplemented
+
+    # Through the operator -- the real dispatch path a user hits ...
+    np.testing.assert_allclose(np.asarray(op(I1, val)), expected)
+
+    # ... and directly, which pins the operand order regardless of dispatch.
+    np.testing.assert_allclose(np.asarray(getattr(val, reflected)(I1)), expected)
 
 
 def test_both_operands_declining_raises_clean_typeerror() -> None:
