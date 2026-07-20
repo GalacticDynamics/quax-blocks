@@ -65,8 +65,13 @@ class NumpyDeepCopyMixin(Generic[RDeepcopy]):
     """
 
     def __deepcopy__(self, memo: dict[Any, Any], /) -> RDeepcopy:
+        # Consult `memo` before copying, then record the result, so repeated
+        # references to `self` share a single copy. `copy.deepcopy` performs
+        # this lookup itself, but `__deepcopy__` may also be called directly
+        # with a shared memo.
+        key = id(self)
+        if key in memo:
+            return memo[key]
         copied = qnp.copy(self)
-        # Record in `memo` so repeated references to `self` within a single
-        # `deepcopy` share one result, per the copy protocol.
-        memo[id(self)] = copied
+        memo[key] = copied
         return copied
