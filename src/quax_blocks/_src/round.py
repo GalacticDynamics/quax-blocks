@@ -15,12 +15,8 @@ from typing_extensions import TypeVar
 
 import jax
 
-# `quaxed`'s annotations describe the plain-JAX signatures it wraps (`ArrayLike`
-# in, `Array` out) and cannot express quax's runtime dispatch, under which an
-# `ArrayValue` flows through and comes back out. Type-checking the mixins
-# against those signatures produces hundreds of false positives, so the modules
-# are given a permissive type at check time and imported normally at runtime.
-# `test_quaxed_names_exist` guards the function names this gives up on.
+# Permissive type at check time (quaxed's annotations can't model quax's
+# dispatch); imported normally at runtime. See tests/test_quaxed_names.py.
 if TYPE_CHECKING:
     qlax: Any
     qnp: Any

@@ -17,9 +17,7 @@ class AbstractVal(ArrayValue):  # type: ignore[misc]
     v: eqx.AbstractVar[Array]
 
     def aval(self) -> Any:
-        # `jax.typeof` is the public accessor; `jax.core` is the legacy path
-        # JAX has been progressively deprecating.
-        return jax.typeof(self.v)
+        return jax.typeof(self.v)  # public accessor; `jax.core` is deprecated
 
     def materialise(self) -> Array:
         return self.v
