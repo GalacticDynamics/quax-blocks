@@ -1312,6 +1312,7 @@ dev = [
     { name = "mypy" },
     { name = "nox" },
     { name = "nox-uv" },
+    { name = "packaging" },
     { name = "prek" },
     { name = "pylint" },
     { name = "pytest" },
@@ -1337,6 +1338,7 @@ nox = [
     { name = "nox-uv" },
 ]
 tests = [
+    { name = "packaging" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "pytest-github-actions-annotate-failures" },
@@ -1363,6 +1365,7 @@ dev = [
     { name = "mypy", specifier = ">=1.19.0" },
     { name = "nox", specifier = ">=2026.4.10" },
     { name = "nox-uv", specifier = ">=0.7.1" },
+    { name = "packaging", specifier = ">=23.0" },
     { name = "prek", specifier = ">=0.3.11" },
     { name = "pylint", specifier = ">=4.0.3" },
     { name = "pytest", specifier = ">=8.4.2" },
@@ -1388,6 +1391,7 @@ nox = [
     { name = "nox-uv", specifier = ">=0.7.1" },
 ]
 tests = [
+    { name = "packaging", specifier = ">=23.0" },
     { name = "pytest", specifier = ">=8.4.2" },
     { name = "pytest-cov", specifier = ">=7.0.0" },
     { name = "pytest-github-actions-annotate-failures", specifier = ">=0.3.0" },

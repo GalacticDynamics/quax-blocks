@@ -63,6 +63,7 @@ docs = [
 lint = ["mypy>=1.19.0", "prek>=0.3.11", "pylint>=4.0.3", "ruff>=0.14.6"]
 nox = ["nox>=2026.4.10", "nox-uv>=0.7.1"]
 tests = [
+  "packaging>=23.0",
   "pytest>=8.4.2",
   "pytest-cov>=7.0.0",
   "pytest-github-actions-annotate-failures>=0.3.0",
