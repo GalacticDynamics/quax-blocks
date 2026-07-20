@@ -79,6 +79,23 @@ repos:
       - id: mypy
         files: src
 
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.410
+    hooks:
+      - id: pyright
+        additional_dependencies:
+          [
+            "jax",
+            "jaxlib",
+            "jaxtyping",
+            "optype",
+            "packaging",
+            "plum-dispatch",
+            "quax",
+            "quaxed",
+          ]
+        files: ^src/
+
   - repo: https://github.com/codespell-project/codespell
     rev: "v2.4.1"
     hooks:

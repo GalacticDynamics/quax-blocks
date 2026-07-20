@@ -2,6 +2,7 @@
 
 __all__: list[str] = ["AbstractVal"]
 
+from typing import Any
 
 import equinox as eqx
 import jax
@@ -15,8 +16,10 @@ class AbstractVal(ArrayValue):  # type: ignore[misc]
     #: The array.
     v: eqx.AbstractVar[Array]
 
-    def aval(self) -> jax.core.ShapedArray:
-        return jax.core.ShapedArray(self.v.shape, self.v.dtype)
+    def aval(self) -> Any:
+        # `jax.typeof` is the public accessor; `jax.core` is the legacy path
+        # JAX has been progressively deprecating.
+        return jax.typeof(self.v)
 
     def materialise(self) -> Array:
         return self.v

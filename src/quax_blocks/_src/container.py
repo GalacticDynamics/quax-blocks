@@ -9,11 +9,21 @@ __all__ = [
 # fmt: on
 
 import operator
-from typing import Any, Generic, Protocol, runtime_checkable
+from typing import TYPE_CHECKING, Any, Generic, Protocol, runtime_checkable
 from typing_extensions import TypeVar
 
 import quax
-import quaxed.numpy as qnp
+
+# `quaxed`'s annotations describe the plain-JAX signatures it wraps (`ArrayLike`
+# in, `Array` out) and cannot express quax's runtime dispatch, under which an
+# `ArrayValue` flows through and comes back out. Type-checking the mixins
+# against those signatures produces hundreds of false positives, so the modules
+# are given a permissive type at check time and imported normally at runtime.
+# `test_quaxed_names_exist` guards the function names this gives up on.
+if TYPE_CHECKING:
+    qnp: Any
+else:
+    import quaxed.numpy as qnp
 
 R = TypeVar("R", default=Any)
 
@@ -26,6 +36,10 @@ class HasShape(Protocol):
     @property
     def shape(self) -> tuple[int, ...]:
         """Return the shape of the object."""
+        # A protocol member needs a body; without it the declared return type
+        # is unsatisfied (pyright: reportReturnType). `...` is the canonical
+        # form -- pylint's `unnecessary-ellipsis` is a false positive here.
+        ...  # pylint: disable=unnecessary-ellipsis
 
 
 # -----------------------------------------------

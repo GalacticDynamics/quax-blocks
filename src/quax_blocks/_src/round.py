@@ -10,12 +10,23 @@ __all__ = [
 # fmt: on
 
 import functools as ft
-from typing import Generic, Literal
+from typing import TYPE_CHECKING, Any, Generic, Literal
 from typing_extensions import TypeVar
 
 import jax
-import quaxed.lax as qlax
-import quaxed.numpy as qnp
+
+# `quaxed`'s annotations describe the plain-JAX signatures it wraps (`ArrayLike`
+# in, `Array` out) and cannot express quax's runtime dispatch, under which an
+# `ArrayValue` flows through and comes back out. Type-checking the mixins
+# against those signatures produces hundreds of false positives, so the modules
+# are given a permissive type at check time and imported normally at runtime.
+# `test_quaxed_names_exist` guards the function names this gives up on.
+if TYPE_CHECKING:
+    qlax: Any
+    qnp: Any
+else:
+    import quaxed.lax as qlax
+    import quaxed.numpy as qnp
 from jaxtyping import Array, Bool, PyTree, Shaped
 
 from .rich import LaxGeMixin

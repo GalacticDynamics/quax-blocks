@@ -60,7 +60,13 @@ docs = [
   "pymdown-extensions>=10.0",
   "zensical>=0.0.40",
 ]
-lint = ["mypy>=1.19.0", "prek>=0.3.11", "pylint>=4.0.3", "ruff>=0.14.6"]
+lint = [
+  "mypy>=1.19.0",
+  "prek>=0.3.11",
+  "pylint>=4.0.3",
+  "pyright>=1.1.410",
+  "ruff>=0.14.6",
+]
 nox = ["nox>=2026.4.10", "nox-uv>=0.7.1"]
 tests = [
   "packaging>=23.0",
@@ -127,6 +133,11 @@ messages_control.disable = [
 py-version = "3.12"
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
+
+
+[tool.pyright]
+include                          = ["src/quax_blocks"]
+reportIncompatibleMethodOverride = true
 
 
 [tool.pytest.ini_options]
