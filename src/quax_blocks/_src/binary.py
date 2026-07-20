@@ -986,6 +986,21 @@ class LaxDivModMixin(Generic[T, R]):
     >>> divmod(x, 2)
     (Array([2, 3, 4], dtype=int32), Array([1, 1, 1], dtype=int32))
 
+    Floating-point operands give an *integral* quotient. This is what the
+    ``(a - rem) / b`` composition buys: a plain `jax.lax.div` would return the
+    true quotient ``2.333...`` here instead.
+
+    >>> divmod(Val(jnp.array([7.0, 8.0])), 3.0)
+    (Array([2., 2.], dtype=float32), Array([1., 2.], dtype=float32))
+
+    Negative operands truncate toward zero, where Python's `divmod` floors
+    (``divmod(-7, 3) == (-3, 2)``):
+
+    >>> divmod(Val(jnp.array([-7, 7])), 3)
+    (Array([-2,  2], dtype=int32), Array([-1,  1], dtype=int32))
+
+    In every case the division identity ``b * q + rem == a`` holds.
+
     """
 
     def __divmod__(self, other: T) -> R:
