@@ -26,7 +26,11 @@ R = TypeVar("R", default=bool)
 
 
 class LaxPosMixin:
-    """Mixin for ``__pos__`` method using quaxified `jax.lax.pos`.
+    """Mixin for ``__pos__`` method returning ``self`` unchanged.
+
+    `jax.lax` has no ``pos`` primitive; unary plus is the identity, so this
+    returns ``self`` directly. See `NumpyPosMixin` for the
+    `jax.numpy.positive` version.
 
     Examples:
     >>> import jax.numpy as jnp
@@ -47,7 +51,7 @@ class LaxPosMixin:
 
 
 class NumpyPosMixin:
-    """Mixin for ``__pos__`` method using quaxified `jax.numpy.pos`.
+    """Mixin for ``__pos__`` method using quaxified `jax.numpy.positive`.
 
     Examples:
     >>> import jax.numpy as jnp
@@ -93,7 +97,7 @@ class LaxNegMixin(Generic[R]):
 
 
 class NumpyNegMixin(Generic[R]):
-    """Mixin for ``__neg__`` method using quaxified `jax.numpy.neg`.
+    """Mixin for ``__neg__`` method using quaxified `jax.numpy.negative`.
 
     Examples:
     >>> import jax.numpy as jnp

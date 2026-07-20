@@ -63,7 +63,7 @@ class LaxEqMixin(Generic[T, Rbool]):
 
 
 class NumpyEqMixin(Generic[T, Rbool]):
-    """Mixin for ``__eq__`` method using quaxified `jax.numpy.eq`.
+    """Mixin for ``__eq__`` method using quaxified `jax.numpy.equal`.
 
     !!! warning
         Equinox PyTree provides an `__eq__` method that cannot be overridden by
@@ -72,7 +72,7 @@ class NumpyEqMixin(Generic[T, Rbool]):
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, NumpyEqMixin
 
     >>> class Val(AbstractVal, NumpyEqMixin[object, Bool[Array, "..."]]):
@@ -105,7 +105,7 @@ class LaxNeMixin(Generic[T, Rbool]):
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, LaxNeMixin
 
     >>> class Val(AbstractVal, LaxNeMixin[object, Bool[Array, "..."]]):
@@ -129,11 +129,11 @@ class LaxNeMixin(Generic[T, Rbool]):
 
 
 class NumpyNeMixin(Generic[T, Rbool]):
-    """Mixin for ``__ne__`` method using quaxified `jax.numpy.ne`.
+    """Mixin for ``__ne__`` method using quaxified `jax.numpy.not_equal`.
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, NumpyNeMixin
 
     >>> class Val(AbstractVal, NumpyNeMixin[object, Bool[Array, "..."]]):
@@ -165,7 +165,7 @@ class LaxLtMixin(Generic[T, Rbool]):
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, LaxLtMixin
 
     >>> class Val(AbstractVal, LaxLtMixin[object, Bool[Array, "..."]]):
@@ -185,11 +185,11 @@ class LaxLtMixin(Generic[T, Rbool]):
 
 
 class NumpyLtMixin(Generic[T, Rbool]):
-    """Mixin for ``__lt__`` method using quaxified `jax.numpy.lt`.
+    """Mixin for ``__lt__`` method using quaxified `jax.numpy.less`.
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, NumpyLtMixin
 
     >>> class Val(AbstractVal, NumpyLtMixin[object, Bool[Array, "..."]]):
@@ -217,7 +217,7 @@ class LaxLeMixin(Generic[T, Rbool]):
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, LaxLeMixin
 
     >>> class Val(AbstractVal, LaxLeMixin[object, Bool[Array, "..."]]):
@@ -237,11 +237,11 @@ class LaxLeMixin(Generic[T, Rbool]):
 
 
 class NumpyLeMixin(Generic[T, Rbool]):
-    """Mixin for ``__le__`` method using quaxified `jax.numpy.le`.
+    """Mixin for ``__le__`` method using quaxified `jax.numpy.less_equal`.
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, NumpyLeMixin
 
     >>> class Val(AbstractVal, NumpyLeMixin[object, Bool[Array, "..."]]):
@@ -269,7 +269,7 @@ class LaxGtMixin(Generic[T, Rbool]):
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, LaxGtMixin
 
     >>> class Val(AbstractVal, LaxGtMixin[object, Bool[Array, "..."]]):
@@ -289,11 +289,11 @@ class LaxGtMixin(Generic[T, Rbool]):
 
 
 class NumpyGtMixin(Generic[T, Rbool]):
-    """Mixin for ``__gt__`` method using quaxified `jax.numpy.gt`.
+    """Mixin for ``__gt__`` method using quaxified `jax.numpy.greater`.
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, NumpyGtMixin
 
     >>> class Val(AbstractVal, NumpyGtMixin[object, Bool[Array, "..."]]):
@@ -321,7 +321,7 @@ class LaxGeMixin(Generic[T, Rbool]):
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, LaxGeMixin
 
     >>> class Val(AbstractVal, LaxGeMixin[object, Bool[Array, "..."]]):
@@ -341,11 +341,11 @@ class LaxGeMixin(Generic[T, Rbool]):
 
 
 class NumpyGeMixin(Generic[T, Rbool]):
-    """Mixin for ``__ge__`` method using quaxified `jax.numpy.ge`.
+    """Mixin for ``__ge__`` method using quaxified `jax.numpy.greater_equal`.
 
     Examples:
     >>> import jax.numpy as jnp
-    >>> from jaxtyping import Array
+    >>> from jaxtyping import Array, Bool
     >>> from quax_blocks import AbstractVal, NumpyGeMixin
 
     >>> class Val(AbstractVal, NumpyGeMixin[object, Bool[Array, "..."]]):

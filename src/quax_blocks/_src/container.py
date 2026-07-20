@@ -25,7 +25,11 @@ class HasShape(Protocol):
 
 
 class LaxLenMixin:
-    """Mixin for ``__len__`` method using quaxified `jax.lax.len`.
+    """Mixin for ``__len__`` reading the leading axis from ``self.shape``.
+
+    Neither `jax.lax` nor `jax.numpy` has a ``len`` function; the length is
+    taken from the shape directly. Returns ``0`` for scalars (unlike NumPy,
+    which raises ``TypeError`` for 0-d arrays).
 
     Examples:
     >>> import jax.numpy as jnp
@@ -50,7 +54,11 @@ class LaxLenMixin:
 
 
 class NumpyLenMixin:
-    """Mixin for ``__len__`` method using quaxified `jax.numpy.len`.
+    """Mixin for ``__len__`` using quaxified `jax.numpy.shape`.
+
+    `jax.numpy` has no ``len`` function; the shape is obtained first and the
+    leading axis returned. Returns ``0`` for scalars (unlike NumPy, which
+    raises ``TypeError`` for 0-d arrays).
 
     Examples:
     >>> import jax.numpy as jnp
@@ -80,7 +88,10 @@ class NumpyLenMixin:
 
 
 class LaxLengthHintMixin:
-    """Mixin for ``__length_hint__`` method using quaxified `jax.lax.length_hint`.
+    """Mixin for ``__length_hint__`` reading the leading axis from ``self.shape``.
+
+    Neither `jax.lax` nor `jax.numpy` has a ``length_hint`` function; the hint
+    is taken from the shape directly.
 
     Examples:
     >>> import jax.numpy as jnp
@@ -105,7 +116,10 @@ class LaxLengthHintMixin:
 
 
 class NumpyLengthHintMixin:
-    """Mixin for ``__length_hint__`` method using quaxified `jax.numpy.length_hint`.
+    """Mixin for ``__length_hint__`` using quaxified `jax.numpy.shape`.
+
+    `jax.numpy` has no ``length_hint`` function; the shape is obtained first
+    and the leading axis returned.
 
     Examples:
     >>> import jax.numpy as jnp
