@@ -17,24 +17,18 @@ import numpy as np
 import pytest
 import quax
 from jaxtyping import Array
+from packaging.version import Version
 
 import quax_blocks as qb
-
-
-def _version_tuple(v: str) -> tuple[int, ...]:
-    parts: list[int] = []
-    for piece in v.split("."):
-        if not piece.isdigit():
-            break
-        parts.append(int(piece))
-    return tuple(parts)
-
 
 #: `quax` < 0.3.5 raises AssertionError where the Lax mixins expect a TypeError
 #: or NotFoundLookupError, so their NotImplemented guard does not fire. The
 #: declared dependency floors only admit such versions -- see issue #46.
+#: Compared with `packaging` rather than a hand-rolled parser so PEP 440 forms
+#: (`0.3.5rc1`, `0.3.5.dev0`, ...) order correctly -- the weekly CI job installs
+#: pre-releases.
 _lax_guard_broken = pytest.mark.xfail(
-    _version_tuple(quax.__version__) < (0, 3, 5),
+    Version(quax.__version__) < Version("0.3.5"),
     reason="quax<0.3.5 raises AssertionError; NotImplemented guard misses it (#46)",
     strict=False,
 )
