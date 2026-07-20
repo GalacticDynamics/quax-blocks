@@ -21,6 +21,26 @@ type promotion, or when a Lax equivalent does not exist (e.g. `divmod`,
 
 Both flavours work transparently with `jit`, `vmap`, and `grad`.
 
+### Lax operators do not follow Python's operator semantics
+
+Because the `Lax…` mixins map each operator straight onto a `jax.lax` primitive,
+some of them **behave differently from the Python operator they implement**. The
+`Numpy…` mixins follow Python/NumPy semantics in every case. Prefer them unless
+you specifically want the lax primitive.
+
+| Operator | Lax mixin behaviour                                                                        | Python / NumPy behaviour        |
+| -------- | ------------------------------------------------------------------------------------------ | ------------------------------- |
+| `/`      | `jax.lax.div` — **integer division** on integer operands: `Val([4,5,6]) / 2` → `[2, 2, 3]` | true division → `[2., 2.5, 3.]` |
+| `%`      | `jax.lax.rem` — C-style remainder, sign of the **dividend**: `-7 % 3` → `-1`               | sign of the **divisor** → `2`   |
+| `**`     | `jax.lax.pow` — **floating-point operands only**; integer operands raise                   | integers supported              |
+| `//`     | `lax.floor(lax.div(…))` — **floating-point operands only**; integer operands raise         | integers supported              |
+
+!!! warning
+
+    The `/` and `%` cases return a *different value* rather than raising, so
+    they will not announce themselves. If you need Python's semantics, use
+    `NumpyTrueDivMixin` / `NumpyModMixin`.
+
 ## The `Both*` pattern
 
 For every binary operator `__xxx__` there is a reflected variant `__rxxx__`

@@ -235,7 +235,7 @@ class LaxSubMixin(Generic[T, R]):
 
 
 class NumpySubMixin(Generic[T, R]):
-    """Mixin for ``__sub__`` method using quaxified `jax.numpy.sub`.
+    """Mixin for ``__sub__`` method using quaxified `jax.numpy.subtract`.
 
     Examples
     --------
@@ -289,7 +289,7 @@ class LaxRSubMixin(Generic[T, R]):
 
 
 class NumpyRSubMixin(Generic[T, R]):
-    """Mixin for ``__rsub__`` method using quaxified `jax.numpy.sub`.
+    """Mixin for ``__rsub__`` method using quaxified `jax.numpy.subtract`.
 
     Examples
     --------
@@ -356,7 +356,7 @@ class LaxMulMixin(Generic[T, R]):
 
 
 class NumpyMulMixin(Generic[T, R]):
-    """Mixin for ``__mul__`` method using quaxified `jax.numpy.mul`.
+    """Mixin for ``__mul__`` method using quaxified `jax.numpy.multiply`.
 
     Examples
     --------
@@ -410,7 +410,7 @@ class LaxRMulMixin(Generic[T, R]):
 
 
 class NumpyRMulMixin(Generic[T, R]):
-    """Mixin for ``__rmul__`` method using quaxified `jax.numpy.mul`.
+    """Mixin for ``__rmul__`` method using quaxified `jax.numpy.multiply`.
 
     Examples
     --------
@@ -621,7 +621,13 @@ class NumpyBothMatMulMixin(NumpyMatMulMixin[T, R], NumpyRMatMulMixin[T, R]):
 
 
 class LaxTrueDivMixin(Generic[T, R]):
-    """Mixin for ``__truediv__`` method using quaxified `jax.lax.truediv`.
+    """Mixin for ``__truediv__`` method using quaxified `jax.lax.div`.
+
+    !!! warning "Lax semantics differ from Python's `/`"
+        `jax.lax.div` performs **integer** division on integer operands, so
+        ``x / 2`` truncates instead of returning a float. Python's ``/`` and
+        `jax.numpy.true_divide` always perform true division. Use
+        `NumpyTrueDivMixin` for NumPy/Python semantics.
 
     Examples
     --------
@@ -675,7 +681,12 @@ class NumpyTrueDivMixin(Generic[T, R]):
 
 
 class LaxRTrueDivMixin(Generic[T, R]):
-    """Mixin for ``__rtruediv__`` method using quaxified `jax.lax.truediv`.
+    """Mixin for ``__rtruediv__`` method using quaxified `jax.lax.div`.
+
+    !!! warning "Lax semantics differ from Python's `/`"
+        `jax.lax.div` performs **integer** division on integer operands, so
+        ``2 / x`` truncates instead of returning a float. Use
+        `NumpyRTrueDivMixin` for NumPy/Python semantics.
 
     Examples
     --------
@@ -748,6 +759,12 @@ class LaxFloorDivMixin(Generic[T, R]):
     Note that lax does not have a floor division function, so this is
     ``lax.floor(lax.div(x, y))``.
 
+    !!! warning "Floating-point operands only"
+        `jax.lax.floor` rejects integer dtypes (*"floor does not accept dtype
+        int32"*), so this requires floating-point operands. Use the
+        corresponding NumPy mixin (`jax.numpy.floor_divide`) for integer
+        support.
+
     Examples
     --------
     >>> import jax.numpy as jnp
@@ -804,6 +821,12 @@ class LaxRFloorDivMixin(Generic[T, R]):
 
     Note that lax does not have a floor division function, so this is
     ``lax.floor(lax.div(x, y))``.
+
+    !!! warning "Floating-point operands only"
+        `jax.lax.floor` rejects integer dtypes (*"floor does not accept dtype
+        int32"*), so this requires floating-point operands. Use the
+        corresponding NumPy mixin (`jax.numpy.floor_divide`) for integer
+        support.
 
     Examples
     --------
@@ -873,6 +896,12 @@ class NumpyBothFloorDivMixin(NumpyFloorDivMixin[T, R], NumpyRFloorDivMixin[T, R]
 class LaxModMixin(Generic[T, R]):
     """Mixin for ``__mod__`` method using quaxified `jax.lax.rem`.
 
+    !!! warning "Lax semantics differ from Python's `%`"
+        `jax.lax.rem` is a C-style remainder taking the sign of the
+        **dividend** (``-7 % 3 == -1``), whereas Python's ``%`` and
+        `jax.numpy.mod` take the sign of the **divisor** (``-7 % 3 == 2``).
+        Use `NumpyModMixin` for NumPy/Python semantics.
+
     Examples
     --------
     >>> import jax.numpy as jnp
@@ -926,6 +955,11 @@ class NumpyModMixin(Generic[T, R]):
 
 class LaxRModMixin(Generic[T, R]):
     """Mixin for ``__rmod__`` method using quaxified `jax.lax.rem`.
+
+    !!! warning "Lax semantics differ from Python's `%`"
+        `jax.lax.rem` is a C-style remainder taking the sign of the
+        **dividend**, whereas Python's ``%`` and `jax.numpy.mod` take the sign
+        of the **divisor**. Use `NumpyRModMixin` for NumPy/Python semantics.
 
     Examples
     --------
@@ -1069,6 +1103,11 @@ class NumpyBothDivModMixin(NumpyDivModMixin[T, R], NumpyRDivModMixin[T, R]):
 class LaxPowMixin(Generic[T, R]):
     """Mixin for ``__pow__`` method using quaxified `jax.lax.pow`.
 
+    !!! warning "Floating-point operands only"
+        `jax.lax.pow` rejects integer dtypes (*"pow does not accept dtype
+        int32"*), so ``x ** y`` requires floating-point operands. Use
+        `NumpyPowMixin` for integer support.
+
     Examples
     --------
     >>> import jax.numpy as jnp
@@ -1122,6 +1161,10 @@ class NumpyPowMixin(Generic[T, R]):
 
 class LaxRPowMixin(Generic[T, R]):
     """Mixin for ``__rpow__`` method using quaxified `jax.lax.pow`.
+
+    !!! warning "Floating-point operands only"
+        `jax.lax.pow` rejects integer dtypes, so ``y ** x`` requires
+        floating-point operands. Use `NumpyRPowMixin` for integer support.
 
     Examples
     --------
@@ -1189,7 +1232,7 @@ class NumpyBothPowMixin(NumpyPowMixin[T, R], NumpyRPowMixin[T, R]):
 
 
 class LaxLShiftMixin(Generic[T, R]):
-    """Mixin for ``__lshift__`` method using quaxified `jax.lax.lshift`.
+    """Mixin for ``__lshift__`` method using quaxified `jax.lax.shift_left`.
 
     Examples
     --------
@@ -1214,7 +1257,7 @@ class LaxLShiftMixin(Generic[T, R]):
 
 
 class NumpyLShiftMixin(Generic[T, R]):
-    """Mixin for ``__lshift__`` method using quaxified `jax.numpy.lshift`.
+    """Mixin for ``__lshift__`` method using quaxified `jax.numpy.left_shift`.
 
     Examples
     --------
@@ -1243,7 +1286,7 @@ class NumpyLShiftMixin(Generic[T, R]):
 
 
 class LaxRLShiftMixin(Generic[T, R]):
-    """Mixin for ``__rlshift__`` method using quaxified `jax.lax.lshift`.
+    """Mixin for ``__rlshift__`` method using quaxified `jax.lax.shift_left`.
 
     Examples
     --------
@@ -1268,7 +1311,7 @@ class LaxRLShiftMixin(Generic[T, R]):
 
 
 class NumpyRLShiftMixin(Generic[T, R]):
-    """Mixin for ``__rlshift__`` method using quaxified `jax.numpy.lshift`.
+    """Mixin for ``__rlshift__`` method using quaxified `jax.numpy.left_shift`.
 
     Examples
     --------
@@ -1311,7 +1354,11 @@ class NumpyBothLShiftMixin(NumpyLShiftMixin[T, R], NumpyRLShiftMixin[T, R]):
 
 
 class LaxRShiftMixin(Generic[T, R]):
-    """Mixin for ``__rshift__`` method using quaxified `jax.lax.shift_right`.
+    """Mixin for ``__rshift__`` using quaxified `jax.lax.shift_right_logical`.
+
+    `jax.lax` has no single ``shift_right``: the shift is selected from
+    `jax.lax.shift_right_logical` or `jax.lax.shift_right_arithmetic` via the
+    ``_RIGHT_SHIFT_LOGICAL`` class variable (default: logical).
 
     Examples
     --------
@@ -1344,7 +1391,7 @@ class LaxRShiftMixin(Generic[T, R]):
 
 
 class NumpyRShiftMixin(Generic[T, R]):
-    """Mixin for ``__rshift__`` method using quaxified `jax.numpy.rshift`.
+    """Mixin for ``__rshift__`` method using quaxified `jax.numpy.right_shift`.
 
     Examples
     --------
@@ -1373,7 +1420,11 @@ class NumpyRShiftMixin(Generic[T, R]):
 
 
 class LaxRRShiftMixin(Generic[T, R]):
-    """Mixin for ``__rrshift__`` method using quaxified `jax.lax.rshift`.
+    """Mixin for ``__rrshift__`` using quaxified `jax.lax.shift_right_logical`.
+
+    `jax.lax` has no single ``shift_right``: the shift is selected from
+    `jax.lax.shift_right_logical` or `jax.lax.shift_right_arithmetic` via the
+    ``_RIGHT_SHIFT_LOGICAL`` class variable (default: logical).
 
     Examples
     --------
@@ -1406,7 +1457,7 @@ class LaxRRShiftMixin(Generic[T, R]):
 
 
 class NumpyRRShiftMixin(Generic[T, R]):
-    """Mixin for ``__rrshift__`` method using quaxified `jax.numpy.rshift`.
+    """Mixin for ``__rrshift__`` method using quaxified `jax.numpy.right_shift`.
 
     Examples
     --------
@@ -1449,7 +1500,7 @@ class NumpyBothRShiftMixin(NumpyRShiftMixin[T, R], NumpyRRShiftMixin[T, R]):
 
 
 class LaxAndMixin(Generic[T, R]):
-    """Mixin for ``__and__`` method using quaxified `jax.lax.and_`.
+    """Mixin for ``__and__`` method using quaxified `jax.lax.bitwise_and`.
 
     Examples
     --------
@@ -1474,7 +1525,7 @@ class LaxAndMixin(Generic[T, R]):
 
 
 class NumpyAndMixin(Generic[T, R]):
-    """Mixin for ``__and__`` method using quaxified `jax.numpy.and_`.
+    """Mixin for ``__and__`` method using quaxified `jax.numpy.bitwise_and`.
 
     Examples
     --------
@@ -1503,7 +1554,7 @@ class NumpyAndMixin(Generic[T, R]):
 
 
 class LaxRAndMixin(Generic[T, R]):
-    """Mixin for ``__rand__`` method using quaxified `jax.lax.and_`.
+    """Mixin for ``__rand__`` method using quaxified `jax.lax.bitwise_and`.
 
     Examples
     --------
@@ -1528,7 +1579,7 @@ class LaxRAndMixin(Generic[T, R]):
 
 
 class NumpyRAndMixin(Generic[T, R]):
-    """Mixin for ``__rand__`` method using quaxified `jax.numpy.and_`.
+    """Mixin for ``__rand__`` method using quaxified `jax.numpy.bitwise_and`.
 
     Examples
     --------
@@ -1572,7 +1623,7 @@ class NumpyBothAndMixin(NumpyAndMixin[T, R], NumpyRAndMixin[T, R]):
 
 
 class LaxXorMixin(Generic[T, R]):
-    """Mixin for ``__xor__`` method using quaxified `jax.lax.xor`.
+    """Mixin for ``__xor__`` method using quaxified `jax.lax.bitwise_xor`.
 
     Examples
     --------
@@ -1597,7 +1648,7 @@ class LaxXorMixin(Generic[T, R]):
 
 
 class NumpyXorMixin(Generic[T, R]):
-    """Mixin for ``__xor__`` method using quaxified `jax.numpy.xor`.
+    """Mixin for ``__xor__`` method using quaxified `jax.numpy.bitwise_xor`.
 
     Examples
     --------
@@ -1626,7 +1677,7 @@ class NumpyXorMixin(Generic[T, R]):
 
 
 class LaxRXorMixin(Generic[T, R]):
-    """Mixin for ``__rxor__`` method using quaxified `jax.lax.xor`.
+    """Mixin for ``__rxor__`` method using quaxified `jax.lax.bitwise_xor`.
 
     Examples
     --------
@@ -1651,7 +1702,7 @@ class LaxRXorMixin(Generic[T, R]):
 
 
 class NumpyRXorMixin(Generic[T, R]):
-    """Mixin for ``__rxor__`` method using quaxified `jax.numpy.xor`.
+    """Mixin for ``__rxor__`` method using quaxified `jax.numpy.bitwise_xor`.
 
     Examples
     --------
@@ -1694,7 +1745,7 @@ class NumpyBothXorMixin(NumpyXorMixin[T, R], NumpyRXorMixin[T, R]):
 
 
 class LaxOrMixin(Generic[T, R]):
-    """Mixin for ``__or__`` method using quaxified `jax.lax.or_`.
+    """Mixin for ``__or__`` method using quaxified `jax.lax.bitwise_or`.
 
     Examples
     --------
@@ -1719,7 +1770,7 @@ class LaxOrMixin(Generic[T, R]):
 
 
 class NumpyOrMixin(Generic[T, R]):
-    """Mixin for ``__or__`` method using quaxified `jax.numpy.or_`.
+    """Mixin for ``__or__`` method using quaxified `jax.numpy.bitwise_or`.
 
     Examples
     --------
@@ -1751,7 +1802,7 @@ class NumpyOrMixin(Generic[T, R]):
 
 
 class LaxROrMixin(Generic[T, R]):
-    """Mixin for ``__ror__`` method using quaxified `jax.lax.or_`.
+    """Mixin for ``__ror__`` method using quaxified `jax.lax.bitwise_or`.
 
     Examples
     --------
@@ -1776,7 +1827,7 @@ class LaxROrMixin(Generic[T, R]):
 
 
 class NumpyROrMixin(Generic[T, R]):
-    """Mixin for ``__ror__`` method using quaxified `jax.numpy.or_`.
+    """Mixin for ``__ror__`` method using quaxified `jax.numpy.bitwise_or`.
 
     Examples
     --------
