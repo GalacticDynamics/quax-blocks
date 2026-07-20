@@ -35,11 +35,9 @@ __all__ = [
     "LaxModMixin", "NumpyModMixin",  # __mod__
     "LaxRModMixin", "NumpyRModMixin",  # __rmod__
     # ----- divmod -----
-    "NumpyBothDivModMixin",
-    # "LaxDivModMixin",
-    "NumpyDivModMixin",
-    # "LaxRDivModMixin",
-    "NumpyRDivModMixin",
+    "LaxBothDivModMixin", "NumpyBothDivModMixin",
+    "LaxDivModMixin", "NumpyDivModMixin",  # __divmod__
+    "LaxRDivModMixin", "NumpyRDivModMixin",  # __rdivmod__
     # ----- pow -----
     "LaxBothPowMixin", "NumpyBothPowMixin",
     "LaxPowMixin", "NumpyPowMixin",  # __pow__
@@ -1026,7 +1024,64 @@ class NumpyBothModMixin(NumpyModMixin[T, R], NumpyRModMixin[T, R]):
 # `__divmod__`
 
 
-# TODO: a jax.lax.divmod equivalent?
+def _lax_divmod(lhs: Any, rhs: Any, /) -> Any:
+    """Return ``(quotient, remainder)`` using `jax.lax` primitives.
+
+    `jax.lax` has no ``divmod``. `jax.lax.rem` gives the C-style remainder, and
+    since ``lhs == rhs * quotient + remainder`` exactly, the truncated quotient
+    is ``(lhs - remainder) / rhs``. Subtracting the remainder first makes the
+    division exact, so this is correct for integer *and* floating-point
+    operands (a plain `jax.lax.div` would return a non-integral quotient for
+    floats).
+    """
+    rem = qlax.rem(lhs, rhs)
+    return qlax.div(qlax.sub(lhs, rem), rhs), rem
+
+
+class LaxDivModMixin(Generic[T, R]):
+    """Mixin for ``__divmod__`` using quaxified `jax.lax.div` and `jax.lax.rem`.
+
+    !!! warning "Lax semantics differ from Python's `divmod`"
+        This truncates toward zero (C-style), following `jax.lax.rem`, whereas
+        Python's `divmod` floors: ``divmod(-7, 3)`` is ``(-2, -1)`` here but
+        ``(-3, 2)`` in Python. The two agree for non-negative operands. Use
+        `NumpyDivModMixin` for NumPy/Python semantics.
+
+    Examples
+    --------
+    >>> import jax.numpy as jnp
+    >>> from jaxtyping import Array
+    >>> from quax_blocks import AbstractVal, LaxDivModMixin
+
+    >>> class Val(AbstractVal, LaxDivModMixin[object, tuple[Array, Array]]):
+    ...     v: Array
+
+    >>> x = Val(jnp.array([5, 7, 9]))
+    >>> divmod(x, 2)
+    (Array([2, 3, 4], dtype=int32), Array([1, 1, 1], dtype=int32))
+
+    Floating-point operands give an *integral* quotient. This is what the
+    ``(a - rem) / b`` composition buys: a plain `jax.lax.div` would return the
+    true quotient ``2.333...`` here instead.
+
+    >>> divmod(Val(jnp.array([7.0, 8.0])), 3.0)
+    (Array([2., 2.], dtype=float32), Array([1., 2.], dtype=float32))
+
+    Negative operands truncate toward zero, where Python's `divmod` floors
+    (``divmod(-7, 3) == (-3, 2)``):
+
+    >>> divmod(Val(jnp.array([-7, 7])), 3)
+    (Array([-2,  2], dtype=int32), Array([-1,  1], dtype=int32))
+
+    In every case the division identity ``b * q + rem == a`` holds.
+
+    """
+
+    def __divmod__(self, other: T) -> R:
+        try:
+            return _lax_divmod(self, other)
+        except (TypeError, NotFoundLookupError):
+            return NotImplemented
 
 
 class NumpyDivModMixin(Generic[T, R]):
@@ -1038,7 +1093,7 @@ class NumpyDivModMixin(Generic[T, R]):
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyDivModMixin
 
-    >>> class Val(AbstractVal, NumpyDivModMixin[object, Array]):
+    >>> class Val(AbstractVal, NumpyDivModMixin[object, tuple[Array, Array]]):
     ...     v: Array
 
     >>> x = Val(jnp.array([5, 7, 9]))
@@ -1058,7 +1113,33 @@ class NumpyDivModMixin(Generic[T, R]):
 # `__rdivmod__`
 
 
-# TODO: a jax.lax.divmod equivalent?
+class LaxRDivModMixin(Generic[T, R]):
+    """Mixin for ``__rdivmod__`` using quaxified `jax.lax.div` and `jax.lax.rem`.
+
+    !!! warning "Lax semantics differ from Python's `divmod`"
+        Truncates toward zero (C-style) rather than flooring. See
+        `LaxDivModMixin`; use `NumpyRDivModMixin` for NumPy/Python semantics.
+
+    Examples
+    --------
+    >>> import jax.numpy as jnp
+    >>> from jaxtyping import Array
+    >>> from quax_blocks import AbstractVal, LaxRDivModMixin
+
+    >>> class Val(AbstractVal, LaxRDivModMixin[object, tuple[Array, Array]]):
+    ...     v: Array
+
+    >>> x = Val(jnp.array([5, 7, 9]))
+    >>> divmod(20, x)
+    (Array([4, 2, 2], dtype=int32), Array([0, 6, 2], dtype=int32))
+
+    """
+
+    def __rdivmod__(self, other: T) -> R:
+        try:
+            return _lax_divmod(other, self)
+        except (TypeError, NotFoundLookupError):
+            return NotImplemented
 
 
 class NumpyRDivModMixin(Generic[T, R]):
@@ -1070,7 +1151,7 @@ class NumpyRDivModMixin(Generic[T, R]):
     >>> from jaxtyping import Array
     >>> from quax_blocks import AbstractVal, NumpyRDivModMixin
 
-    >>> class Val(AbstractVal, NumpyRDivModMixin[object, Array]):
+    >>> class Val(AbstractVal, NumpyRDivModMixin[object, tuple[Array, Array]]):
     ...     v: Array
 
     >>> x = Val(jnp.array([5, 7, 9]))
@@ -1087,6 +1168,10 @@ class NumpyRDivModMixin(Generic[T, R]):
 
 
 # -------------------------------------
+
+
+class LaxBothDivModMixin(LaxDivModMixin[T, R], LaxRDivModMixin[T, R]):
+    pass
 
 
 class NumpyBothDivModMixin(NumpyDivModMixin[T, R], NumpyRDivModMixin[T, R]):
@@ -1873,7 +1958,7 @@ class LaxMathMixin(
     LaxBothTrueDivMixin[T, R],  # __truediv__, __rtruediv__
     LaxBothFloorDivMixin[T, R],  # __floordiv__, __rfloordiv__
     LaxBothModMixin[T, R],  # __mod__, __rmod__
-    # TODO: divmod
+    LaxBothDivModMixin[T, R],  # __divmod__, __rdivmod__
     LaxBothPowMixin[T, R],  # __pow__, __rpow__
 ):
     pass

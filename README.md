@@ -63,8 +63,8 @@ pip install quax-blocks
 | `__rfloordiv__`        | `LaxRFloorDivMixin` | `NumpyRFloorDivMixin` |
 | `__mod__`              | `LaxModMixin`       | `NumpyModMixin`       |
 | `__rmod__`             | `LaxRModMixin`      | `NumpyRModMixin`      |
-| `__divmod__`           | Not Implemented     | `NumpyDivModMixin`    |
-| `__rdivmod__`          | Not Implemented     | `NumpyRDivModMixin`   |
+| `__divmod__`           | `LaxDivModMixin`    | `NumpyDivModMixin`    |
+| `__rdivmod__`          | `LaxRDivModMixin`   | `NumpyRDivModMixin`   |
 | `__pow__`              | `LaxPowMixin`       | `NumpyPowMixin`       |
 | `__rpow__`             | `LaxRPowMixin`      | `NumpyRPowMixin`      |
 | All Bitwise Operations | `LaxBitwiseMixin`   | `NumpyBitwiseMixin`   |
@@ -81,13 +81,13 @@ pip install quax-blocks
 
 ### Unary Operators
 
-| Unary Operator       | Lax Operator    | NumPy Operator     |
-| -------------------- | --------------- | ------------------ |
-| All Unary Operations | `LaxUnaryMixin` | `NumpyUnaryMixin`  |
-| `__pos__`            | `LaxPosMixin`   | `NumpyPosMixin`    |
-| `__neg__`            | `LaxNegMixin`   | `NumpyNegMixin`    |
-| `__abs__`            | `LaxAbsMixin`   | `NumpyAbsMixin`    |
-| `__invert__`         | Not Implemented | `NumpyInvertMixin` |
+| Unary Operator       | Lax Operator     | NumPy Operator     |
+| -------------------- | ---------------- | ------------------ |
+| All Unary Operations | `LaxUnaryMixin`  | `NumpyUnaryMixin`  |
+| `__pos__`            | `LaxPosMixin`    | `NumpyPosMixin`    |
+| `__neg__`            | `LaxNegMixin`    | `NumpyNegMixin`    |
+| `__abs__`            | `LaxAbsMixin`    | `NumpyAbsMixin`    |
+| `__invert__`         | `LaxInvertMixin` | `NumpyInvertMixin` |
 
 ### Rounding Operators
 
@@ -103,6 +103,7 @@ pip install quax-blocks
 | Container Operator | Lax Operator         | NumPy Operator         |
 | ------------------ | -------------------- | ---------------------- |
 | `__len__`          | `LaxLenMixin`        | `NumpyLenMixin`        |
+| `__getitem__`      | Not Implemented      | `NumpyGetItemMixin`    |
 | `__length_hint__`  | `LaxLengthHintMixin` | `NumpyLengthHintMixin` |
 
 ### Copy Operators

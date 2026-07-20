@@ -6,7 +6,7 @@ __all__ = [
     # ----------
     "LaxPosMixin", "NumpyPosMixin",  # __pos__
     "LaxNegMixin", "NumpyNegMixin",  # __neg__
-    "NumpyInvertMixin",              # __invert__
+    "LaxInvertMixin", "NumpyInvertMixin",  # __invert__
     "LaxAbsMixin", "NumpyAbsMixin",  # __abs__
 ]
 # fmt: on
@@ -125,7 +125,26 @@ class NumpyNegMixin(Generic[R]):
 # `__invert__`
 
 
-# TODO: LaxInvertMixin for jax.lax.invert does not exist yet
+class LaxInvertMixin(Generic[R]):
+    """Mixin for ``__invert__`` method using quaxified `jax.lax.bitwise_not`.
+
+    Examples
+    --------
+    >>> import jax.numpy as jnp
+    >>> from jaxtyping import Array
+    >>> from quax_blocks import AbstractVal, LaxInvertMixin
+
+    >>> class Val(AbstractVal, LaxInvertMixin[Array]):
+    ...     v: Array
+
+    >>> x = Val(jnp.array([1, 2, 3]))
+    >>> ~x
+    Array([-2, -3, -4], dtype=int32)
+
+    """
+
+    def __invert__(self) -> R:
+        return qlax.bitwise_not(self)
 
 
 class NumpyInvertMixin(Generic[R]):
@@ -202,7 +221,7 @@ class NumpyAbsMixin(Generic[R]):
 # Combined Mixins
 
 
-class LaxUnaryMixin(LaxPosMixin, LaxNegMixin[R], LaxAbsMixin[R]):
+class LaxUnaryMixin(LaxPosMixin, LaxNegMixin[R], LaxAbsMixin[R], LaxInvertMixin[R]):
     """Combined mixin for unary operations using quaxified `jax.lax`."""
 
 
