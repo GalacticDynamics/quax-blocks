@@ -16,7 +16,7 @@
 
 ---
 
-[`quax`](https://docs.kidger.site/quax/) enables JAX to work with custom
+[`quax`](https://nstarman.github.io/quax/) enables JAX to work with custom
 array-ish objects. This library provides the building blocks, like comparison
 operators, for building `quax`-compatible classes.
 
