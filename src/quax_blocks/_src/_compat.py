@@ -7,27 +7,26 @@ from importlib.metadata import version
 from packaging.version import Version
 from plum import NotFoundLookupError
 
-#: `quax` < 0.3.5 raises `AssertionError` out of its dispatch machinery where
-#: later versions raise `TypeError` / `NotFoundLookupError`. The operator mixins
-#: rely on those exceptions to return `NotImplemented`, so on older `quax` the
-#: guard misses and the operator raises instead of deferring to the other
-#: operand.
+#: On a dispatch miss (an operand `quax` cannot handle), the operator mixins
+#: rely on `quax` raising `TypeError` / `NotFoundLookupError` so they can return
+#: `NotImplemented` and let Python try the reflected operand. On `jax` < 0.9.2
+#: that miss instead surfaces as an `AssertionError`: `quax`'s
+#: `_default_process` ends in a bare ``assert False`` (quax `_core.py`), and on
+#: those older `jax` dispatch paths the unhandled primitive reaches it, whereas
+#: `jax` >= 0.9.2 rejects the argument with a `TypeError` before `quax` is
+#: consulted. The trigger is the `jax` version, not the `quax` version -- a
+#: fixed `quax` (0.3.7, the declared floor) still asserts under `jax` 0.7.2.
 #:
-#: Why the floor is not simply raised past 0.3.5: the released 0.3.5 and 0.3.6
-#: cannot be imported against the declared `jax` floor (0.7.2) -- they reference
-#: `jax._src.literals.TypedInt`, which only exists in `jax` >= 0.8.0 -- so the
-#: `quax` that resolves at the floor is one of the older, `AssertionError`
-#: -raising versions. That import bug is fixed upstream (quax#166 / #167); once
-#: a fixed `quax` is released, raise the floor to it and delete this shim.
-#: See issue #46.
-#:
-#: `AssertionError` is added only on the affected versions, so on a modern
-#: `quax` a genuine assertion failure still propagates instead of being
-#: silently converted into `NotImplemented`.
-_QUAX_RAISES_ASSERTION: bool = Version(version("quax")) < Version("0.3.5")
+#: The `jax` floor is deliberately kept at 0.7.2 (see issue #46), so the
+#: affected range 0.7.2 -- 0.9.1 is supported and the guard must catch
+#: `AssertionError` there. `AssertionError` is added only on that range, so on
+#: `jax` >= 0.9.2 a genuine assertion failure still propagates instead of being
+#: silently converted into `NotImplemented`. Once the `jax` floor is raised past
+#: 0.9.2, drop `AssertionError` and delete this shim.
+_JAX_RAISES_ASSERTION: bool = Version(version("jax")) < Version("0.9.2")
 
 DISPATCH_ERRORS: tuple[type[Exception], ...] = (
     (TypeError, NotFoundLookupError, AssertionError)
-    if _QUAX_RAISES_ASSERTION
+    if _JAX_RAISES_ASSERTION
     else (TypeError, NotFoundLookupError)
 )
