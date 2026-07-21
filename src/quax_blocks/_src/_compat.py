@@ -13,10 +13,13 @@ from plum import NotFoundLookupError
 #: guard misses and the operator raises instead of deferring to the other
 #: operand.
 #:
-#: This is not a hypothetical: `quax` >= 0.3.5 cannot be imported against the
-#: declared `jax` floor (0.7.2) -- it uses `jax._src.literals.TypedInt`, which
-#: only exists in newer `jax` -- so the versions resolved at the floor are
-#: exactly the ones that raise `AssertionError`. See issue #46.
+#: Why the floor is not simply raised past 0.3.5: the released 0.3.5 and 0.3.6
+#: cannot be imported against the declared `jax` floor (0.7.2) -- they reference
+#: `jax._src.literals.TypedInt`, which only exists in `jax` >= 0.8.0 -- so the
+#: `quax` that resolves at the floor is one of the older, `AssertionError`
+#: -raising versions. That import bug is fixed upstream (quax#166 / #167); once
+#: a fixed `quax` is released, raise the floor to it and delete this shim.
+#: See issue #46.
 #:
 #: `AssertionError` is added only on the affected versions, so on a modern
 #: `quax` a genuine assertion failure still propagates instead of being
