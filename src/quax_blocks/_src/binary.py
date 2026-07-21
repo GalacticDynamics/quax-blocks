@@ -78,7 +78,8 @@ if TYPE_CHECKING:
 else:
     import quaxed.lax as qlax
     import quaxed.numpy as qnp
-from plum import NotFoundLookupError
+
+from ._compat import DISPATCH_ERRORS
 
 T = TypeVar("T")
 R = TypeVar("R", default=bool)
@@ -112,7 +113,7 @@ class LaxAddMixin(Generic[T, R]):
     def __add__(self, other: T) -> R:
         try:
             return qlax.add(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -137,7 +138,7 @@ class NumpyAddMixin(Generic[T, R]):
     def __add__(self, other: T) -> R:
         try:
             return qnp.add(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -166,7 +167,7 @@ class LaxRAddMixin(Generic[T, R]):
     def __radd__(self, other: T) -> R:
         try:
             return qlax.add(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -191,7 +192,7 @@ class NumpyRAddMixin(Generic[T, R]):
     def __radd__(self, other: T) -> R:
         try:
             return qnp.add(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -234,7 +235,7 @@ class LaxSubMixin(Generic[T, R]):
     def __sub__(self, other: T) -> R:
         try:
             return qlax.sub(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -259,7 +260,7 @@ class NumpySubMixin(Generic[T, R]):
     def __sub__(self, other: T) -> R:
         try:
             return qnp.subtract(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -288,7 +289,7 @@ class LaxRSubMixin(Generic[T, R]):
     def __rsub__(self, other: T) -> R:
         try:
             return qlax.sub(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -313,7 +314,7 @@ class NumpyRSubMixin(Generic[T, R]):
     def __rsub__(self, other: T) -> R:
         try:
             return qnp.subtract(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -355,7 +356,7 @@ class LaxMulMixin(Generic[T, R]):
     def __mul__(self, other: T) -> R:
         try:
             return qlax.mul(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -380,7 +381,7 @@ class NumpyMulMixin(Generic[T, R]):
     def __mul__(self, other: T) -> R:
         try:
             return qnp.multiply(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -409,7 +410,7 @@ class LaxRMulMixin(Generic[T, R]):
     def __rmul__(self, other: T) -> R:
         try:
             return qlax.mul(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -434,7 +435,7 @@ class NumpyRMulMixin(Generic[T, R]):
     def __rmul__(self, other: T) -> R:
         try:
             return qnp.multiply(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -514,7 +515,7 @@ class LaxMatMulMixin(Generic[T, R]):
     def __matmul__(self, other: T) -> R:
         try:
             return _lax_matmul(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -541,7 +542,7 @@ class NumpyMatMulMixin(Generic[T, R]):
     def __matmul__(self, other: T) -> R:
         try:
             return qnp.matmul(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -575,7 +576,7 @@ class LaxRMatMulMixin(Generic[T, R]):
     def __rmatmul__(self, other: T) -> R:
         try:
             return _lax_matmul(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -602,7 +603,7 @@ class NumpyRMatMulMixin(Generic[T, R]):
     def __rmatmul__(self, other: T) -> R:
         try:
             return qnp.matmul(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -651,7 +652,7 @@ class LaxTrueDivMixin(Generic[T, R]):
     def __truediv__(self, other: T) -> R:
         try:
             return qlax.div(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -676,7 +677,7 @@ class NumpyTrueDivMixin(Generic[T, R]):
     def __truediv__(self, other: T) -> R:
         try:
             return qnp.true_divide(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -710,7 +711,7 @@ class LaxRTrueDivMixin(Generic[T, R]):
     def __rtruediv__(self, other: T) -> R:
         try:
             return qlax.div(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -735,7 +736,7 @@ class NumpyRTrueDivMixin(Generic[T, R]):
     def __rtruediv__(self, other: T) -> R:
         try:
             return qnp.true_divide(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -787,7 +788,7 @@ class LaxFloorDivMixin(Generic[T, R]):
     def __floordiv__(self, other: T) -> R:
         try:
             return qlax.floor(qlax.div(self, other))
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -812,7 +813,7 @@ class NumpyFloorDivMixin(Generic[T, R]):
     def __floordiv__(self, other: T) -> R:
         try:
             return qnp.floor_divide(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -850,7 +851,7 @@ class LaxRFloorDivMixin(Generic[T, R]):
     def __rfloordiv__(self, other: T) -> R:
         try:
             return qlax.floor(qlax.div(other, self))
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -875,7 +876,7 @@ class NumpyRFloorDivMixin(Generic[T, R]):
     def __rfloordiv__(self, other: T) -> R:
         try:
             return qnp.floor_divide(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -924,7 +925,7 @@ class LaxModMixin(Generic[T, R]):
     def __mod__(self, other: T) -> R:
         try:
             return qlax.rem(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -949,7 +950,7 @@ class NumpyModMixin(Generic[T, R]):
     def __mod__(self, other: T) -> R:
         try:
             return qnp.mod(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -983,7 +984,7 @@ class LaxRModMixin(Generic[T, R]):
     def __rmod__(self, other: T) -> R:
         try:
             return qlax.rem(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1008,7 +1009,7 @@ class NumpyRModMixin(Generic[T, R]):
     def __rmod__(self, other: T) -> R:
         try:
             return qnp.mod(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1086,7 +1087,7 @@ class LaxDivModMixin(Generic[T, R]):
     def __divmod__(self, other: T) -> R:
         try:
             return _lax_divmod(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1111,7 +1112,7 @@ class NumpyDivModMixin(Generic[T, R]):
     def __divmod__(self, other: T) -> R:
         try:
             return qnp.divmod(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1144,7 +1145,7 @@ class LaxRDivModMixin(Generic[T, R]):
     def __rdivmod__(self, other: T) -> R:
         try:
             return _lax_divmod(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1169,7 +1170,7 @@ class NumpyRDivModMixin(Generic[T, R]):
     def __rdivmod__(self, other: T) -> R:
         try:
             return qnp.divmod(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1217,7 +1218,7 @@ class LaxPowMixin(Generic[T, R]):
     def __pow__(self, other: T) -> R:
         try:
             return qlax.pow(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1242,7 +1243,7 @@ class NumpyPowMixin(Generic[T, R]):
     def __pow__(self, other: T) -> R:
         try:
             return qnp.power(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1275,7 +1276,7 @@ class LaxRPowMixin(Generic[T, R]):
     def __rpow__(self, other: T) -> R:
         try:
             return qlax.pow(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1300,7 +1301,7 @@ class NumpyRPowMixin(Generic[T, R]):
     def __rpow__(self, other: T) -> R:
         try:
             return qnp.power(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1343,7 +1344,7 @@ class LaxLShiftMixin(Generic[T, R]):
     def __lshift__(self, other: T) -> R:
         try:
             return qlax.shift_left(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1368,7 +1369,7 @@ class NumpyLShiftMixin(Generic[T, R]):
     def __lshift__(self, other: T) -> R:
         try:
             return qnp.left_shift(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1397,7 +1398,7 @@ class LaxRLShiftMixin(Generic[T, R]):
     def __rlshift__(self, other: T) -> R:
         try:
             return qlax.shift_left(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1422,7 +1423,7 @@ class NumpyRLShiftMixin(Generic[T, R]):
     def __rlshift__(self, other: T) -> R:
         try:
             return qnp.left_shift(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1477,7 +1478,7 @@ class LaxRShiftMixin(Generic[T, R]):
                 self,
                 other,
             )
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1502,7 +1503,7 @@ class NumpyRShiftMixin(Generic[T, R]):
     def __rshift__(self, other: T) -> R:
         try:
             return qnp.right_shift(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1543,7 +1544,7 @@ class LaxRRShiftMixin(Generic[T, R]):
                 other,
                 self,
             )
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1568,7 +1569,7 @@ class NumpyRRShiftMixin(Generic[T, R]):
     def __rrshift__(self, other: T) -> R:
         try:
             return qnp.right_shift(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1611,7 +1612,7 @@ class LaxAndMixin(Generic[T, R]):
     def __and__(self, other: T) -> R:
         try:
             return qlax.bitwise_and(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1636,7 +1637,7 @@ class NumpyAndMixin(Generic[T, R]):
     def __and__(self, other: T) -> R:
         try:
             return qnp.bitwise_and(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1665,7 +1666,7 @@ class LaxRAndMixin(Generic[T, R]):
     def __rand__(self, other: T) -> R:
         try:
             return qlax.bitwise_and(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1690,7 +1691,7 @@ class NumpyRAndMixin(Generic[T, R]):
     def __rand__(self, other: T) -> R:
         try:
             return qnp.bitwise_and(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1734,7 +1735,7 @@ class LaxXorMixin(Generic[T, R]):
     def __xor__(self, other: T) -> R:
         try:
             return qlax.bitwise_xor(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1759,7 +1760,7 @@ class NumpyXorMixin(Generic[T, R]):
     def __xor__(self, other: T) -> R:
         try:
             return qnp.bitwise_xor(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1788,7 +1789,7 @@ class LaxRXorMixin(Generic[T, R]):
     def __rxor__(self, other: T) -> R:
         try:
             return qlax.bitwise_xor(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1813,7 +1814,7 @@ class NumpyRXorMixin(Generic[T, R]):
     def __rxor__(self, other: T) -> R:
         try:
             return qnp.bitwise_xor(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1856,7 +1857,7 @@ class LaxOrMixin(Generic[T, R]):
     def __or__(self, other: T) -> R:
         try:
             return qlax.bitwise_or(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1881,7 +1882,7 @@ class NumpyOrMixin(Generic[T, R]):
     def __or__(self, other: T) -> R:
         try:
             return qnp.bitwise_or(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1913,7 +1914,7 @@ class LaxROrMixin(Generic[T, R]):
     def __ror__(self, other: T) -> R:
         try:
             return qlax.bitwise_or(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -1938,7 +1939,7 @@ class NumpyROrMixin(Generic[T, R]):
     def __ror__(self, other: T) -> R:
         try:
             return qnp.bitwise_or(other, self)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 

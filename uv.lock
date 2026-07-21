@@ -1297,7 +1297,7 @@ wheels = [
 
 [[package]]
 name = "quax"
-version = "0.3.6"
+version = "0.3.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "equinox" },
@@ -1306,9 +1306,9 @@ dependencies = [
     { name = "packaging" },
     { name = "plum-dispatch" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bb/09/7d59f59e558f2fb573abef5a15d107f845d59f2b42cf9c40d7d92f7b13cf/quax-0.3.6.tar.gz", hash = "sha256:f879f9c9945393281cf219b76d4e531ef3b50e88b864041ab159c95305eef451", size = 175831, upload-time = "2026-06-29T20:22:28.982Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5e/28/5687bc4ee6151b889e55230616bb50b7e28890e43394073d6b4901483db8/quax-0.3.7.tar.gz", hash = "sha256:3a75421f831b40cc91e2cb63c7696892dc0692d1e8b5614f8e587e3308c0b72c", size = 177321, upload-time = "2026-07-21T03:39:18.618Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1d/8d/c3fd4c78ba0a128b79053a279bc5de4db6b81bcf8476726d45c64ff46b8b/quax-0.3.6-py3-none-any.whl", hash = "sha256:dbe08ddca8d6df4383feffa5943f7bceaa4d273fd588901d2a5819e36ffce815", size = 40887, upload-time = "2026-06-29T20:22:27.473Z" },
+    { url = "https://files.pythonhosted.org/packages/ba/ec/86d3054bf2e9197e4ed068834e5a68bbe6d3bfb9ed98399a19932ea24858/quax-0.3.7-py3-none-any.whl", hash = "sha256:ae566c5d126dec3d31a4266359834986641c839df24dd54277baed3a33b7d47e", size = 42415, upload-time = "2026-07-21T03:39:17.134Z" },
 ]
 
 [[package]]
@@ -1319,6 +1319,7 @@ dependencies = [
     { name = "jaxlib" },
     { name = "jaxtyping" },
     { name = "optype" },
+    { name = "packaging" },
     { name = "plum-dispatch" },
     { name = "quax" },
     { name = "quaxed" },
@@ -1375,9 +1376,10 @@ requires-dist = [
     { name = "jaxlib", specifier = ">=0.7.2" },
     { name = "jaxtyping", specifier = ">=0.3.9" },
     { name = "optype", specifier = ">=0.17.0" },
+    { name = "packaging", specifier = ">=20.0" },
     { name = "plum-dispatch", marker = "python_full_version < '3.14'", specifier = ">=2.8.0" },
     { name = "plum-dispatch", marker = "python_full_version >= '3.14'", specifier = ">=2.9.0" },
-    { name = "quax", specifier = ">=0.3.2" },
+    { name = "quax", specifier = ">=0.3.7" },
     { name = "quaxed", specifier = ">=0.10.5" },
 ]
 

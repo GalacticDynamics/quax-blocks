@@ -15,23 +15,9 @@ from typing import Any
 import jax.numpy as jnp
 import numpy as np
 import pytest
-import quax
 from jaxtyping import Array
-from packaging.version import Version
 
 import quax_blocks as qb
-
-#: `quax` < 0.3.5 raises AssertionError where the Lax mixins expect a TypeError
-#: or NotFoundLookupError, so their NotImplemented guard does not fire. The
-#: declared dependency floors only admit such versions -- see issue #46.
-#: Compared with `packaging` rather than a hand-rolled parser so PEP 440 forms
-#: (`0.3.5rc1`, `0.3.5.dev0`, ...) order correctly -- the weekly CI job installs
-#: pre-releases.
-_lax_guard_broken = pytest.mark.xfail(
-    Version(quax.__version__) < Version("0.3.5"),
-    reason="quax<0.3.5 raises AssertionError; NotImplemented guard misses it (#46)",
-    strict=False,
-)
 
 
 def make(*mixins: type, v: Array) -> Any:
@@ -146,15 +132,15 @@ def test_both_operands_declining_raises_clean_typeerror() -> None:
 @pytest.mark.parametrize(
     ("mixin", "method"),
     [
-        pytest.param(qb.LaxAddMixin, "__add__", marks=_lax_guard_broken),
+        (qb.LaxAddMixin, "__add__"),
         (qb.NumpyAddMixin, "__add__"),
-        pytest.param(qb.LaxSubMixin, "__sub__", marks=_lax_guard_broken),
+        (qb.LaxSubMixin, "__sub__"),
         (qb.NumpySubMixin, "__sub__"),
-        pytest.param(qb.LaxLtMixin, "__lt__", marks=_lax_guard_broken),
+        (qb.LaxLtMixin, "__lt__"),
         (qb.NumpyLtMixin, "__lt__"),
-        pytest.param(qb.LaxGtMixin, "__gt__", marks=_lax_guard_broken),
+        (qb.LaxGtMixin, "__gt__"),
         (qb.NumpyGtMixin, "__gt__"),
-        pytest.param(qb.LaxGeMixin, "__ge__", marks=_lax_guard_broken),
+        (qb.LaxGeMixin, "__ge__"),
         (qb.NumpyGeMixin, "__ge__"),
     ],
 )

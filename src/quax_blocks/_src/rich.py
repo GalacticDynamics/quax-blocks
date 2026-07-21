@@ -25,7 +25,8 @@ if TYPE_CHECKING:
 else:
     import quaxed.lax as qlax
     import quaxed.numpy as qnp
-from plum import NotFoundLookupError
+
+from ._compat import DISPATCH_ERRORS
 
 T = TypeVar("T")
 Rbool = TypeVar("Rbool", default=bool)
@@ -65,7 +66,7 @@ class LaxEqMixin(Generic[T, Rbool]):  # noqa: PLW1641
     def __eq__(self, other: T) -> Rbool:  # type: ignore[override]
         try:
             return qlax.eq(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -100,7 +101,7 @@ class NumpyEqMixin(Generic[T, Rbool]):  # noqa: PLW1641
     def __eq__(self, other: T) -> Rbool:  # type: ignore[override]
         try:
             return qnp.equal(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -133,7 +134,7 @@ class LaxNeMixin(Generic[T, Rbool]):
     def __ne__(self, other: T) -> Rbool:  # type: ignore[override]
         try:
             return qlax.ne(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -162,7 +163,7 @@ class NumpyNeMixin(Generic[T, Rbool]):
     def __ne__(self, other: T) -> Rbool:  # type: ignore[override]
         try:
             return qnp.not_equal(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -191,7 +192,7 @@ class LaxLtMixin(Generic[T, Rbool]):
     def __lt__(self, other: T) -> Rbool:
         try:
             return qlax.lt(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -216,7 +217,7 @@ class NumpyLtMixin(Generic[T, Rbool]):
     def __lt__(self, other: T) -> Rbool:
         try:
             return qnp.less(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -245,7 +246,7 @@ class LaxLeMixin(Generic[T, Rbool]):
     def __le__(self, other: T) -> Rbool:
         try:
             return qlax.le(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -270,7 +271,7 @@ class NumpyLeMixin(Generic[T, Rbool]):
     def __le__(self, other: T) -> Rbool:
         try:
             return qnp.less_equal(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -299,7 +300,7 @@ class LaxGtMixin(Generic[T, Rbool]):
     def __gt__(self, other: T) -> Rbool:
         try:
             return qlax.gt(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -324,7 +325,7 @@ class NumpyGtMixin(Generic[T, Rbool]):
     def __gt__(self, other: T) -> Rbool:
         try:
             return qnp.greater(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -353,7 +354,7 @@ class LaxGeMixin(Generic[T, Rbool]):
     def __ge__(self, other: T) -> Rbool:
         try:
             return qlax.ge(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
@@ -378,7 +379,7 @@ class NumpyGeMixin(Generic[T, Rbool]):
     def __ge__(self, other: T) -> Rbool:
         try:
             return qnp.greater_equal(self, other)
-        except (TypeError, NotFoundLookupError):
+        except DISPATCH_ERRORS:
             return NotImplemented
 
 
