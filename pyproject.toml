@@ -24,9 +24,10 @@ dependencies = [
   "jaxtyping>=0.3.3",
   "optype>=0.13,<0.14; python_version<'3.12'",
   "optype>=0.14.0; python_version>='3.12'",
+  "packaging>=20.0",
   'plum-dispatch>=2.5.7; python_version < "3.14"',
   'plum-dispatch>=2.9.0; python_version >= "3.14"',
-  "quax>=0.3.2",
+  "quax>=0.3.7",
   "quaxed>=0.10.5",
 ]
 description = "Building blocks for Quax classes"
