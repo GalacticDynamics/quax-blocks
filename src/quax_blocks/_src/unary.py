@@ -11,12 +11,19 @@ __all__ = [
 ]
 # fmt: on
 
-from typing import Generic
+from typing import TYPE_CHECKING, Any, Generic
 from typing_extensions import TypeVar
 
 import optype as opt
-import quaxed.lax as qlax
-import quaxed.numpy as qnp
+
+# Permissive type at check time (quaxed's annotations can't model quax's
+# dispatch); imported normally at runtime. See tests/test_quaxed_names.py.
+if TYPE_CHECKING:
+    qlax: Any
+    qnp: Any
+else:
+    import quaxed.lax as qlax
+    import quaxed.numpy as qnp
 
 T = TypeVar("T")
 R = TypeVar("R", default=bool)

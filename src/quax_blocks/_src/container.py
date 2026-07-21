@@ -9,11 +9,17 @@ __all__ = [
 # fmt: on
 
 import operator
-from typing import Any, Generic, Protocol, runtime_checkable
+from typing import TYPE_CHECKING, Any, Generic, Protocol, runtime_checkable
 from typing_extensions import TypeVar
 
 import quax
-import quaxed.numpy as qnp
+
+# Permissive type at check time (quaxed's annotations can't model quax's
+# dispatch); imported normally at runtime. See tests/test_quaxed_names.py.
+if TYPE_CHECKING:
+    qnp: Any
+else:
+    import quaxed.numpy as qnp
 
 R = TypeVar("R", default=Any)
 
@@ -26,6 +32,9 @@ class HasShape(Protocol):
     @property
     def shape(self) -> tuple[int, ...]:
         """Return the shape of the object."""
+        # Protocol member needs a body; `...` is canonical (pylint's
+        # unnecessary-ellipsis is a false positive for protocols).
+        ...  # pylint: disable=unnecessary-ellipsis
 
 
 # -----------------------------------------------

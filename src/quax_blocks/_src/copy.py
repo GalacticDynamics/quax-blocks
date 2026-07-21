@@ -5,11 +5,17 @@ __all__ = [
     "NumpyDeepCopyMixin",  # __deepcopy__
 ]
 
-from typing import Any, Generic
+from typing import TYPE_CHECKING, Any, Generic
 from typing_extensions import TypeVar
 
 import optype as opt
-import quaxed.numpy as qnp
+
+# Permissive type at check time (quaxed's annotations can't model quax's
+# dispatch); imported normally at runtime. See tests/test_quaxed_names.py.
+if TYPE_CHECKING:
+    qnp: Any
+else:
+    import quaxed.numpy as qnp
 
 RCopy = TypeVar("RCopy", default=opt.copy.CanCopySelf)
 RDeepcopy = TypeVar("RDeepcopy", default=opt.copy.CanDeepcopySelf)

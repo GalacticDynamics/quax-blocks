@@ -79,6 +79,20 @@ repos:
       - id: mypy
         files: src
 
+  # Runs Pyright from the project's locked environment (`uv run --frozen`) rather
+  # than a pre-commit venv with unpinned deps, so the type check matches uv.lock
+  # exactly -- both the runtime deps and the pinned `pyright` (lint group) -- with
+  # nothing to keep in sync by hand. CI already invokes prek via `uv run --frozen`.
+  - repo: local
+    hooks:
+      - id: pyright
+        name: pyright
+        entry: uv run --frozen pyright
+        language: system
+        types: [python]
+        pass_filenames: false
+        files: ^src/
+
   - repo: https://github.com/codespell-project/codespell
     rev: "v2.4.1"
     hooks:

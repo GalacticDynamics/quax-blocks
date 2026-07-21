@@ -14,11 +14,17 @@ __all__ = [
 # fmt: on
 
 
-from typing import Generic, override
+from typing import TYPE_CHECKING, Any, Generic, override
 from typing_extensions import TypeVar
 
-import quaxed.lax as qlax
-import quaxed.numpy as qnp
+# Permissive type at check time (quaxed's annotations can't model quax's
+# dispatch); imported normally at runtime. See tests/test_quaxed_names.py.
+if TYPE_CHECKING:
+    qlax: Any
+    qnp: Any
+else:
+    import quaxed.lax as qlax
+    import quaxed.numpy as qnp
 from plum import NotFoundLookupError
 
 T = TypeVar("T")
