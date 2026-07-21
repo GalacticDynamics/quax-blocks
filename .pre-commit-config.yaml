@@ -79,19 +79,18 @@ repos:
       - id: mypy
         files: src
 
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.411
+  # Runs Pyright from the project's locked environment (`uv run --frozen`) rather
+  # than a pre-commit venv with unpinned deps, so the type check matches uv.lock
+  # exactly -- both the runtime deps and the pinned `pyright` (lint group) -- with
+  # nothing to keep in sync by hand. CI already invokes prek via `uv run --frozen`.
+  - repo: local
     hooks:
       - id: pyright
-        additional_dependencies:
-          - "jax"
-          - "jaxlib"
-          - "jaxtyping"
-          - "optype"
-          - "packaging"
-          - "plum-dispatch"
-          - "quax"
-          - "quaxed"
+        name: pyright
+        entry: uv run --frozen pyright
+        language: system
+        types: [python]
+        pass_filenames: false
         files: ^src/
 
   - repo: https://github.com/codespell-project/codespell
