@@ -224,3 +224,54 @@ has no general indexing primitive that accepts a Python index expression.
 
 Both copy operations are backed by `jax.numpy.copy` and return a new array, not
 a new instance of the custom type.
+
+---
+
+## Construction
+
+| Method     | Mixin                   |
+| ---------- | ----------------------- |
+| `__make__` | `SupportsUncheckedMake` |
+
+`SupportsUncheckedMake` is the odd one out: it adds no operator, and it is the
+only mixin that can hand you an object your own constructor would reject.
+
+A `quax.ArrayValue` is an `equinox.Module`, so it is a dataclass whose fields
+live in `__dict__` and which JAX rebuilds from them directly on unflatten.
+`__make__` does exactly that — write the fields, return the object — so field
+converters, `__post_init__` and `__check_init__` never run. On a class whose
+check lowers to `equinox.error_if`, that is ~33 µs down to ~0.7 µs.
+
+```python
+from jaxtyping import Array
+from quax_blocks import AbstractVal, SupportsUncheckedMake
+
+
+class Val(AbstractVal, SupportsUncheckedMake):
+    v: Array
+```
+
+Fields are passed **by name** (`Val.__make__(v=x)`), so a subclass adding a
+field cannot silently change what a positional argument means; fields with
+defaults may be omitted. A base class that wants a positional signature can wrap
+it under a name of its own:
+
+```python
+@classmethod
+def _mk(cls, v, /, name="v"):
+    return cls.__make__(v=v, name=name)
+```
+
+Wrap rather than override: ruff's `PLW3201` objects to invented dunders, and it
+fires where one is _defined_, not where it is called. (It is preview-only, and
+it flags equinox's own `__check_init__` too.) To keep the keyword signature and
+only shorten the name, re-bind the classmethod object —
+`_mk = SupportsUncheckedMake.__dict__["__make__"]` — so `cls` follows the class
+it is called on. Two spellings that look right and are not: `_mk = __make__` in
+a class body is a `NameError`, and `_mk = SupportsUncheckedMake.__make__` binds
+to the mixin itself.
+
+Use it only where the invariant being skipped is a theorem about the caller's
+arithmetic — and say which theorem at the call site. Everywhere else the
+ordinary constructor is the right answer; a check that XLA folds away costs
+nothing, and a check that fires is telling you something.
