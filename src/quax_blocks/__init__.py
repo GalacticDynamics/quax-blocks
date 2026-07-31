@@ -92,6 +92,8 @@ __all__ = [
     #################################################
     "NumpyCopyMixin",  # __copy__
     "NumpyDeepCopyMixin",  # __deepcopy__
+    #################################################
+    "SupportsUncheckedMake",  # __make__
 ]
 # fmt: on
 
@@ -199,6 +201,7 @@ from ._src.copy import (
     NumpyDeepCopyMixin,
 )
 from ._src.example import AbstractVal  # noqa: F401
+from ._src.make import SupportsUncheckedMake
 from ._src.rich import (
     LaxComparisonMixin,
     LaxEqMixin,
