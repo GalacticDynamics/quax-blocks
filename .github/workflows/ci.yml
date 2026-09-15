@@ -48,8 +48,9 @@ jobs:
 
       - name: Checks with prek
         # no-commit-to-branch always fails here: CI checks out the real
-        # `main` branch on every push, which is exactly what the hook exists
-        # to block for a human running `git commit`/`git push` locally.
+        # `main` branch on every push, which is exactly what this hook
+        # exists to block for a human running `git commit` locally (it's
+        # scoped to stages: [pre-commit], so it never fires on push).
         # SKIP over --skip: prek's --skip flag replaces rather than merges
         # with an existing SKIP, which this repo's own precommit nox session
         # relies on -- keep both call sites using the same, safe mechanism.
