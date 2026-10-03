@@ -19,8 +19,8 @@ theme:
         name: Switch to light mode
   icon:
     repo: fontawesome/brands/github
-  logo: "_static/favicon.png"
-  favicon: "_static/favicon.png"
+  logo: "_static/favicon.svg"
+  favicon: "_static/favicon.svg"
 
 site_name: quax-blocks
 site_description: The documentation for the quax-blocks software library.
