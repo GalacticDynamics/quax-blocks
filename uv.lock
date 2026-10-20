@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.12"
 resolution-markers = [
     "python_full_version >= '3.15'",
@@ -1297,7 +1297,7 @@ wheels = [
 
 [[package]]
 name = "quax"
-version = "0.3.7"
+version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "equinox" },
@@ -1306,9 +1306,9 @@ dependencies = [
     { name = "packaging" },
     { name = "plum-dispatch" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5e/28/5687bc4ee6151b889e55230616bb50b7e28890e43394073d6b4901483db8/quax-0.3.7.tar.gz", hash = "sha256:3a75421f831b40cc91e2cb63c7696892dc0692d1e8b5614f8e587e3308c0b72c", size = 177321, upload-time = "2026-07-21T03:39:18.618Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7e/ca/22d024bf70badc86c9c31f37f7f5bd4afb97ff4bc82cb95c802676c4915f/quax-0.4.6.tar.gz", hash = "sha256:994f0a8ae909c33c729adca07921b78314b5fd9d71aa9b4f135e9e409a192bae", size = 216040, upload-time = "2026-10-20T01:06:18.985Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ba/ec/86d3054bf2e9197e4ed068834e5a68bbe6d3bfb9ed98399a19932ea24858/quax-0.3.7-py3-none-any.whl", hash = "sha256:ae566c5d126dec3d31a4266359834986641c839df24dd54277baed3a33b7d47e", size = 42415, upload-time = "2026-07-21T03:39:17.134Z" },
+    { url = "https://files.pythonhosted.org/packages/21/09/dede1ec41c0f89fd128c65e7690a9e6112e63166c424287600e8a54a45bd/quax-0.4.6-py3-none-any.whl", hash = "sha256:123dffe5fb5fe6784d9e75879da7409b8b73d691babb094c43f5945d57c830e1", size = 61767, upload-time = "2026-10-20T01:06:17.207Z" },
 ]
 
 [[package]]
@@ -1379,7 +1379,7 @@ requires-dist = [
     { name = "packaging", specifier = ">=20.0" },
     { name = "plum-dispatch", marker = "python_full_version < '3.14'", specifier = ">=2.8.0" },
     { name = "plum-dispatch", marker = "python_full_version >= '3.14'", specifier = ">=2.9.0" },
-    { name = "quax", specifier = ">=0.3.7" },
+    { name = "quax", specifier = ">=0.4.0" },
     { name = "quaxed", specifier = ">=0.10.5" },
 ]
 
