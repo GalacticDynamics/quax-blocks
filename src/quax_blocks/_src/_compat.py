@@ -15,7 +15,7 @@ from plum import NotFoundLookupError
 #: those older `jax` dispatch paths the unhandled primitive reaches it, whereas
 #: `jax` >= 0.9.2 rejects the argument with a `TypeError` before `quax` is
 #: consulted. The trigger is the `jax` version, not the `quax` version -- a
-#: fixed `quax` (0.3.7, the declared floor) still asserts under `jax` 0.7.2.
+#: fixed `quax` (0.4.0, the declared floor) still asserts under `jax` 0.7.2.
 #:
 #: The `jax` floor is deliberately kept at 0.7.2 (see issue #46), so the
 #: affected range 0.7.2 -- 0.9.1 is supported and the guard must catch

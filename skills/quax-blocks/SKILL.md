@@ -31,7 +31,7 @@ skill assumes you already have a working `quax.ArrayValue` (with
   (upstream, not in this repo) — the `quaxed.numpy`/`quaxed.lax` fallback
   behaviour that every mixin call goes through.
 
-Checked against quax-blocks main (`jax>=0.7.2`, `quax>=0.3.7`, `quaxed>=0.10.5`,
+Checked against quax-blocks main (`jax>=0.7.2`, `quax>=0.4.0`, `quaxed>=0.10.5`,
 `plum-dispatch>=2.8.0`, Python >=3.12). Docs:
 [Mixin reference](https://github.com/GalacticDynamics/quax-blocks/blob/main/docs/guides/mixins.md).
 
@@ -231,10 +231,11 @@ intentional, matching `self.shape[0] if self.shape else 0`, not an oversight.
 
 ## Version notes
 
-`quax-blocks` pins to `quax>=0.3.7` specifically because earlier quax patch
-releases don't import cleanly across the full supported `jax` range
-(`jax>=0.7.2`); if you see an import-time failure on an old lockfile, bump
-`quax` first. The `AssertionError` addition to the dispatch-miss guard is scoped
-to `jax < 0.9.2` and is a compatibility shim expected to be deleted once the
-`jax` floor rises past that version — don't rely on it being permanent if you're
+`quax-blocks` pins to `quax>=0.4.0` because that is the first `quax` release to
+declare `jax>=0.7.2` itself (earlier `0.3.x` releases only required
+`jax>=0.5.3,!=0.7.0,!=0.7.1`, which happens to admit `jax>=0.7.2` but doesn't
+guarantee it); if you see an import-time failure on an old lockfile, bump `quax`
+first. The `AssertionError` addition to the dispatch-miss guard is scoped to
+`jax < 0.9.2` and is a compatibility shim expected to be deleted once the `jax`
+floor rises past that version — don't rely on it being permanent if you're
 reading the source rather than this skill.
