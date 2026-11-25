@@ -121,7 +121,9 @@ pip install quax-blocks
 [![pre-commit][pre-commit-badge]][pre-commit-link]
 [![ruff][ruff-badge]][ruff-link]
 
-We welcome contributions!
+We welcome contributions! Contributors and AI assistants: this repository ships
+a queryable code graph — see
+[CONTRIBUTING.md](.github/CONTRIBUTING.md#the-code-graph).
 
 ## Citation
 

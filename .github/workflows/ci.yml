@@ -52,10 +52,13 @@ jobs:
         run: uv sync --no-default-groups --group lint --locked
 
       - name: Checks with prek
-        # Not a real commit -- no-commit-to-branch would always fail here.
+        # Not a real commit -- no-commit-to-branch would always fail here. And
+        # graphify-update rebuilds the committed code graph, which is not byte-reproducible
+        # across platforms, so it would fail whenever the committed copy was built on
+        # another OS. The weekly "Refresh code graph" job is what keeps the graph honest.
         run: uv run --frozen prek run --all-files
         env:
-          SKIP: no-commit-to-branch
+          SKIP: no-commit-to-branch,graphify-update
 
   tests:
     name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
